@@ -1,0 +1,27 @@
+=== Coding Standards ===
+Python: 3.7.2
+Django: 2.0.6
+MySQL : 5.7.25
+
+General Commenting:
+- Block comments before every method/class.
+- Line comments for global variables, loops, etc.
+	
+Java/Python/Javascript:
+- 4 spaced tabs.
+- Inline brackets. 
+- Every statement must have brackets even if it only has 1 line
+- Logical object/variable/function names.
+  i.e.  Global variables : mDatabase
+        Local Variables  : users = mDatabase.child
+        
+HTML:
+- Tabs for new body or divs ONLY
+- HTML standard coding style
+
+
+CSS:
+- CSS standard coding style
+
+MySQL:
+- Storage Engine: InnoDB

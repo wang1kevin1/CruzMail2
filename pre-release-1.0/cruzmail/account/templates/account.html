@@ -1,0 +1,266 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Account Settings
+{% endblock %}
+
+{% block content %}
+
+	<!-- Page Content -->
+	<div class="row">
+		<div style="display: none">
+			<p id="bio">{{ user.profile.bio }}</p>
+			<p id="private_account">{{user.profile.private_account}}</p>
+			<p id="user_email">{{user.email}}</p>
+		</div>
+		<div class="col-lg-8">
+		{% csrf_token %}
+			<p><span style="font-weight: bold">Username:</span> {{ user }}</p>
+			{% verbatim %}
+			 
+			<p style="display: inline; font-weight: bold">Email: </p>
+			<div v-if="!isActiveEmail" style="display:inline">
+			<p id="emailField" style="display: inline; margin-right: 2em">{{ email }}</p>
+			</div>
+			<div v-if="isActiveEmail" style="display: inline">
+			<input class="form-control" id="email_input" v-model="email" type="text" value="" style="display: inline; width: 25%; height: 2em"/>			
+		 </div>
+			
+			<i v-on:click="toggleEmailArea" class="fa fa-pencil-square-o" 
+										aria-hidden="true" style=""></i>
+		</div>
+	 
+		<div class="col-md-10" style="margin-top: 1em;">
+			<div v-if="isActive">
+				<label for=""><span style="font-weight: bold; margin-top: 3em;">About me: </span> 
+				<i v-on:click="toggleTextArea" class="fa fa-pencil-square-o" aria-hidden="true"
+								style="display: inline"></i>
+					<textarea class="form-control" rows="4" cols="50" id="user_bio">{{user_bio}}</textarea>
+			</div>
+			<div class="" v-if="!isActive">
+				<label for=""><span style="font-weight: bold">About me: </span>
+					<i v-on:click="toggleTextArea" class="fa fa-pencil-square-o" aria-hidden="true"	
+					style="display: inline"></i>
+					<p id="user_bio">{{user_bio}}</p>
+			</div>
+			</div>
+			{% endverbatim %}
+			<div class="col-md-12" style="margin-top: 1em">
+			<label class="custom-control custom-checkbox">
+				{% if user.profile.private_account %}
+					{% verbatim %}
+						<input id="account_checkbox" v-on:click="toggleAccountPrivacy" type="checkbox" class="custom-control-input" checked="checked">
+					{% endverbatim %}
+				{% else %}
+					{% verbatim %}
+						<input id="account_checkbox" v-on:click="toggleAccountPrivacy"	type="checkbox" class="custom-control-input">
+					{% endverbatim %}
+				{% endif %}
+				<span class="custom-control-indicator"></span>
+				<span class="custom-control-description" style="font-weight: bold">Private Account?</span>
+				<p style="display: inline; margin-left: 3em">Private accounts cannot be viewed by other users and all riffs will be set to <em>private</em>.</p>
+			</label>
+			</div> 
+			<div class="col-md-3">
+				<button type="button" class="btn btn-info" data-toggle="modal" data-target="#password_modal" style="float: right;">Change Password</button>
+			</div>
+		</div>
+		
+		<!-- Modal -->
+		<div class="modal fade" id="password_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="exampleInputPassword1">Old Password</label>
+						<input type="password" class="form-control" id="old_password" placeholder="Password">
+					</div>
+					<div class="form-group">
+						<label for="exampleInputPassword1">New Password</label>
+						<input type="password" class="form-control" id="new_password1" placeholder="Password">
+					</div>
+					<div class="form-group">
+						<label for="exampleInputPassword1">Confirm New Password</label>
+						<input type="password" class="form-control" id="new_password2" placeholder="Password">
+					</div>
+				</div>
+				<div class="alert alert-success" v-if="passwdChange">
+					<strong>Success!</strong> Your password has been changed.
+				</div>
+				<div class="alert alert-danger" v-if="passwdError">
+					<strong>Error!</strong> Please ensure the old password is correct and the new password fields match.
+				</div>
+				<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" v-on:click="updateUserPassword" class="btn btn-primary">Save changes</button>
+				</div>
+			</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- /.container -->
+
+	<!-- Bootstrap core JavaScript -->
+	<script src="../../static/js/vue.js"></script>
+	<script src="../../static/js/jquery-3.2.1.js"></script>
+	<script src="../../static/popper/popper.min.js"></script>
+	<script src="../../static/bootstrap/js/bootstrap.min.js"></script>
+
+	<!-- Vue.js -->
+	<script>
+		
+		//Set checkbox initial value
+		var privacy = String(document.getElementById('private_account').innerHTML);
+		var checkbox = document.getElementById('account_checkbox');
+		checkbox.value = (privacy == "True") ? 'on' : 'off';
+
+		var app = function() {
+			var self = {};
+			
+			self.toggleTextArea = function() {
+				var bio = document.getElementById('user_bio').value
+				self.vue.isActive = !self.vue.isActive;
+				if(bio != undefined) self.vue.user_bio = bio
+				if(!self.vue.isActive) self.saveUserBio();
+			}
+			
+			self.toggleEmailArea = function() {
+				
+				self.vue.isActiveEmail = !self.vue.isActiveEmail;
+				if(!self.vue.isActiveEmail) {
+					self.vue.email = document.getElementById('email_input').value;
+					self.saveUserEmail();
+				} 
+			}
+
+			self.toggleAccountPrivacy = function() {
+				var check = document.getElementById('account_checkbox');
+				checkbox.value = (checkbox.value == 'on') ? 'off' : 'on';
+				self.vue.private_account = checkbox.value;
+
+				$.ajax({
+
+							type: "POST",
+							url: "/account/update_user_account_privacy",
+							data: {"account_private": self.vue.private_account,
+									 "user_bio": self.vue.user_bio,
+									 "user_email": self.vue.email
+									},
+							dataType: 'json',
+							success: function (json) {
+								self.vue.events = json
+								console.log(self.vue.events)
+						}
+					});
+			}
+
+			self.saveUserEmail = function() {
+				
+				$.ajax({
+
+					type: "POST",
+					url: "/account/update_user_email",
+					data: { "account_private": self.vue.private_account,
+							"user_bio": self.vue.user_bio,
+							"user_email": self.vue.email
+							},
+					dataType: 'json',
+					success: function (json) {
+						self.vue.events = json
+						console.log(self.vue.events)
+	                }
+			    });
+			}
+			self.saveUserBio = function() {
+				
+				$.ajax({
+
+							type: "POST",
+							url: "/account/update_user_bio",
+							data: { "account_private": self.vue.private_account,
+									"user_bio": self.vue.user_bio,
+									"user_email": self.vue.email
+									},
+							dataType: 'json',
+							success: function (json) {
+								self.vue.events = json
+								console.log(self.vue.events)
+						}
+				});
+			}
+
+			self.passwordError = function() {
+
+			}
+
+			self.updateUserPassword = function() {
+				self.vue.passwdChange = false;
+				self.vue.passwdError = false;
+				self.vue.old_password = document.getElementById('old_password').value;
+				self.vue.new_password1 = document.getElementById('new_password1').value;
+				self.vue.new_password2 = document.getElementById('new_password2').value;
+
+				if (self.vue.new_password1 != self.vue.new_password2) {
+					self.vue.passwdError = true;
+				} else {
+				
+					$.ajax({
+
+						type: "POST",
+						url: "/account/update_user_password",
+						data: { "new_password1": self.vue.new_password1,
+								"new_password2": self.vue.new_password2,
+								"old_password": self.vue.old_password
+							},
+						dataType: 'json',
+						success: function (json) {
+							self.vue.events = json
+							self.vue.passwdChange = (json.success == 'True' ) ? true : false;
+							self.vue.passwdError = (json.success == 'True' ) ? false : true;
+							console.log(self.vue.events)
+						}
+				    });
+				}
+			}
+			self.vue = new Vue({
+				el: "#vue-div",
+				data: {
+					 isActive: false,
+					 isActiveEmail: false,
+					 user_bio: document.getElementById('bio').innerHTML,
+					 private_account: document.getElementById('private_account').innerHTML,
+					 email: document.getElementById('user_email').innerHTML,
+					 old_password: "",
+					 new_password1: "",
+					 new_password2: "",
+					 passwdChange: false,
+					 passwdError: false
+					 
+				},
+				methods: {
+					toggleTextArea: self.toggleTextArea,
+					saveUserEmail: self.saveUserEmail,
+					saveUserBio: self.saveUserBio,
+					toggleAccountPrivacy: self.toggleAccountPrivacy,
+					toggleEmailArea: self.toggleEmailArea,
+					updateUserPassword: self.updateUserPassword,
+					passwordError: self.passwordError
+				}
+			});
+			return self;
+		};
+		
+		var APP = null;
+		// This will make everything accessible from the js console;
+		// for instance, self.x above would be accessible as APP.x
+		jQuery(function(){APP = app();});
+	</script>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- Compiled and minified CSS -->
+
+  <title>Cruz Mail</title>
+  <header>
+    <h1 class="logo">CruzMail</h1>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle">
+    <nav>
+      <ul>
+        <li>
+          <a class="nav-link" style="float:right" href="/account/login">Log In</a>
+        </li>
+
+      </ul>
+    </nav>
+    <label for="nav-toggle" class="nav-toggle-label">
+      <span></span>
+    </label>
+  </header>
+</head>
+
+<body>
+  <div id="my_view">
+    <!--SEARCH BOX-->
+    <form>
+      <input type="text" name="search" placeholder="ENTER YOUR TRACKING NUMBER :)" v-model="search_pkg">
+      <input class="submit_button" name="submit" value="Search" v-on:click="queryPackage();">
+    </form>
+
+    <div v-if="Info.length == 0">
+      Package Not Found
+    </div>
+
+
+    <!--results box-->
+
+    <div class="wrapper" style="align-self: auto;">
+      <div class="trackInfo">
+        <div class="info">Status:</div>
+        <div class="results" v-if="Info.length > 0"> ${Info[0].state} </div>
+
+        <div class="info">Tracking Number:</div>
+        <div class="results" v-if="Info.length > 0"> ${Info[0].tracking} </div>
+
+        <div class="info">Destination:</div>
+        <div class="results" v-if="Info.length > 0">${Info[0].mailstop}</div>
+
+        <!--<div class = "info">Date/Time Delivered:</div>
+                        <div class = "results"> March 9 10:00 am </div>
+
+        <div class="info">Last Location:</div>
+        <div class="results"v-if="Info.length > 0">  </div>-->
+      </div>
+    </div>
+
+
+  </div>
+
+  <script src="{% static 'js/jquery-3.2.1.js' %}"></script>
+  <script src="{% static 'js/vue.js' %}"></script>
+  <script src="{% static 'js/package_html.js' %}"></script>
+  <link href="{% static 'css/general_design.css' %}" rel="stylesheet">
+  <link href="{% static 'css/manage.css' %}" rel="stylesheet">
+</body>
+
+</html>

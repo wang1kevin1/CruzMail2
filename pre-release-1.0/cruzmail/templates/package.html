@@ -1,0 +1,205 @@
+{% load staticfiles %}
+
+<html>
+
+<head>
+	<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<!-- Compiled and minified CSS -->
+		<!--
+		  		-->
+		<title>Cruz Mail</title>
+
+
+
+		<header>
+			<h1 class="logo"><img src="../static/img/pages/thumbnail_package.png"> Packages</h1>
+			<input type="checkbox" id="nav-toggle" class="nav-toggle">
+			<nav>
+				<ul>
+					<li><a class="nav-link" href="{% url 'menu' %}">Home</a></li>
+					<li><a class="nav-link" href="{% url 'logging_out' %}">Logout</a></li>
+				</ul>
+			</nav>
+			<label for="nav-toggle" class="nav-toggle-label">
+				<span></span>
+			</label>
+		</header>
+	</head>
+
+<body>
+	<!--...................................Header for Manage................................................................-->
+	<div id="my_view">
+
+		<div class="body" style="background-color:#305371; height:20%;"></div>
+
+		&nbsp; &nbsp; &nbsp;Search by Tracking Number
+		<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="search_pkg">
+		    ${search_pkg}
+	    </textarea>
+
+		<button v-on:click="queryPackage();">Search</button>
+
+		<!--........................................ adding new package overlay ................................-->
+		<div id="overlay" v-if="newPackageView==true">
+			<div style="font-size:30px" class="exit_button" v-on:click="newPackageView=false">
+				<img src="../static/img/tools/exit_button.png">
+			</div>
+			<div class="new_package" style="overflow:scroll; overflow-x:hidden;">
+				New Package
+
+				<br>Tracking Number
+				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_tracknum">
+				    ${new_tracknum}
+			    </textarea>
+
+				<br>name
+				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_name">
+				    ${new_name}
+			    </textarea>
+
+				<br>mailstop
+				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_mailstop">
+				    ${new_mailstop}
+			    </textarea>
+
+				<br>sign
+				<select class="list" style="background-color: rgb(236, 236, 250)" v-model="new_sign">
+					<option value="Yes">Yes</option>
+					<option value="No">No</option>
+				</select>
+
+				<br>email
+				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_email">
+				    ${new_email}
+			    </textarea>
+
+				<br>remark
+				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_remark">
+				    ${new_remark}
+			    </textarea>
+
+				<br>
+				<button v-on:click="addPackage(); newPackageView = false;">Add Package</button>
+			</div>
+		</div>
+
+		<!--...................................List Of Packages................................................................-->
+		<div class="list2">
+			<div class="row">
+
+				<div class="col_title" style="background-color: lightcoral; width:30%;">
+
+					<div style="float:left;">
+						<input type="checkbox" v-on:click="change_to_true();" v-model="allTrue">
+						</input>
+					</div>
+					Status
+
+				</div>
+				<div class="col_title" style="background-color: lightcoral; width:35%; height:19.667px;">
+					Tracking#
+				</div>
+				<div class="col_title" style="background-color: lightcoral; width:35%; height:19.667px;">
+					Mailstop
+				</div>
+
+			</div>
+			<div style="border-bottom:10px;"></div>
+
+			<div style="overflow:scroll; height: 50%; overflow-x:hidden; overflow-y:overlay;">
+				<div v-for="info in Info" class="row" style="width:100%">
+
+					<div v-if="info.index != currentView">
+						<div class="col_title" style="width:30%;">
+							<div style="float:left;">
+								<input type="checkbox" v-model="info.isDelivered">
+								</input>
+							</div>
+
+							<div v-on:click="currentView = info.index">
+								${info.state}
+							</div>
+						</div>
+						<div class="col_title" style="width:35%;" v-on:click="currentView = info.index">
+							${info.tracking}
+						</div>
+						<div class="col_title" style="width:35%;" v-on:click="currentView = info.index">
+							${info.mailstop}
+						</div>
+					</div>
+
+					<!--..................................extra details for package if needed...................................................-->
+					<div v-if="info.index == currentView">
+						<div class="col_title" style="background-color: rgb(0,121,136); width:30%;">
+							<div style="float:left;">
+								<input type="checkbox" v-model="info.isDelivered">
+								</input>
+							</div>
+
+							<div v-on:click="currentView = -1">
+								${info.state}
+							</div>
+						</div>
+						<div class="col_title" style="background-color: rgb(0,121,136); width:35%;" v-on:click="currentView = -1">
+							${info.tracking}
+						</div>
+						<div class="col_title" style="background-color: rgb(0,121,136); width:35%;" v-on:click="currentView = -1">
+							${info.mailstop}
+						</div>
+
+						<br>&nbsp;&nbsp;Name
+						<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="info.name">
+			    			${info.name}
+	   				 	</textarea>
+
+						<br>&nbsp;&nbsp;email
+						<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="info.email">
+			    			${info.email}
+	   				 	</textarea>
+
+						<br>&nbsp;&nbsp;Signing?
+						<select class="list" style="background-color: rgb(236, 236, 250)" v-model="info.sign">
+							<option value="yes">Yes</option>
+							<option value="no">No</option>
+						</select>
+
+						<br>&nbsp;&nbsp;Weight
+						<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="info.weight">
+			    			${info.weight}
+	   				 	</textarea>
+
+						<br>&nbsp;&nbsp;Recieve Date:
+						${info.date_rec}
+
+
+						<br>
+						<button v-on:click="updatePackage()">
+							Update
+						</button>
+
+						<div style="border-bottom:3px solid rgb(255, 96, 96);">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--...................................buttons to update packages..................................................-->
+		<div class="text-center">
+			<button class="btn btn-primary" v-on:click="newPackageView = true;">New Package</button>
+			<button class="btn btn-primary" v-on:click="packageDelivered();">Deliver Package</button>
+		</div>
+	</div>
+
+	<script src="{% static 'js/jquery-3.2.1.js' %}"></script>
+	<script src="{% static 'js/vue.js' %}"></script>
+	<script src="{% static 'js/package_html.js' %}"></script>
+	<link href="{% static 'css/general_design.css' %}" rel="stylesheet">
+	<link href="{% static 'css/manage.css' %}" rel="stylesheet">
+
+</html>

@@ -1,0 +1,46 @@
+-- RELEASE PLAN -- 
+
+Product Name: SlugMail/CruzMail 
+Release Date: TBD 
+Revision Number: 1 
+
+HIGH LEVEL GOALS: 
+~ Easy interactable database management UI 
+~ Database (Location, People, Packages) 
+~ Mobile WebApp for delivery 
+~ Online Customer website with tracking 
+
+USER STORIES: 
+~ Easy interactable UI 
+  - As a user I want a Widget/banner system to navigate through the application. 
+  - As a developer I want a rough Sketch/design of UI to go off of when designing 
+    the application. 
+  - As a user I want a functionality to access information about package delivery 
+    so I can know the whereabouts of my package. 
+      -general database management 
+      
+~ Database (Location, People, Packages) 
+  - As a user, I want an Admin page so that only specific users can modify info 
+    on database such as locations. 
+  - As a developer, I want to have a system design for my database tree so that I 
+    can get/store the information properly and use it on the website. 
+    
+~ Mobile WebApp for delivery 
+  - Able to scan package or lot QR to mark package as delivered in database. 
+  - Able to receive recipient signature and add as an attachment to the package 
+    database object. 
+  
+~ Online Customer website with tracking 
+  - As a user, I want to be able to access my delivery information without a login. 
+  - As a user, I want to be able to track package location to find out where it 
+    currently is and when it’s delivered. 
+  - As a user, I want to be able to see who signed for my package so I know who has 
+    my package.
+
+PRODUCT BACKLOG: 
+- GPS tracking 
+- Inventory Management 
+
+PO: Zeyuan 
+SM: Kevin 
+DEVS: Sean, Chris, Samir 

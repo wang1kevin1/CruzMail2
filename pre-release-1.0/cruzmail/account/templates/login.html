@@ -1,0 +1,107 @@
+{% extends 'base.html' %} {% block title %} Login {% endblock %} {% block content %}
+
+<!-- Page Content -->
+<div class="row" style="">
+	<div class="col-md-3"></div>
+	<div id="content-container" class="col-md-6" style="margin-top: 2em; border-radius: 5%; background-color: #EEEEEE;">
+		<div class="" style="margin: 0 auto">
+			<form id="login-form" method="post" action="">
+				{% csrf_token %}
+				<table class="table">
+					<tr>
+						<td><label for="id_username">Username:</label></td>
+						<td><input id="id_username" name="username" type="text"></td>
+					</tr>
+					<tr>
+						<td><label for="id_password">Password:</label></td>
+						<td><input id="password1" name="password" type="password"></td>
+					</tr>
+				</table>
+				{% if form.errors %}
+				<p class="label label-danger" style="color: red">
+					Your username and password did not match. Please try again.
+				</p>
+				{% endif %}
+
+				<button type="submit" class="btn btn-primary">Log In</button>
+				<p style="display: inline; float: right" data-toggle="modal" data-target="#myModal"><a href="#">Forgot Password?</a></p>
+			</form>
+		</div>
+	</div>
+	<div class="col-md-3"></div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="myModal">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Reset Password</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					  </button>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group" style="width: 80%">
+							<label for="exampleInputEmail1">Email Address</label>
+							<input type="email" class="form-control" id="user_email" aria-describedby="emailHelp" placeholder="user@email.com">
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" v-on:click="sendEmail">Reset</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- /.container -->
+
+
+<!-- Bootstrap core JavaScript -->
+<script src="../../static/js/vue.js"></script>
+<script src="../../static/js/jquery-3.2.1.js"></script>
+<script src="../../static/popper/popper.min.js"></script>
+<script src="../../static/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- Vue.js -->
+<script>
+	var app = function () {
+		var self = {};
+
+		self.sendEmail = function () {
+			self.vue.email = document.getElementById('user_email').value
+			$.ajax({
+				type: "POST",
+				url: "/account/reset_password",
+				data: {
+					"user_email": self.vue.email
+				},
+				dataType: 'json',
+				success: function (json) {
+					self.vue.events = json
+				}
+			});
+		}
+
+		self.vue = new Vue({
+			el: "#vue-div",
+			data: {
+				email: document.getElementById('user_email').value
+			},
+			methods: {
+				sendEmail: self.sendEmail
+			}
+		});
+		return self;
+	};
+
+	var APP = null;
+	// This will make everything accessible from the js console;
+	// for instance, self.x above would be accessible as APP.x
+	jQuery(function () { APP = app(); });
+
+</script>
+
+{% endblock %}

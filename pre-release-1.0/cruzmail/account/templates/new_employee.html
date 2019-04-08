@@ -1,0 +1,39 @@
+{% extends 'add_new.html' %}
+
+{% block title %}
+Create Account
+{% endblock %}
+
+{% block content %}
+
+	<!-- Page Content -->
+	<div class="container">
+		<div class="lgn-container col-lg-6" style="margin: 0 auto; border-radius: 5%; background-color: #EEEEEE;">
+			<div style="padding: 2em">
+				<form method="post">
+					{% csrf_token %}
+					{% for field in form %}
+					<table class="table">
+						<tr>
+							<td>{{ field.label_tag }} </td>
+							<td style="text-align: right">{{ field }}</td>
+						</tr>
+				    </table>
+						{% for error in field.errors %}
+							<p style="color: red">{{ error }}</p>
+						{% endfor %}
+					{% endfor %}
+					<button type="submit" class="btn btn-primary" a href = "./templates/manage">Create</button>
+					
+				  </form>
+			</div>
+		</div>
+	</div>
+	<!-- /.container -->
+
+	<!-- Bootstrap core JavaScript -->
+	<script src="../../static/js/jquery-3.2.1.js"></script>
+	<script src="../../static/popper/popper.min.js"></script>
+	<script src="../../static/bootstrap/js/bootstrap.min.js"></script>
+
+{% endblock %}

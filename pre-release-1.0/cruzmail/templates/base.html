@@ -1,0 +1,98 @@
+{% load staticfiles %}
+{% block scripts %}{% endblock %}
+<html>
+	<head>
+
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+		<title>CRUZMAIL</title>
+
+		<!-- Bootstrap core CSS -->
+		<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+
+		<!-- Custom styles for this template -->
+		<link rel="stylesheet" href="{% static 'css/logo-nav.css' %}">
+		<link rel="stylesheet" href="{% static 'css/collection.css' %}">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		
+	</head>
+	<body>
+
+		<div class="navigation-header" style="margin-bottom:3em">
+
+			<!-- Navigation -->
+			<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+				<div class="container">
+					<a class="navbar-brand">
+						<img src="{% static 'img/black_ucsc.jpg' %}" width="130" height="71" alt="">
+					</a>
+					<div class="navbar-header">
+						<a class="navbar-brand" style="color: white"><em>Enter Your ID</em></a>
+					</div>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarResponsive">
+						<ul class="navbar-nav ml-auto">
+
+							
+
+							<!-- Login -->
+							<li {% if params.category != "account" and params.category != "collections" and params.category != "inbox" %}
+									{% if params.category != 'create' %}
+										class="nav-item active"
+									{ % else % }
+										class="nav-item"
+									{%  endif %}
+								{% else %}
+									style="display: none"
+								{% endif %}>
+								<a class="nav-link" href="{% url 'login' %}">Login</a>
+							</li>
+
+							<!-- Create Account -->
+							<li {% if params.category != "account" and params.category != "collections" and params.category != "inbox" %} 
+									{% if params.category == 'create' %}
+										class="nav-item active"
+									{ % else % }
+										class="nav-item"
+									{%  endif %}
+								{% else %}
+									style="display: none" 
+								{% endif %}>
+								<a class="nav-link" href="{% url 'create' %}">Sign Up</a>
+							</li>
+
+							<!-- Logout -->
+							<li {% if params.category == "collections" or params.category == "account" or params.category == "inbox" %}
+								{% else %}
+									style="display: none"
+								{% endif %}>
+								<a class="nav-link" href="{% url 'logout' %}">Logout</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+
+		<div class="container" id="vue-div" style="border-radius: 5%; background-color: #EEEEEE; padding: 2em; margin-top: 4em; margin-bottom: 2em;">
+			<h3 style="font-weight: bold; padding-bottom: 20px">
+				{% block title %}
+				{% endblock %}
+			</h3>
+
+			{% block content %}
+			{% endblock %}
+		</div>
+
+		<footer>
+			<p class="copyright text-muted" style="text-align: center">Copyright &copy; CRUZMAIL 2019</p>
+		</footer>
+
+	</body>
+
+</html>

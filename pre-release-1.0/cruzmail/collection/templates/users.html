@@ -1,0 +1,298 @@
+{% load staticfiles %}
+<!-- Bootstrap core CSS -->
+<html>
+
+<head>
+
+  <head>
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=Work+Sans:300,600');
+
+      :root {
+        --background: #2E5A7D
+      }
+
+      /*
+                      #305371 for background
+                      #2C5779 nav bar 
+                    */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: #305371;
+        font-family: 'Work Sans', sans-serif;
+        font-weight: 400;
+      }
+
+      .content {
+        height: 200vh;
+        background-image: url(//unsplash.it/1000/1000);
+        background-color: #333;
+        /*    */
+        background-blend-mode: multiply;
+        background-size: cover;
+        display: grid;
+        place-items: center;
+      }
+
+      /* navigation styles start here */
+
+      header {
+        background: var(--background);
+        text-align: center;
+        position: fixed;
+        z-index: 999;
+        width: 100%;
+      }
+
+      /*stuff i just found online*/
+      .nav-toggle {
+        position: absolute !important;
+        top: -9999px !important;
+        left: -9999px !important;
+      }
+
+      .nav-toggle:focus~.nav-toggle-label {
+        outline: 3px solid rgba(lightblue, .75);
+      }
+
+      .nav-toggle-label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin-left: 1em;
+        height: 100%;
+        display: flex;
+        align-items: center;
+      }
+
+      .nav-toggle-label span,
+      .nav-toggle-label span::before,
+      .nav-toggle-label span::after {
+        display: block;
+        background: white;
+        height: 2px;
+        width: 2em;
+        border-radius: 2px;
+        position: relative;
+      }
+
+      .nav-toggle-label span::before,
+      .nav-toggle-label span::after {
+        content: '';
+        position: absolute;
+      }
+
+      .nav-toggle-label span::before {
+        bottom: 7px;
+      }
+
+      .nav-toggle-label span::after {
+        top: 7px;
+      }
+
+      nav {
+        position: absolute;
+        text-align: left;
+        top: 100%;
+        left: 0;
+        background: var(--background);
+        width: 100%;
+        transform: scale(1, 0);
+        transform-origin: top;
+        transition: transform 400ms ease-in-out;
+      }
+
+      nav ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      nav li {
+        margin-bottom: 1em;
+        margin-left: 1em;
+      }
+
+      nav a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        opacity: 0;
+        transition: opacity 150ms ease-in-out;
+      }
+
+      nav a:hover {
+        color: #000;
+      }
+
+      .nav-toggle:checked~nav {
+        transform: scale(1, 1);
+      }
+
+      .nav-toggle:checked~nav a {
+        opacity: 1;
+        transition: opacity 250ms ease-in-out 250ms;
+      }
+
+      @media screen and (min-width: 800px) {
+        .nav-toggle-label {
+          display: none;
+        }
+
+        header {
+          display: grid;
+          grid-template-columns: 1fr auto minmax(600px, 3fr) 1fr;
+        }
+
+        .logo {
+          grid-column: 2 / 3;
+        }
+
+        nav {
+          /*  this block needed for edge support*/
+          position: relative;
+          text-align: left;
+          transition: none;
+          transform: scale(1, 1);
+          background: none;
+          top: initial;
+          left: initial;
+
+          /*grid for where to align title */
+          grid-column: 3 / 4;
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+        }
+
+        nav ul {
+          display: flex;
+        }
+
+        nav li {
+          margin-left: 3em;
+          margin-bottom: 0;
+        }
+
+        nav a {
+          opacity: 1;
+          position: relative;
+        }
+
+        nav a::before {
+          content: '';
+          display: block;
+          height: 5px;
+          background: black;
+          position: absolute;
+          top: -.75em;
+          left: 0;
+          right: 0;
+          transform: scale(0, 1);
+          transition: transform ease-in-out 250ms;
+        }
+
+        nav a:hover::before {
+          transform: scale(1, 1);
+        }
+      }
+
+      .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+      }
+
+
+      /*------------------------CSS FOR THE BUTTONS--------------------------------------*/
+
+      button:hover {
+        background: #5c5b5b;
+        cursor: pointer;
+      }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Compiled and minified CSS -->
+    <!--
+                -->
+    <header>
+      <h1 class="logo"><img src="../static/img/pages/thumbnail_admin.png"> Users</h1>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle">
+      <nav>
+        <ul>
+          <li><a class="nav-link" href="{% url 'menu' %}">Home</a></li>
+          <li><a class="nav-link" href="{% url 'home' %}">Logout</a></li>
+        </ul>
+      </nav>
+      <label for="nav-toggle" class="nav-toggle-label">
+        <span></span>
+      </label>
+    </header>
+  </head>
+</head>
+<div id="my_view">
+  <div class="body" style="background-color:#305371; height:20%;">
+  </div>
+  <!--...................................List Of Packages................................................................-->
+  <div class="list2">
+    <div class="row">
+      <div class="col_title" style="background-color: lightcoral; width:50%;">
+
+        <div style="float:left;">
+          <input type="checkbox" v-on:click="change_to_true();" v-model="allTrue">
+          </input>
+        </div>
+
+        Users
+      </div>
+      <div class="col_title" style="background-color: lightcoral; width:50%;">
+        Emails
+      </div>
+
+    </div>
+
+    <div style="border-bottom:10px;"></div>
+
+    <div style="overflow:scroll; height: 50%; overflow-x:hidden; overflow-y:overlay;">
+      <div v-for="user_titles in users" class="row" style="width:100%">
+
+        <div class="col_title" style=" width:50%;">
+
+          <div style="float:left;">
+            <input type="checkbox" v-model="user_titles.is_deleted">
+            </input>
+          </div>
+
+          ${user_titles.name}
+
+        </div>
+        <div class="col_title" style=" width:50%;">
+          ${user_titles.email}
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+  <div class="text-center">
+    <button class="btn btn-primary" onclick="window.location.href='/account/create'">New Employee</button>
+    <button class="btn btn-primary" v-on:click="delete_user()">Remove Employee</button>
+  </div>
+</div>
+<script src="{% static 'js/jquery-3.2.1.js' %}"></script>
+<script src="{% static 'js/vue.js' %}"></script>
+<script src="{% static 'js/user_html.js' %}"></script>
+<link href="{% static 'css/manage.css' %}" rel="stylesheet">
+
+</html>

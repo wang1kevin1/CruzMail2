@@ -1,0 +1,173 @@
+{% load staticfiles %}
+
+<html>
+
+<head>
+	<html lang="en">
+
+	<head>
+
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<!-- Compiled and minified CSS -->
+		<!--
+		  		-->
+		<title>Cruz Mail</title>
+
+
+
+		<header>
+			<h1 class="logo"><img src="../static/img/pages/thumbnail_people.png">  People</h1>
+			<input type="checkbox" id="nav-toggle" class="nav-toggle">
+			<nav>
+				<ul>
+					<li><a class="nav-link" href="{% url 'menu' %}">Home</a></li>
+					<li><a class="nav-link" href="{% url 'logging_out' %}">Logout</a></li>
+				</ul>
+			</nav>
+			<label for="nav-toggle" class="nav-toggle-label">
+				<span></span>
+			</label>
+		</header>
+	</head>
+
+<body>
+	<!--...................................Header for People................................................................-->
+	<div id="person_view">
+
+		<div class="body" style="background-color:#305371; height:20%;"></div>
+
+		&nbsp; &nbsp; &nbsp;Search for People...
+		<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="test">
+		    ${test}
+	    </textarea>
+
+		<button v-on:click="queryPerson();">Search</button>
+
+		<!-- adding new person overlay -->
+		<div id="overlay" v-if="newPersonView==true">
+			<div style="font-size:20px" class="exit_button" v-on:click="newPersonView=false;">
+					<img src="../static/img/tools/exit_button.png">
+			</div>
+			<div class="new_person" style="overflow:scroll; overflow-x:hidden;">
+				New Person
+
+				<br>Name
+				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_person">
+				    ${new_person}
+			    </textarea>
+
+				<br>Email
+				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_ppl_email">
+				    ${new_ppl_email}
+			    </textarea>
+
+				<br>Mailstop
+				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_mailstop">
+				    ${new_mailstop}
+			    </textarea>
+
+				<br>
+				<button v-on:click="addPerson(); newPersonView = false;">Add Person</button>
+			</div>
+		</div>
+
+		<!--...................................List Of Mailstops................................................................-->
+		<div class="list2">
+			<div class="row">
+
+				<div class="col_title" style="background-color: khaki; width:30%;">
+
+					<div style="float:left;">
+						<input type="checkbox" v-on:click="change_to_true();" v-model="allTrue">
+						</input>
+					</div>
+					Status
+
+				</div>
+				<div class="col_title" style="background-color: khaki; width:35%; height:19.667px;">
+					Name
+				</div>
+				<div class="col_title" style="background-color: khaki; width:35%; height:19.667px;">
+					Mailstop
+				</div>
+
+			</div>
+			<div style="border-bottom:10px;"></div>
+
+			<div style="overflow:scroll; height: 50%; overflow-x:hidden; overflow-y:overlay;">
+				<div v-for="info in Info" class="row" style="width:100%">
+
+					<div v-if="info.index != currentView">
+						<div class="col_title" style="width:30%;">
+							<div style="float:left;">
+								<input type="checkbox" v-model="info.isAvailable">
+								</input>
+							</div>
+
+							<div v-on:click="currentView = info.index">
+								${info.ppl_status}
+							</div>
+						</div>
+						<div class="col_title" style="width:35%;" v-on:click="currentView = info.index">
+							${info.name}
+						</div>
+						<div class="col_title" style="width:35%;" v-on:click="currentView = info.index">
+							${info.mailstop}
+						</div>
+					</div>
+
+					<div v-if="info.index == currentView">
+						<div class="col_title" style="background-color: lightgrey; width:30%;">
+							<div style="float:left;">
+								<input type="checkbox" v-model="info.isAvailable">
+								</input>
+							</div>
+
+							<div v-on:click="currentView = -1">
+								${info.ppl_status}
+							</div>
+						</div>
+						<div class="col_title" style="background-color: lightgrey; width:35%;" v-on:click="currentView = -1">
+							${info.name}
+						</div>
+						<div class="col_title" style="background-color: lightgrey; width:35%;" v-on:click="currentView = -1">
+							${info.mailstop}
+						</div>
+
+
+						<br>&nbsp;&nbsp;Email
+						<textarea style="background-color: rgb(236, 236, 250)" v-model="info.ppl_email">
+			    			${info.ppl_email}
+	   				 	</textarea>
+
+						<br>
+						<button v-on:click="updatePerson()">
+							Update
+						</button>
+
+						<div style="border-bottom:3px solid khaki;">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="text-center">
+			<button class="btn btn-primary" v-on:click="newPersonView = true;">New Person</button>
+			<button class="btn btn-primary" v-on:click="awayPerson();">Mark as Away</button>
+		</div>
+
+	</div>
+
+
+	<script src="{% static 'js/jquery-3.2.1.js' %}"></script>
+	<script src="{% static 'js/vue.js' %}"></script>
+	<script src="{% static 'js/person_html.js' %}"></script>
+	<link href="{% static 'css/general_design.css' %}" rel="stylesheet">
+	<link href="{% static 'css/person.css' %}" rel="stylesheet">
+
+</body>
+
+</html>

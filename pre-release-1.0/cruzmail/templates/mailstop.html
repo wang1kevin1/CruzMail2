@@ -1,0 +1,184 @@
+{% load staticfiles %}
+
+<html>
+
+<head>
+	<html lang="en">
+
+	<head>
+
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<!-- Compiled and minified CSS -->
+		<!--
+		  		-->
+		<title>Cruz Mail</title>
+
+
+
+		<header>
+			<h1 class="logo"><img src="../static/img/pages/thumbnail_mailstop.png"> Mailstops</h1>
+			<input type="checkbox" id="nav-toggle" class="nav-toggle">
+			<nav>
+				<ul>
+					<li><a class="nav-link" href="{% url 'menu' %}">Home</a></li>
+					<li><a class="nav-link" href="{% url 'logging_out' %}">Logout</a></li>
+				</ul>
+			</nav>
+			<label for="nav-toggle" class="nav-toggle-label">
+				<span></span>
+			</label>
+		</header>
+	</head>
+
+<body>
+	<!--...................................Header for People................................................................-->
+	<div id="mailstop_view">
+
+		<div class="body" style="background-color:#305371; height:20%;">
+		</div>
+
+		&nbsp; &nbsp; &nbsp;Search for Mailstops...
+		<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="test">
+		    ${test}
+	    </textarea>
+
+		<button v-on:click="queryMailstop();">Search</button>
+
+		<!-- adding new mailstop overlay -->
+		<div id="overlay" v-if="newMailstopView==true">
+			<div style="font-size:30px" class="exit_button" v-on:click="newMailstopView=false;">
+					<img src="../static/img/tools/exit_button.png">
+			</div>
+			<div class="new_mailstop" style="overflow:scroll; overflow-x:hidden;">
+				New Mailstop
+
+				<br>Mailstop ID
+				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_mailstop">
+				    ${new_mailstop}
+			    </textarea>
+
+				<br>Mailstop Name
+				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_ms_name">
+				    ${new_ms_name}
+			    </textarea>
+
+				<br>Route
+				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_ms_route">
+				    ${new_ms_route}
+			    </textarea>
+
+				<br>Order
+				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_ms_route_order">
+				    ${new_ms_route_order}
+			    </textarea>
+
+				<br>
+				<button v-on:click="addMailstop(); newMailstopView = false;">Add Mailstop</button>
+			</div>
+		</div>
+
+		<!--...................................List Of Mailstops................................................................-->
+		<div class="list2">
+			<div class="row">
+
+				<div class="col_title" style="background-color: lightskyblue; width:30%;">
+
+					<div style="float:left;">
+						<input type="checkbox" v-on:click="change_to_true();" v-model="allTrue">
+						</input>
+					</div>
+					Status
+
+				</div>
+				<div class="col_title" style="background-color: lightskyblue; width:35%; height:19.667px;">
+					ID
+				</div>
+				<div class="col_title" style="background-color: lightskyblue; width:35%; height:19.667px;">
+					Name
+				</div>
+
+			</div>
+			<div style="border-bottom:10px;"></div>
+
+			<div style="overflow:scroll; height: 50%; overflow-x:hidden; overflow-y:overlay;">
+				<div v-for="info in Info" class="row" style="width:100%">
+
+					<div v-if="info.index != currentView">
+						<div class="col_title" style="width:30%;">
+							<div style="float:left;">
+								<input type="checkbox" v-model="info.isActive">
+								</input>
+							</div>
+
+							<div v-on:click="currentView = info.index">
+								${info.ms_status}
+							</div>
+						</div>
+						<div class="col_title" style="width:35%;" v-on:click="currentView = info.index">
+							${info.mailstop}
+						</div>
+						<div class="col_title" style="width:35%;" v-on:click="currentView = info.index">
+							${info.ms_name}
+						</div>
+					</div>
+
+					<div v-if="info.index == currentView">
+						<div class="col_title" style="background-color: lightgrey; width:30%;">
+							<div style="float:left;">
+								<input type="checkbox" v-model="info.isActive">
+								</input>
+							</div>
+
+							<div v-on:click="currentView = -1">
+								${info.ms_status}
+							</div>
+						</div>
+						<div class="col_title" style="background-color: lightgrey; width:35%;" v-on:click="currentView = -1">
+							${info.mailstop}
+						</div>
+						<div class="col_title" style="background-color: lightgrey; width:35%;" v-on:click="currentView = -1">
+							${info.ms_name}
+						</div>
+
+
+						<br>&nbsp;&nbsp;Route
+						<textarea style="background-color: rgb(236, 236, 250)" v-model="info.ms_route">
+			    			${info.ms_route}
+	   				 	</textarea>
+
+						<br>&nbsp;&nbsp;Order
+						<textarea style="background-color: rgb(236, 236, 250)" v-model="info.ms_route_order">
+			    			${info.ms_route_order}
+	   				 	</textarea>
+
+						<br>
+						<button v-on:click="updateMailstop()">
+							Update
+						</button>
+
+						<div style="border-bottom:3px solid lightskyblue;">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="text-center">
+			<button class="btn btn-primary" v-on:click="newMailstopView = true;">New Mailstop</button>
+			<button class="btn btn-primary" v-on:click="deactivateMailstop();">Deactivate Mailstop</button>
+		</div>
+
+	</div>
+
+
+	<script src="{% static 'js/jquery-3.2.1.js' %}"></script>
+	<script src="{% static 'js/vue.js' %}"></script>
+	<script src="{% static 'js/mailstop_html.js' %}"></script>
+	<link href="{% static 'css/general_design.css' %}" rel="stylesheet">
+	<link href="{% static 'css/mailstop.css' %}" rel="stylesheet">
+
+</body>
+
+</html>
