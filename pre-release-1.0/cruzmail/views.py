@@ -48,11 +48,12 @@ def package_delivered(request):
     #t = packages_master.objects.get(pkg_tracking=request.POST.get('pkg_tracking'))
 
     send_mail(
-    'PACKAGE ' + request.POST.get('track') + ' DELIVERED',
+    'PACKAGE ' + request.POST.get('pkg_tracking') + ' DELIVERED',
     'This is a notification that your package has been delivered',
     'cruzmail.ucsc@gmail.com',
     ['zeyuanjiang@gmail.com'],
     )
+
 
     p = packages_master.objects.get(pkg_tracking=request.POST.get('pkg_tracking'))
     p.pkg_status = 'delivered'
@@ -67,12 +68,12 @@ def update_package(request):
       return
 
     #update package information based on the data from request parameter
-    t = packages_master.objects.get(pkg_tracking=request.POST.get('track'))
-    t.name =       request.POST.get('name')
-    t.pkg_email =  request.POST.get('email')
-    t.pkg_weight = request.POST.get('weight')
-    t.pkg_sign =   request.POST.get('sign')
-    t.save()
+    p = packages_master.objects.get(pkg_tracking=request.POST.get('track'))
+    p.name =       request.POST.get('name')
+    p.pkg_email =  request.POST.get('email')
+    p.pkg_weight = request.POST.get('weight')
+    p.pkg_sign =   request.POST.get('sign')
+    p.save()
     return JsonResponse(dict(test="ok"))
 
 @csrf_exempt
