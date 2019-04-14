@@ -7,6 +7,7 @@ from .collection.models import mailstops_master, packages_master, people_master
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, permission_required
 
+from django.core.mail import send_mail
 # PACKAGE VIEWS-------------------------------------------------------------------------------------------------------------
 @csrf_exempt
 def query_package(request):
@@ -46,6 +47,12 @@ def package_delivered(request):
     #updates package as delievered and saves it
     #t = packages_master.objects.get(pkg_tracking=request.POST.get('pkg_tracking'))
 
+    send_mail(
+    'PACKAGE ' + request.POST.get('track') + ' DELIVERED',
+    'This is a notification that your package has been delivered',
+    'cruzmail.ucsc@gmail.com',
+    ['zeyuanjiang@gmail.com'],
+    )
 
     p = packages_master.objects.get(pkg_tracking=request.POST.get('pkg_tracking'))
     p.pkg_status = 'delivered'
@@ -74,6 +81,12 @@ def add_package(request):
     if request.user is None:
       return
 
+    send_mail(
+    'PACKAGE ' + request.POST.get('track'),
+    'This is a notification that your package has arrived at the UCSC barn. It will take another 1 to 2 days to deliver the package to your location google.com',
+    'cruzmail.ucsc@gmail.com',
+    ['zeyuanjiang@gmail.com'],
+    )
 
     #inputs package information based on the data from request parameter
     packages_master.objects.create(pkg_tracking = request.POST.get('track'),
