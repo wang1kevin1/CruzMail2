@@ -70,8 +70,9 @@ var myViewModel = new Vue({
 	 
 	 	//iterates through packages and checks which packages should be marked
 	    for(var key in myViewModel.Info){
-	    	//console.log(myViewModel.Info[key].tracking);
-			if(myViewModel.Info[key].isDelivered)
+	    	//console.log(myViewModel.Info[key].state);
+			if(myViewModel.Info[key].isDelivered && myViewModel.Info[key].state == "received")
+				//console.log("a");
 		 	   $.ajax({ type: "POST",
 	                  	   url:  '/package_delivered' ,
 	       	                   data:{"pkg_tracking": myViewModel.Info[key].tracking},
