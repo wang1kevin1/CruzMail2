@@ -75,7 +75,8 @@ var myViewModel = new Vue({
 				//console.log("a");
 		 	   $.ajax({ type: "POST",
 	                  	   url:  '/package_delivered' ,
-	       	                   data:{"pkg_tracking": myViewModel.Info[key].tracking},
+	       	                   data:{"pkg_tracking": myViewModel.Info[key].tracking,
+	       	               			 "pkg_email": myViewModel.Info[key].email},
 	                    	   dataType: 'json',
 	                           success: function no(response){
 	                           },

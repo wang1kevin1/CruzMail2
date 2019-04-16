@@ -59,11 +59,7 @@ class packages_master(models.Model):
        ('n', 'no'))
    pkg_sign     = models.CharField(max_length = 10, choices = pkg_sign_choice, default = 'n')
 
-
-   pkg_email_choice = (
-       ('y', 'yes'),
-       ('n', 'no'))
-   pkg_email    = models.CharField(max_length = 10, choices = pkg_email_choice, default = 'y')
+   pkg_email    = models.CharField(max_length = 50, default = '')
 
    pkg_weight_choice = (
        ('s', '1 to 5'),

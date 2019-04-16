@@ -51,7 +51,7 @@ def package_delivered(request):
     'PACKAGE ' + request.POST.get('pkg_tracking') + ' DELIVERED',
     'This is a notification that your package has been delivered',
     'cruzmail.ucsc@gmail.com',
-    ['zeyuanjiang@gmail.com'],
+    [request.POST.get('pkg_email')],
     )
 
 
@@ -82,13 +82,6 @@ def add_package(request):
     if request.user is None:
       return
 
-    send_mail(
-    'PACKAGE ' + request.POST.get('track'),
-    'This is a notification that your package has arrived at the UCSC barn. It will take another 1 to 2 days to deliver the package to your location google.com',
-    'cruzmail.ucsc@gmail.com',
-    ['zeyuanjiang@gmail.com'],
-    )
-
     #inputs package information based on the data from request parameter
     packages_master.objects.create(pkg_tracking = request.POST.get('track'),
                                   name = request.POST.get('name'),
@@ -98,6 +91,14 @@ def add_package(request):
                                   pkg_email = request.POST.get('email'),
                                   pkg_weight = '1 to 5',
                                   pkg_remarks = request.POST.get('remark'))
+
+    send_mail(
+    'PACKAGE ' + request.POST.get('track'),
+    'This is a notification that your package has arrived at the UCSC barn. It will take another 1 to 2 days to deliver the package to your location google.com',
+    'cruzmail.ucsc@gmail.com',
+    [request.POST.get('email')],
+    )
+
     return JsonResponse(dict(test="ok"))
 
 # MAILSTOP VIEWS-------------------------------------------------------------------------------------------------------------
