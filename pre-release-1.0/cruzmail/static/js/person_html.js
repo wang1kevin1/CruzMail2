@@ -81,6 +81,7 @@ var myViewModel = new Vue({
         }
       });
     },
+
     queryPerson: queryPeople = function () {
       myViewModel.allTrue = false;
       myViewModel.currentView = -1;
@@ -116,6 +117,24 @@ var myViewModel = new Vue({
           console.log("invalid inputs\n");
         }
       });
+    },
+
+    exportPersons: exportPeople = function () {
+      for (var key in myViewModel.Info)
+        if (myViewModel.Info[key].isAvailable)
+          $.ajax({
+            type: "POST",
+            url: '/export_persons',
+            data: {
+              "index": myViewModel.index * 10
+            },
+            dataType: 'json',
+            success: function no(response) {
+            },
+            error: function (response) {
+              console.log("invalid inputs\n");
+            }
+          });
     }
 
   }

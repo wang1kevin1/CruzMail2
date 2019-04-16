@@ -232,7 +232,7 @@ def add_person(request):
     return JsonResponse(dict(test="ok"))
 
 @csrf_exempt
-def export_people(request):
+def export_persons(request):
 
     if request.user is None:
       return
