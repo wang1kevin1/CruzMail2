@@ -1,3 +1,5 @@
+import csv
+
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User, Permission
@@ -229,6 +231,31 @@ def add_person(request):
                                 )
     return JsonResponse(dict(test="ok"))
 
+@csrf_exempt
+def export_people(request):
+
+    if request.user is None:
+      return
+
+    #queries table
+    params = []
+    index = int(request.POST.get('index'))
+    for r in people_master.objects.all():
+        t = dict(name       = r.name,
+                 ppl_email  = r.ppl_email,
+                 ppl_status = r.ppl_status,
+                 mailstop   = r.mailstop
+                )
+        params.append(t)
+
+    keys = params[0].keys()
+
+    with open('people.csv', 'wb') as output_file:
+    dict_writer = csv.DictWriter(output_file, keys)
+    dict_writer.writeheader()
+    dict_writer.writerows(params)
+
+    return JsonResponse(dict(test="ok"))
 
 # ADMIN VIEWS-------------------------------------------------------------------------------------------------------------
 
