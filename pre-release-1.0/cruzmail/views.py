@@ -237,25 +237,28 @@ def export_persons(request):
     if request.user is None:
       return
 
-    index = int(request.POST.get('index'))
+    if(request.GET.get('export')):
+        index = int(request.POST.get('index'))
 
-    response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="people.csv"'
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="people.csv"'
 
-    fieldnames = ['name', 'ppl_email', 'ppl_status', 'mailstop']
+        fieldnames = ['name', 'ppl_email', 'ppl_status', 'mailstop']
 
-    writer = csv.DictWriter(response, fieldnames= fieldnames)
-    writer.writeheader()
+        writer = csv.DictWriter(response, fieldnames= fieldnames)
+        writer.writeheader()
 
-    for r in people_master.objects.all():
-          t = dict(name       = r.name,
-                   ppl_email  = r.ppl_email,
-                   ppl_status = r.ppl_status,
-                   mailstop   = r.mailstop
-                  )
-          writer.writerow(t)
+        for r in people_master.objects.all():
+            t = dict(name       = r.name,
+                     ppl_email  = r.ppl_email,
+                     ppl_status = r.ppl_status,
+                     mailstop   = r.mailstop
+                    )
+            writer.writerow(t)
     
-    return response
+        return response
+
+    #return render(request, 'person.html', {'form': form, 'params':params})
 
 # ADMIN VIEWS-------------------------------------------------------------------------------------------------------------
 

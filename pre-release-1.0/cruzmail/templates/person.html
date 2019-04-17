@@ -157,7 +157,7 @@
 		<div class="text-center">
 			<button class="btn btn-primary" v-on:click="newPersonView = true;">New Person</button>
 			<button class="btn btn-primary" v-on:click="awayPerson();">Mark as Away</button>
-			<button class="btn btn-primary" v-on:click="exportPersons();">Export</button>
+			<button class="btn btn-primary" onclick="window.location.href='{% export_persons %}?export=true'">Export</button>
 		</div>
 
 	</div>

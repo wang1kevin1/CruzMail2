@@ -117,41 +117,6 @@ var myViewModel = new Vue({
           console.log("invalid inputs\n");
         }
       });
-    },
-
-    exportPersons: exportPeople = function () {
-      myViewModel.allTrue = false;
-      myViewModel.currentView = -1;
-
-      $.ajax({
-        type: "POST",
-        url: '/export_persons',
-        data: {
-          "index": myViewModel.index * 10
-        },
-        dataType: 'HttpResponse',
-        success: function good(response) {
-          console.log(response.params);
-          myViewModel.Info = [];
-          var index = 0;
-          var objHold;
-          for (var key in response.params) {
-            objHold = response.params[key]
-            myViewModel.Info.push({
-              name: objHold.name,
-              ppl_email: objHold.ppl_email,
-              ppl_status: objHold.ppl_status,
-              mailstop: objHold.mailstop,
-              index: index
-            });
-            index++;
-            //console.log(response.params[key]);
-          }
-        },
-        error: function (response) {
-          console.log("invalid inputs\n");
-        }
-      });
     }
 
   }
