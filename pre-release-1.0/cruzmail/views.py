@@ -239,12 +239,14 @@ def export_persons(request):
 
     index = int(request.POST.get('index'))
 
-    with open('people.csv', 'w', newline='') as csvfile:
-      fieldnames = ['name', 'ppl_email', 'ppl_status', 'mailstop']
-      writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="people.csv"'
 
-      writer.writeheader()
-      for r in people_master.objects.all():
+    fieldnames = ['name', 'ppl_email', 'ppl_status', 'mailstop']
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+    writer.writeheader()
+
+    for r in people_master.objects.all():
           t = dict(name       = r.name,
                    ppl_email  = r.ppl_email,
                    ppl_status = r.ppl_status,
@@ -252,7 +254,7 @@ def export_persons(request):
                   )
           writer.writerow(t)
     
-    return JsonResponse(dict(csvfile= csvfile))
+    return response
 
 # ADMIN VIEWS-------------------------------------------------------------------------------------------------------------
 

@@ -129,7 +129,7 @@ var myViewModel = new Vue({
         data: {
           "index": myViewModel.index * 10
         },
-        dataType: 'json',
+        dataType: 'HttpResponse',
         success: function good(response) {
           console.log(response.params);
           myViewModel.Info = [];
@@ -142,7 +142,6 @@ var myViewModel = new Vue({
               ppl_email: objHold.ppl_email,
               ppl_status: objHold.ppl_status,
               mailstop: objHold.mailstop,
-              isAvailable: false,
               index: index
             });
             index++;
