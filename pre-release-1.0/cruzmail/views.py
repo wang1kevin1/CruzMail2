@@ -1,4 +1,4 @@
-import csv
+import unicodecsv as csv
 
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
