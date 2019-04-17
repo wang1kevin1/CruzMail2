@@ -255,7 +255,7 @@ def export_persons(request):
       writer.close()
 
     
-    return JsonResponse(dict(test="ok"))
+    return JsonResponse(dict(csvfile= csvfile))
 
 # ADMIN VIEWS-------------------------------------------------------------------------------------------------------------
 
