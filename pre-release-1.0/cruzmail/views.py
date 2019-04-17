@@ -242,7 +242,9 @@ def export_persons(request):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="people.csv"'
 
-    writer = csv.DictWriter(response)
+    fieldnames = ['name', 'ppl_email', 'ppl_status', 'mailstop']
+
+    writer = csv.DictWriter(response, fieldnames= fieldnames)
     writer.writeheader()
 
     for r in people_master.objects.all():
