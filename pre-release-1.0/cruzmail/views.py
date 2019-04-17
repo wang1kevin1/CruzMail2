@@ -251,9 +251,6 @@ def export_persons(request):
                    mailstop   = r.mailstop
                   )
           writer.writerow(t)
-      
-      writer.close()
-
     
     return JsonResponse(dict(csvfile= csvfile))
 
