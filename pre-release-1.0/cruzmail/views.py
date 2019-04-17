@@ -1,4 +1,4 @@
-import unicodecsv as csv
+import csv
 
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
@@ -237,24 +237,20 @@ def export_persons(request):
     if request.user is None:
       return
 
-    #queries table
-    params = []
     index = int(request.POST.get('index'))
-    for r in people_master.objects.all():
-        t = dict(name       = r.name,
-                 ppl_email  = r.ppl_email,
-                 ppl_status = r.ppl_status,
-                 mailstop   = r.mailstop
-                )
-        params.append(t)
 
-    keys = params[0].keys()
+    with open('people.csv', 'w', newline='') as csvfile:
+      fieldnames = ['name', 'ppl_email', 'ppl_status', 'mailstop']
+      writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
-    with open('people.csv', 'wb') as output_file:
-    dict_writer = csv.DictWriter(output_file, keys)
-    dict_writer.writeheader()
-    dict_writer.writerows(params)
-
+      writer.writeheader()
+      for r in people_master.objects.all():
+          t = dict(name       = r.name,
+                   ppl_email  = r.ppl_email,
+                   ppl_status = r.ppl_status,
+                   mailstop   = r.mailstop
+                  )
+          writer.writerow(t)
     return JsonResponse(dict(test="ok"))
 
 # ADMIN VIEWS-------------------------------------------------------------------------------------------------------------
