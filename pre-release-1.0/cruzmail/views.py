@@ -23,7 +23,7 @@ def query_package(request):
     index = request.POST.get('index')
 
     #gets proper queries and stores it into an array
-    for r in packages_master.objects.all():
+    for r in packages_master.objects.filter(pkg_tracking__contains=search):
         if search is None or search == '' or search == r.pkg_tracking:
             t = dict(pkg_tracking = r.pkg_tracking,
                      pkg_status = r.pkg_status,

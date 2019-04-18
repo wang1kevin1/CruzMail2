@@ -43,6 +43,28 @@
 	    </textarea>
 
 		<button v-on:click="queryPackage();">Search</button>
+		<button v-on:click="advancedSearchView = !advancedSearchView">more</button>
+
+		<!--...................................Advanced Search UI................................................................-->
+		<div v-if="advancedSearchView">
+			<br>&nbsp;&nbsp;Name
+			<textarea class="list" style="background-color: rgb(236, 236, 250)" >
+			</textarea>
+
+			<br>&nbsp;&nbsp;email
+			<textarea class="list" style="background-color: rgb(236, 236, 250)">
+			</textarea>
+
+			<br>&nbsp;&nbsp;Signing?
+			<select class="list" style="background-color: rgb(236, 236, 250)">
+				<option value="yes">Yes</option>
+				<option value="no">No</option>
+			</select>
+
+			<br>&nbsp;&nbsp;Weight
+			<textarea class="list" style="background-color: rgb(236, 236, 250)">
+			</textarea>
+		</div>
 
 		<!--........................................ adding new package overlay ................................-->
 		<div id="overlay" v-if="newPackageView==true">

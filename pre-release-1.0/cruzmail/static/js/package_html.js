@@ -25,6 +25,7 @@ var myModel = {
 
     //checks if the new package overlay is to be displayed
     newPackageView: false,
+    advancedSearchView: false,
 
 	users:[],    
 };
@@ -85,6 +86,7 @@ var myViewModel = new Vue({
 	                           }
 	                   });
 	    }
+	    //myViewModel.queryPackage();
 
 	},
 	updatePackage: updatePackages = function(){
