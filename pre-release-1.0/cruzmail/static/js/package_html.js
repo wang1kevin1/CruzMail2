@@ -15,6 +15,13 @@ var myModel = {
     new_mailstop: '',
     new_route: '',
 
+    //stores the information of advanced search
+    adv_mailstop: '',
+    adv_name: '',
+    adv_status: '',
+    adv_email: '',
+    adv_signing: '',
+
     //stores the info for all the packages
     Info: [],
 
@@ -122,8 +129,13 @@ var myViewModel = new Vue({
 	    //gets all the packages with search funtionalities
 	    $.ajax({ type: "POST",
 		     url:  '/query_package' ,
-		     data:{"search": myViewModel.search_pkg,
-		           "index":  myViewModel.index * 10}, 
+		     data:{"search":   myViewModel.search_pkg,
+		           "index":    myViewModel.index * 10,
+		       	   "mailstop": myViewModel.adv_mailstop,
+		       	   "name":     myViewModel.adv_name,
+		       	   "email":    myViewModel.adv_email,
+		       	   "status":   myViewModel.adv_status,
+		       	   "signing":  myViewModel.adv_signing}, 
 		     dataType: 'json',
 		     success: function good(response){
 

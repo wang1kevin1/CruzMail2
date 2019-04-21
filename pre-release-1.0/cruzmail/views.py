@@ -17,24 +17,25 @@ def query_package(request):
       return
 
     params = []    
-
-    #gets the search information if exists
-    search = request.POST.get('search')
     index = request.POST.get('index')
 
     #gets proper queries and stores it into an array
-    for r in packages_master.objects.filter(pkg_tracking__contains=search):
-        if search is None or search == '' or search == r.pkg_tracking:
-            t = dict(pkg_tracking = r.pkg_tracking,
-                     pkg_status = r.pkg_status,
-                     pkg_date_rec = r.pkg_date_rec,
-                     name = r.name,
-                     mailstop = r.mailstop,
-                     sign = r.pkg_sign,
-                     weight = r.pkg_weight,
-                     email = r.pkg_email
-                    )
-            params.append(t)
+    for r in packages_master.objects.filter(pkg_tracking__contains = request.POST.get('search'),
+                                            mailstop__contains =     request.POST.get('mailstop'),
+                                            name__contains =         request.POST.get('name'),
+                                            pkg_email__contains =    request.POST.get('email'),
+                                            pkg_status__contains =   request.POST.get('status'),):
+
+      t = dict(pkg_tracking = r.pkg_tracking,
+               pkg_status = r.pkg_status,
+               pkg_date_rec = r.pkg_date_rec,
+               name = r.name,
+               mailstop = r.mailstop,
+               sign = r.pkg_sign,
+               weight = r.pkg_weight,
+               email = r.pkg_email
+              )
+      params.append(t)
 
     return JsonResponse(dict(params= params))
 

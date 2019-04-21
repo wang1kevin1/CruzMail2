@@ -47,16 +47,29 @@
 
 		<!--...................................Advanced Search UI................................................................-->
 		<div v-if="advancedSearchView">
-			<br>&nbsp;&nbsp;Name
-			<textarea class="list" style="background-color: rgb(236, 236, 250)" >
+			<br>&nbsp;&nbsp;Status
+			<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="adv_status">
+				<option value="yes">delivered</option>
+				<option value="no">received</option>
 			</textarea>
 
-			<br>&nbsp;&nbsp;email
-			<textarea class="list" style="background-color: rgb(236, 236, 250)">
+			<br>&nbsp;&nbsp;Name
+			<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="adv_name">
+				${adv_name}
+			</textarea>
+
+			<br>&nbsp;&nbsp;Email
+			<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="adv_email">
+				${adv_email}
+			</textarea>
+
+			<br>&nbsp;&nbsp;Mailstop
+			<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="adv_mailstop">
+				${adv_mailstop}
 			</textarea>
 
 			<br>&nbsp;&nbsp;Signing?
-			<select class="list" style="background-color: rgb(236, 236, 250)">
+			<select class="list" style="background-color: rgb(236, 236, 250)" v-model="adv_signing">
 				<option value="yes">Yes</option>
 				<option value="no">No</option>
 			</select>
