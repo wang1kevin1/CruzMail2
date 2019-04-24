@@ -232,34 +232,23 @@ def add_person(request):
     return JsonResponse(dict(test="ok"))
 
 @csrf_exempt
-def export_persons(request, exportCSV):
+def export_persons(request):
 
     if request.user is None:
       return
 
-    index = int(request.POST.get('index'))
+    meta = people_master._meta
+    field_names = [field.name for field in meta.fields]
 
-    if exportCSV:
-        response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename="people.csv"'
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename={}.csv'.format(meta)
+    writer = csv.writer(response)
 
-        fieldnames = ['name', 'ppl_email', 'ppl_status', 'mailstop']
+    writer.writerow(field_names)
+    for obj in people_master.objects.all():
+        writer.writerow([getattr(obj, field) for field in field_names])
 
-        writer = csv.DictWriter(response, fieldnames= fieldnames)
-        writer.writeheader()
-
-        for r in people_master.objects.all():
-            t = dict(name       = r.name,
-                     ppl_email  = r.ppl_email,
-                     ppl_status = r.ppl_status,
-                     mailstop   = r.mailstop
-                    )
-            writer.writerow(t)
-    
-        return response
-
-    else:
-        return render(request, 'person.html', {'params': params})
+    return response
     
 # ADMIN VIEWS-------------------------------------------------------------------------------------------------------------
 
