@@ -65,8 +65,7 @@ urlpatterns = [
     url(r'^update_person', views.update_person, name='update_person'),
     url(r'^add_person', views.add_person, name='add_person'),
     #not sure if this part works
-    url(r'^test', 'export_persons', {"exportCSV": False}, name="test"),
-    url(r'^export_persons', 'export_persons', {"exportCSV": True}, name="export_persons"),
+    url(r'^export_persons', views.export_persons, name="export_persons"),
 
     
     # Admin (Employee Management)
