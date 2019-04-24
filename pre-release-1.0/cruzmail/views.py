@@ -234,9 +234,9 @@ def add_person(request):
 @csrf_exempt
 def export_persons(request):
 
-    if request.user is None:
-      return
-
+    #if request.user is None:
+    #  return
+    print("In export_persons python method")
     meta = people_master._meta
     field_names = [field.name for field in meta.fields]
 
@@ -246,6 +246,7 @@ def export_persons(request):
 
     writer.writerow(field_names)
     for obj in people_master.objects.all():
+        print("Getting Attributes of " + obj.name)
         writer.writerow([getattr(obj, field) for field in field_names])
 
     return response
@@ -329,7 +330,7 @@ def collection(request):
 def mailstop(request):
   return render(request, 'mailstop.html')
 
-@login_required(login_url='/account/login')
+#@login_required(login_url='/account/login')
 def person(request):
   return render(request, 'person.html')
 
