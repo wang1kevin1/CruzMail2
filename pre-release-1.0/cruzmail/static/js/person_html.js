@@ -119,25 +119,6 @@ var myViewModel = new Vue({
       });
     },
 
-    exportPerson: exportPeople = function () {
-      $.ajax({
-        type: "POST",
-        url: '/export_persons',
-        dataType: 'HttpResponse',
-        success: function good(response) {
-          console.log('Returned good response');
-          for (var key in response.params) {
-            objHold = repsponse.params[key]
-            console.log(objHold);
-          }
-          response.download();
-        },
-        error: function (response) {
-          console.log("Something went wrong\n");
-        }
-      });
-    }
-
   }
 
 });

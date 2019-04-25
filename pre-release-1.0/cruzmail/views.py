@@ -232,26 +232,6 @@ def add_person(request):
     return JsonResponse(dict(test="ok"))
 
 @csrf_exempt
-def export_persons(request):
-
-    #if request.user is None:
-    #  return
-    print("In export_persons python method")
-    meta = people_master._meta
-    field_names = [field.name for field in meta.fields]
-
-    response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename={}.csv'.format(meta)
-    writer = csv.writer(response)
-
-    writer.writerow(field_names)
-    for obj in people_master.objects.all():
-        print("Getting Attributes of " + obj.name)
-        writer.writerow([getattr(obj, field) for field in field_names])
-
-    return response
-
-@csrf_exempt
 def export_csv(request):
 
     #if request.user is None:
