@@ -41,7 +41,9 @@ urlpatterns = [
     path('export_people/', views.export_people, name='export_people'),
     path('import_people/', views.import_people, name='import_people'),
     path('export_mailstops/', views.export_mailstops, name='export_mailstops'),
+    path('import_mailstops/', views.import_mailstops, name='import_mailstops'),
     path('exports_packages/', views.export_packages, name='export_packages'),
+    path('import_packages/', views.import_packages, name='import_packages'),
     #path('collection/', CollectionPageViews>as_view(), name='users'),
 
     url(r'^account/', include('cruzmail.account.urls')),

@@ -288,6 +288,58 @@ def import_people(request):
     return redirect('/person')
 
 @csrf_exempt
+def import_packages(request):
+    if request.user is None:
+        return
+
+    # Delete values in people table
+    clear_table(packages_master)
+
+    filePath = '/Users/sean.bell/Downloads/collection.packages_master.csv'
+
+    with open(filePath) as f:
+        reader = csv.reader(f)
+        # Creates a new model for each row in the csv file
+        for row in reader:
+            _, created = packages_master.objects.get_or_create(
+                pkg_tracking=row[0],
+                name=row[1],
+                mailstop=row[2],
+                pkg_status=row[3],
+                pkg_sign=row[4],
+                pkg_email=row[5],
+                pkg_weight=row[6],
+                pkg_date_rec=row[7],
+                pkg_date_del=row[8],
+                pkg_remarks=row[9],
+            )
+
+    return redirect('/manage')
+
+@csrf_exempt
+def import_mailstops(request):
+    if request.user is None:
+        return
+
+    # Delete values in people table
+    clear_table(mailstops_master)
+
+    filePath = '/Users/sean.bell/Downloads/collection.mailstops_master.csv'
+
+    with open(filePath) as f:
+        reader = csv.reader(f)
+        # Creates a new model for each row in the csv file
+        for row in reader:
+            _, created = mailstops_master.objects.get_or_create(
+                mailstop=row[0],
+                ms_name=row[1],
+                ms_route=row[2],
+                mt_status=row[3],
+            )
+
+    return redirect('/mailstop')
+
+@csrf_exempt
 def clear_table(tableName):
     tableName.objects.all().delete()
 
