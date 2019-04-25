@@ -246,9 +246,9 @@ def export_mailstops(request):
 @csrf_exempt
 def export_csv(request, tableName):
 
-    #if request.user is None:
-    #  return
-    print("In export_csv python method")
+    if request.user is None:
+      return
+    #print("In export_csv python method")
     meta = tableName._meta
     field_names = [field.name for field in meta.fields]
 
@@ -258,7 +258,7 @@ def export_csv(request, tableName):
 
     writer.writerow(field_names)
     for obj in tableName.objects.all():
-        print("Getting Attributes of " + obj.name)
+        #print("Getting Attributes of " + obj.name)
         writer.writerow([getattr(obj, field) for field in field_names])
 
     return response
@@ -325,7 +325,7 @@ def index(request):
 def home(request):
     return render(request, 'search.html')
 
-#@login_required(login_url='/account/login')
+@login_required(login_url='/account/login')
 def manage(request):
     return render(request, 'package.html')
 
@@ -338,11 +338,11 @@ def menu(request):
 def collection(request):
   return render(request, 'users.html')
 
-#@login_required(login_url='/account/login')
+@login_required(login_url='/account/login')
 def mailstop(request):
   return render(request, 'mailstop.html')
 
-#@login_required(login_url='/account/login')
+@login_required(login_url='/account/login')
 def person(request):
   return render(request, 'person.html')
 
