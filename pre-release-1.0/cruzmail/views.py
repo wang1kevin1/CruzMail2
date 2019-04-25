@@ -232,12 +232,24 @@ def add_person(request):
     return JsonResponse(dict(test="ok"))
 
 @csrf_exempt
-def export_csv(request):
+def export_packages(request):
+    return export_csv(request, packages_master)
+
+@csrf_exempt
+def export_people(request):
+    return export_csv(request, people_master)
+
+@csrf_exempt
+def export_mailstops(request):
+    return export_csv(request, mailstops_master)
+
+@csrf_exempt
+def export_csv(request, tableName):
 
     #if request.user is None:
     #  return
     print("In export_csv python method")
-    meta = people_master._meta
+    meta = tableName._meta
     field_names = [field.name for field in meta.fields]
 
     response = HttpResponse(content_type='text/csv')
@@ -245,7 +257,7 @@ def export_csv(request):
     writer = csv.writer(response)
 
     writer.writerow(field_names)
-    for obj in people_master.objects.all():
+    for obj in tableName.objects.all():
         print("Getting Attributes of " + obj.name)
         writer.writerow([getattr(obj, field) for field in field_names])
 
@@ -313,7 +325,7 @@ def index(request):
 def home(request):
     return render(request, 'search.html')
 
-@login_required(login_url='/account/login')
+#@login_required(login_url='/account/login')
 def manage(request):
     return render(request, 'package.html')
 
@@ -326,7 +338,7 @@ def menu(request):
 def collection(request):
   return render(request, 'users.html')
 
-@login_required(login_url='/account/login')
+#@login_required(login_url='/account/login')
 def mailstop(request):
   return render(request, 'mailstop.html')
 
