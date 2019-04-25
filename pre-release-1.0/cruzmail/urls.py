@@ -39,6 +39,7 @@ urlpatterns = [
     path('logging_out/', views.logging_out, name='logging_out'),
     path('person/', views.person, name='person'),
     path('export_people/', views.export_people, name='export_people'),
+    path('import_people/', views.import_people, name='import_people'),
     path('export_mailstops/', views.export_mailstops, name='export_mailstops'),
     path('exports_packages/', views.export_packages, name='export_packages'),
     #path('collection/', CollectionPageViews>as_view(), name='users'),

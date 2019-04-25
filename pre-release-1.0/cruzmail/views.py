@@ -256,13 +256,41 @@ def export_csv(request, tableName):
     response['Content-Disposition'] = 'attachment; filename={}.csv'.format(meta)
     writer = csv.writer(response)
 
-    writer.writerow(field_names)
+    #writer.writerow(field_names)
     for obj in tableName.objects.all():
         #print("Getting Attributes of " + obj.name)
         writer.writerow([getattr(obj, field) for field in field_names])
 
     return response
-    
+
+@csrf_exempt
+def import_people(request):
+
+    if request.user is None:
+        return
+
+    # Delete values in people table
+    clear_table(people_master)
+
+    filePath = '/Users/sean.bell/Downloads/collection.people_master.csv'
+
+    with open(filePath) as f:
+        reader = csv.reader(f)
+        # Creates a new model for each row in the csv file
+        for row in reader:
+            _, created = people_master.objects.get_or_create(
+                name=row[0],
+                ppl_email=row[1],
+                ppl_status=row[2],
+                mailstop=row[3],
+            )
+
+    return redirect('/person')
+
+@csrf_exempt
+def clear_table(tableName):
+    tableName.objects.all().delete()
+
 # ADMIN VIEWS-------------------------------------------------------------------------------------------------------------
 
 @csrf_exempt
