@@ -38,6 +38,7 @@ urlpatterns = [
     path('mailstop/', views.mailstop, name='mailstop'),
     path('logging_out/', views.logging_out, name='logging_out'),
     path('person/', views.person, name='person'),
+    path('exports/', views.export_csv, name='export_csv'),
     #path('collection/', CollectionPageViews>as_view(), name='users'),
 
     url(r'^account/', include('cruzmail.account.urls')),

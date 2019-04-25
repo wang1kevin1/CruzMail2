@@ -123,14 +123,14 @@ var myViewModel = new Vue({
       $.ajax({
         type: "POST",
         url: '/export_persons',
-        dataType: 'json',
+        dataType: 'HttpResponse',
         success: function good(response) {
-          console.log('Returned good response')
+          console.log('Returned good response');
           for (var key in response.params) {
             objHold = repsponse.params[key]
-            console.log(objHold)
+            console.log(objHold);
           }
-          response.download()
+          response.download();
         },
         error: function (response) {
           console.log("Something went wrong\n");

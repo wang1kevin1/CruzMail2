@@ -158,6 +158,7 @@
 			<button class="btn btn-primary" v-on:click="newPersonView = true;">New Person</button>
 			<button class="btn btn-primary" v-on:click="awayPerson();">Mark as Away</button>
 			<button class="btn btn-primary" v-on:click="exportPerson();">Export</button>
+			<a href="{% url 'export_csv' %}">Export to CSV</a>
 		</div>
 
 	</div>
