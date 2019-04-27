@@ -30,6 +30,9 @@ urlpatterns = [
     url(r'^index', views.index, name="index"),
     url(r'^admin/', admin.site.urls),
 
+    #testtttttttttttttttttttttttttttttttttttttt
+    url(r'test/', views.test, name='test'),
+
     path('accounts/', include('django.contrib.auth.urls')),
     path('manage/', views.manage, name='manage'),
     path('collection/', views.collection, name='collection'),
