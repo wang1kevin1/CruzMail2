@@ -23,6 +23,7 @@
 				<ul>
 					<li><a class="nav-link" href="{% url 'menu' %}">Home</a></li>
 					<li><a class="nav-link" href="{% url 'logging_out' %}">Logout</a></li>
+					<li><a class="nav-link" href="{% url 'test' %}">Test</a></li>
 				</ul>
 			</nav>
 			<label for="nav-toggle" class="nav-toggle-label">
@@ -92,7 +93,7 @@
 				    ${new_tracknum}
 			    </textarea>
 
-				<br>name
+				<br>name  <button v-on:click="queryPerson();">Autofill</button>
 				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_name">
 				    ${new_name}
 			    </textarea>

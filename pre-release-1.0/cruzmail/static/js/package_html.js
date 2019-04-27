@@ -24,6 +24,7 @@ var myModel = {
 
     //stores the info for all the packages
     Info: [],
+    advanced_fill: [],
 
     //checks if extra data wants to be displayed
     // -1: no packages displays extra data
@@ -135,7 +136,7 @@ var myViewModel = new Vue({
 		       	   "name":     myViewModel.adv_name,
 		       	   "email":    myViewModel.adv_email,
 		       	   "status":   myViewModel.adv_status,
-		       	   "signing":  myViewModel.adv_signing}, 
+		       	   "signing":  myViewModel.adv_signing }, 
 		     dataType: 'json',
 		     success: function good(response){
 
@@ -169,6 +170,41 @@ var myViewModel = new Vue({
 		     }
 	    });
 	},
+
+	queryPerson: queryPeople = function () {
+
+      	$.ajax({
+        	type: "POST",
+        	url: '/query_person',
+        	data: {
+        	  "search": myViewModel.new_name,
+        	  "index": 10
+       	 },
+       	 dataType: 'json',
+       	 success: function good(response) {
+
+        	  myViewModel.advanced_fill = [];
+        	  var index = 0;
+       	  	  var objHold;
+        	  for (var key in response.params) {
+
+        	  	  var objHold = response.params[key]
+           		  myViewModel.advanced_fill.push({
+              	  	  name: objHold.name,
+              	  	  ppl_email: objHold.ppl_email,
+                  	  mailstop: objHold.mailstop,
+            	  });
+            	  myViewModel.new_email =    objHold.ppl_email;
+            	  myViewModel.new_mailstop = objHold.mailstop;
+
+                  console.log(response.params[key]);
+          	  }
+        },
+        error: function (response) {
+          console.log("invalid inputs\n");
+        }
+      });
+    },
 
     user_names: user = function(){
         $.ajax({

@@ -10,6 +10,12 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.core.mail import send_mail
 # PACKAGE VIEWS-------------------------------------------------------------------------------------------------------------
 @csrf_exempt
+def test(request):
+  print("hi")
+  return
+
+
+@csrf_exempt
 def query_package(request):
 
     #make sure user is logged in
