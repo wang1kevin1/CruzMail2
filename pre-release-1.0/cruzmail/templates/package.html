@@ -23,6 +23,7 @@
 				<ul>
 					<li><a class="nav-link" href="{% url 'menu' %}">Home</a></li>
 					<li><a class="nav-link" href="{% url 'logging_out' %}">Logout</a></li>
+					<li><a class="nav-link" href="{% url 'test' %}">Test</a></li>
 				</ul>
 			</nav>
 			<label for="nav-toggle" class="nav-toggle-label">
@@ -43,6 +44,41 @@
 	    </textarea>
 
 		<button v-on:click="queryPackage();">Search</button>
+		<button v-on:click="advancedSearchView = !advancedSearchView">more</button>
+
+		<!--...................................Advanced Search UI................................................................-->
+		<div v-if="advancedSearchView">
+			<br>&nbsp;&nbsp;Status
+			<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="adv_status">
+				<option value="yes">delivered</option>
+				<option value="no">received</option>
+			</textarea>
+
+			<br>&nbsp;&nbsp;Name
+			<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="adv_name">
+				${adv_name}
+			</textarea>
+
+			<br>&nbsp;&nbsp;Email
+			<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="adv_email">
+				${adv_email}
+			</textarea>
+
+			<br>&nbsp;&nbsp;Mailstop
+			<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="adv_mailstop">
+				${adv_mailstop}
+			</textarea>
+
+			<br>&nbsp;&nbsp;Signing?
+			<select class="list" style="background-color: rgb(236, 236, 250)" v-model="adv_signing">
+				<option value="yes">Yes</option>
+				<option value="no">No</option>
+			</select>
+
+			<br>&nbsp;&nbsp;Weight
+			<textarea class="list" style="background-color: rgb(236, 236, 250)">
+			</textarea>
+		</div>
 
 		<!--........................................ adding new package overlay ................................-->
 		<div id="overlay" v-if="newPackageView==true">
@@ -57,7 +93,7 @@
 				    ${new_tracknum}
 			    </textarea>
 
-				<br>name
+				<br>name  <button v-on:click="queryPerson();">Autofill</button>
 				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_name">
 				    ${new_name}
 			    </textarea>
