@@ -29,8 +29,8 @@ class mailstops_master(models.Model):
    ms_status = models.CharField(max_length = 8, choices = ms_status_choice, default = 'Active')
 
 class people_master(models.Model):
-   name        = models.CharField(max_length = 50, primary_key = True, default = '')
-   ppl_email   = models.CharField(max_length = 50, default = '')
+   name        = models.CharField(max_length = 50, default = '')
+   ppl_email   = models.CharField(max_length = 100, primary_key = True, default = '')
 
    ppl_status_choice = (
        ('Available', 'Available'),
@@ -59,7 +59,7 @@ class packages_master(models.Model):
        ('n', 'no'))
    pkg_sign     = models.CharField(max_length = 10, choices = pkg_sign_choice, default = 'n')
 
-   pkg_email    = models.CharField(max_length = 50, default = '')
+   pkg_email    = models.CharField(max_length = 100, default = '')
 
    pkg_weight_choice = (
        ('s', '1 to 5'),
