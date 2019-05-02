@@ -143,3 +143,14 @@
     z-index:10;
 
 }
+.choose_row{
+  overflow-x:scroll; 
+  overflow-y:hidden; 
+  white-space:nowrap;
+}
+.choose_block{
+  padding: 10px; 
+  margin: 5px; 
+  background-color: #E5E4E2; 
+  display: inline-block;
+}

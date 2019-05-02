@@ -24,7 +24,7 @@ var myModel = {
 
     //stores the info for all the packages
     Info: [],
-    advanced_fill: [],
+    auto_fill: [],
 
     //checks if extra data wants to be displayed
     // -1: no packages displays extra data
@@ -173,37 +173,43 @@ var myViewModel = new Vue({
 
 	queryPerson: queryPeople = function () {
 
-      	$.ajax({
-        	type: "POST",
-        	url: '/query_person',
-        	data: {
-        	  "search": myViewModel.new_name,
-        	  "index": 10
-       	 },
-       	 dataType: 'json',
-       	 success: function good(response) {
+		if(myViewModel.new_name != "" && myViewModel != null)
+	      	$.ajax({
+	        	type: "POST",
+	        	url: '/query_person',
+	        	data: {
+	        	  "search": myViewModel.new_name,
+	        	  "index": 10
+	       	 },
+	       	 dataType: 'json',
+	       	 success: function good(response) {
 
-        	  myViewModel.advanced_fill = [];
-        	  var index = 0;
-       	  	  var objHold;
-        	  for (var key in response.params) {
+	        	  myViewModel.auto_fill = [];
+	        	  var index = 0;
+	       	  	  var objHold;
+	        	  for (var key in response.params) {
 
-        	  	  var objHold = response.params[key]
-           		  myViewModel.advanced_fill.push({
-              	  	  name: objHold.name,
-              	  	  ppl_email: objHold.ppl_email,
-                  	  mailstop: objHold.mailstop,
-            	  });
-            	  myViewModel.new_email =    objHold.ppl_email;
-            	  myViewModel.new_mailstop = objHold.mailstop;
+	        	  	  var objHold = response.params[key]
+	           		  myViewModel.auto_fill.push({
+	              	  	  name: objHold.name,
+	              	  	  ppl_email: objHold.ppl_email,
+	                  	  mailstop: objHold.mailstop,
+	            	  });
 
-                  console.log(response.params[key]);
-          	  }
-        },
-        error: function (response) {
-          console.log("invalid inputs\n");
-        }
-      });
+	                  console.log(response.params[key]);
+	          	  }
+	        },
+	        error: function (response) {
+	          console.log("invalid inputs\n");
+	        }
+	      });
+    },
+    autoFill_name: autofill_names = function (new_auto_name, new_auto_mailstop, new_auto_email) {
+    	myViewModel.auto_fill = [];
+    	myViewModel.new_name = new_auto_name;
+    	myViewModel.new_mailstop = new_auto_mailstop;
+    	myViewModel.new_email = new_auto_email;
+
     },
 
     user_names: user = function(){

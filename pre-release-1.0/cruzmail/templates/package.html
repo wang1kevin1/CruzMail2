@@ -93,7 +93,17 @@
 				    ${new_tracknum}
 			    </textarea>
 
+			    <!--.............................................  auto fill choice UI .....................................................-->
 				<br>name  <button v-on:click="queryPerson();">Autofill</button>
+
+				<div class="choose_row" v-if ="auto_fill.length != 0">
+					<div class = "choose_block" v-for="name in auto_fill" v-on:click = "autoFill_name(name.name, name.mailstop, name.ppl_email)">
+						Name: ${name.name} <br>
+						Email: ${name.ppl_email} <br>
+						Mailstop: ${name.mailstop}
+					</div>
+				</div>
+
 				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_name">
 				    ${new_name}
 			    </textarea>
