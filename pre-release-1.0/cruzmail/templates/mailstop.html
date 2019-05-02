@@ -79,6 +79,31 @@
 			</div>
 		</div>
 
+		<!-- Import overlay -->
+		<div id="overlay" v-if="newImportView==true">
+			<div style="font-size:30px" class="exit_button" v-on:click="newImportView=false;">
+					<img src="../static/img/tools/exit_button.png">
+			</div>
+			<div class="new_import" style="overflow:scroll; overflow-x:hidden;">
+				Import CSV
+
+				<form action="{% url 'import_mailstops' %}" method="POST" enctype="multipart/form-data" class="form-horizontal"> 
+					{% csrf_token %}
+					<div class="form-group">
+							<label for="name" class="col-md-3 col-sm-3 col-xs-12 control-label">File: </label>
+							<div class="col-md-8">
+									<input type="file" name="mailstop_csv" id="mailstop_csv" required="True" class="form-control">
+							</div>                    
+					</div>
+					<div class="form-group">                    
+							<div class="col-md-3 col-sm-3 col-xs-12 col-md-offset-3" style="margin-bottom:10px;">
+								<button v-on:click="newImportView = false;">Upload</button>
+							</div> 
+					</div>
+					</form>
+			</div>
+		</div>
+
 		<!--...................................List Of Mailstops................................................................-->
 		<div class="list2">
 			<div class="row">
@@ -168,9 +193,11 @@
 		<div class="text-center">
 			<button class="btn btn-primary" v-on:click="newMailstopView = true;">New Mailstop</button>
 			<button class="btn btn-primary" v-on:click="deactivateMailstop();">Deactivate Mailstop</button>
-            <a href="{% url 'export_mailstops' %}" class="btn btn-primary">Export to CSV</a>
-            <a href="{% url 'import_mailstops' %}" class="btn btn-primary">Import CSV</a>
+      <a href="{% url 'export_mailstops' %}" class="btn btn-primary">Export to CSV</a>
+			<button class="btn btn-primary" v-on:click="newImportView = true;">Import CSV</button>
 		</div>
+
+		
 
 	</div>
 

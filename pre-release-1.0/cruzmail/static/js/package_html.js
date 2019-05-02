@@ -31,10 +31,14 @@ var myModel = {
     //positive number: package of the specific index displays extra data
     currentView: -1,
 
-    //checks if the new package overlay is to be displayed
-    newPackageView: false,
-    advancedSearchView: false,
+	//checks if the new package overlay is to be displayed
+	newPackageView: false,
+	
+	//checks if the import overlay is to be displayed
+	newImportView: false,
 
+	advancedSearchView: false,
+	
 	users:[],    
 };
 

@@ -279,9 +279,15 @@ def import_people(request):
     # Delete values in people table
     clear_table(people_master)
 
-    filePath = '/Users/sean.bell/Downloads/collection.people_master.csv'
-
-    with open(filePath) as f:
+    # Upload temp import csv
+    if request.method == "POST":
+        f = request.FILES['people_csv']
+        with open("/tmp/people_csv.csv", 'wb+') as destination:
+            for chunk in f.chunks():
+                destination.write(chunk)
+    
+    # Read uploaded CSV and import data
+    with open("/tmp/people_csv.csv") as f:
         reader = csv.reader(f)
         # Creates a new model for each row in the csv file
         for row in reader:
@@ -302,9 +308,15 @@ def import_packages(request):
     # Delete values in people table
     clear_table(packages_master)
 
-    filePath = '/Users/sean.bell/Downloads/collection.packages_master.csv'
-
-    with open(filePath) as f:
+    # Upload temp import csv
+    if request.method == "POST":
+        f = request.FILES['package_csv']
+        with open("/tmp/package_csv.csv", 'wb+') as destination:
+            for chunk in f.chunks():
+                destination.write(chunk)
+    
+    # Read uploaded CSV and import data
+    with open("/tmp/package_csv.csv") as f:
         reader = csv.reader(f)
         # Creates a new model for each row in the csv file
         for row in reader:
@@ -325,15 +337,22 @@ def import_packages(request):
 
 @csrf_exempt
 def import_mailstops(request):
+
     if request.user is None:
         return
 
-    # Delete values in people table
+    # Delete values in mailstop table
     clear_table(mailstops_master)
 
-    filePath = '/Users/sean.bell/Downloads/collection.mailstops_master.csv'
-
-    with open(filePath) as f:
+    # Upload temp import csv
+    if request.method == "POST":
+        f = request.FILES['mailstop_csv']
+        with open("/tmp/mailstop_csv.csv", 'wb+') as destination:
+            for chunk in f.chunks():
+                destination.write(chunk)
+    
+    # Read uploaded CSV and import data
+    with open("/tmp/mailstop_csv.csv") as f:
         reader = csv.reader(f)
         # Creates a new model for each row in the csv file
         for row in reader:
@@ -341,10 +360,12 @@ def import_mailstops(request):
                 mailstop=row[0],
                 ms_name=row[1],
                 ms_route=row[2],
-                mt_status=row[3],
+                ms_route_order=row[3],
+                ms_status=row[4],
             )
-
+    
     return redirect('/mailstop')
+
 
 @csrf_exempt
 def clear_table(tableName):
