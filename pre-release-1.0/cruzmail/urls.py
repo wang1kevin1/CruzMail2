@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^$', views.home, name="home"),
     url(r'^index', views.index, name="index"),
     url(r'^admin/', admin.site.urls),
+    
 
     #testtttttttttttttttttttttttttttttttttttttt
     url(r'test/', views.test, name='test'),
@@ -41,6 +42,7 @@ urlpatterns = [
     path('mailstop/', views.mailstop, name='mailstop'),
     path('logging_out/', views.logging_out, name='logging_out'),
     path('person/', views.person, name='person'),
+    #path('package/', views.package, name='package'),
     path('export_people/', views.export_people, name='export_people'),
     path('import_people/', views.import_people, name='import_people'),
     path('export_mailstops/', views.export_mailstops, name='export_mailstops'),

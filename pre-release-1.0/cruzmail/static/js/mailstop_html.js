@@ -2,15 +2,29 @@ var myModel = {
   name: "Who's Ashley",
   test: '',
   index: 0,
+  
+  //true if the general checkbox is checked
   allTrue: false,
 
+  // stores the information for a new mailstop if needed
   new_mailstop: '',
   new_ms_name: '',
   new_ms_route: '',
   new_ms_route_order: '',
+
+  //stores the info for all the mailstops
   Info: [],
+
+  //checks if extra data wants to be displayed
+  // -1: no mailstops displays extra data
+  //positive number: mailstop of the specific index displays extra data
   currentView: -1,
+
+  //checks if the new mailstop overlay is to be displayed
   newMailstopView: false,
+
+  //checks if the import overlay is to be displayed
+  newImportView: false,
 };
 
 var myViewModel = new Vue({
