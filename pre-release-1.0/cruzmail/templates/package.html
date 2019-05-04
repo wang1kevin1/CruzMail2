@@ -23,7 +23,6 @@
 				<ul>
 					<li><a class="nav-link" href="{% url 'menu' %}">Home</a></li>
 					<li><a class="nav-link" href="{% url 'logging_out' %}">Logout</a></li>
-					<li><a class="nav-link" href="{% url 'test' %}">Test</a></li>
 				</ul>
 			</nav>
 			<label for="nav-toggle" class="nav-toggle-label">
@@ -95,6 +94,9 @@
 
 			    <!--.............................................  auto fill choice UI .....................................................-->
 				<br>name  <button v-on:click="queryPerson();">Autofill</button>
+				<div v-if="no_result_for_autofill">
+					No name in database
+				</div>
 
 				<div class="choose_row" v-if ="auto_fill.length != 0">
 					<div class = "choose_block" v-for="name in auto_fill" v-on:click = "autoFill_name(name.name, name.mailstop, name.ppl_email)">
@@ -103,6 +105,7 @@
 						Mailstop: ${name.mailstop}
 					</div>
 				</div>
+				<!--........................................................................................................................-->
 
 				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_name">
 				    ${new_name}
@@ -113,16 +116,23 @@
 				    ${new_mailstop}
 			    </textarea>
 
+				<br>email
+				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_email">
+				    ${new_email}
+			    </textarea>
+
 				<br>sign
 				<select class="list" style="background-color: rgb(236, 236, 250)" v-model="new_sign">
 					<option value="Yes">Yes</option>
 					<option value="No">No</option>
 				</select>
 
-				<br>email
-				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_email">
-				    ${new_email}
-			    </textarea>
+				<br>weight
+				<select class="list" style="background-color: rgb(236, 236, 250)" v-model="new_weight">
+					<option value="1 to 5">1 to 5</option>
+					<option value="6 to 15">6 to 15</option>
+					<option value="6 to 15">over 15</option>
+				</select>
 
 				<br>remark
 				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_remark">
@@ -214,10 +224,12 @@
 							<option value="no">No</option>
 						</select>
 
-						<br>&nbsp;&nbsp;Weight
-						<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="info.weight">
-			    			${info.weight}
-	   				 	</textarea>
+						<br>&nbsp;&nbsp;weight
+						<select class="list" style="background-color: rgb(236, 236, 250)" v-model="new_weight">
+							<option value="1 to 5">1 to 5</option>
+							<option value="6 to 15">6 to 15</option>
+							<option value="6 to 15">over 15</option>
+						</select>
 
 						<br>&nbsp;&nbsp;Recieve Date:
 						${info.date_rec}

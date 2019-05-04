@@ -65,7 +65,11 @@ class packages_master(models.Model):
        ('s', '1 to 5'),
        ('m', '6 to 15'),
        ('l', 'over 16'))
-   pkg_weight   = models.CharField(max_length = 7, choices = pkg_weight_choice, null = False)
+   pkg_weight   = models.CharField(max_length = 7, choices = pkg_weight_choice, blank = True, null = True)
+   pkg_height   = models.IntegerField(blank=True, null=True)
+   pkg_width    = models.IntegerField(blank=True, null=True)
+   pkg_length   = models.IntegerField(blank=True, null=True)
+
    pkg_date_rec = models.DateField(default = datetime.date.today)
    pkg_date_del = models.DateField(default = datetime.date.today)
    pkg_remarks  = models.CharField(max_length = 144, default = '')

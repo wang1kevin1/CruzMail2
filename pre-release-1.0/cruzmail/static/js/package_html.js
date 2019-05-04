@@ -13,6 +13,7 @@ var myModel = {
     new_email: '',
     new_remark: '',
     new_mailstop: '',
+    new_weight: null,
     new_route: '',
 
     //stores the information of advanced search
@@ -35,6 +36,7 @@ var myModel = {
     newPackageView: false,
     advancedSearchView: false,
 
+    no_result_for_autofill: false,
 	users:[],    
 };
 
@@ -64,7 +66,8 @@ var myViewModel = new Vue({
 			   			   "mailstop": myViewModel.new_mailstop,
 		           		   "sign":     myViewModel.new_sign,
 		           		   "email":    myViewModel.new_email,
-		           		   "remark":   myViewModel.new_remark},
+		           		   "remark":   myViewModel.new_remark,
+		           		   "weight":   myViewModel.new_weight},
                      dataType: 'json',
                      success: function no(response){
                      },
@@ -173,6 +176,7 @@ var myViewModel = new Vue({
 
 	queryPerson: queryPeople = function () {
 
+		myViewModel.no_result_for_autofill = false;
 		if(myViewModel.new_name != "" && myViewModel != null)
 	      	$.ajax({
 	        	type: "POST",
@@ -184,6 +188,10 @@ var myViewModel = new Vue({
 	       	 dataType: 'json',
 	       	 success: function good(response) {
 
+	       	 	  //check if result is found
+	       	 	  if(response.params.length == 0){
+	       	 	  	 myViewModel.no_result_for_autofill = true;
+	       	 	  }
 	        	  myViewModel.auto_fill = [];
 	        	  var index = 0;
 	       	  	  var objHold;
@@ -209,7 +217,6 @@ var myViewModel = new Vue({
     	myViewModel.new_name = new_auto_name;
     	myViewModel.new_mailstop = new_auto_mailstop;
     	myViewModel.new_email = new_auto_email;
-
     },
 
     user_names: user = function(){

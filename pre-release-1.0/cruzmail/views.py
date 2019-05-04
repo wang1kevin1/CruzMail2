@@ -12,12 +12,6 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.core.mail import send_mail
 # PACKAGE VIEWS-------------------------------------------------------------------------------------------------------------
 @csrf_exempt
-def test(request):
-  print("hi")
-  return
-
-
-@csrf_exempt
 def query_package(request):
 
     #make sure user is logged in
@@ -98,7 +92,7 @@ def add_package(request):
                                   pkg_status = 'received',
                                   pkg_sign = request.POST.get('sign'),
                                   pkg_email = request.POST.get('email'),
-                                  pkg_weight = '1 to 5',
+                                  pkg_weight = request.POST.get('weight'),
                                   pkg_remarks = request.POST.get('remark'))
 
     send_mail(
@@ -189,16 +183,15 @@ def query_person(request):
       return
 
     params = []
-    search = request.POST.get('search')
     index = int(request.POST.get('index'))
-    for r in people_master.objects.all():
-      if search is None or (len(search) <= len(r.name) and search == r.name[0:len(search)]):
-        t = dict(name       = r.name,
-                 ppl_email  = r.ppl_email,
-                 ppl_status = r.ppl_status,
-                 mailstop   = r.mailstop
-                )
-        params.append(t)
+    for r in people_master.objects.filter(name__contains = request.POST.get('search')):
+
+      t = dict(name       = r.name,
+               ppl_email  = r.ppl_email,
+               ppl_status = r.ppl_status,
+               mailstop   = r.mailstop
+              )
+      params.append(t)
     return JsonResponse(dict(params= params))
 
 @csrf_exempt
@@ -410,11 +403,15 @@ def index(request):
     return render(request, 'search.html')
 
 def home(request):
-    return render(request, 'search.html')
+
+  if request.user.is_authenticated:
+    return render(request, 'menu.html')
+  return render(request, 'search.html')
 
 @login_required(login_url='/account/login')
 def manage(request):
-    return render(request, 'package.html')
+
+  return render(request, 'package.html')
 
 @login_required(login_url='/account/login')
 def menu(request):
