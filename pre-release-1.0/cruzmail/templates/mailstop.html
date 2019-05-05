@@ -11,8 +11,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<!-- Compiled and minified CSS -->
-		<!--
-		  		-->
+		<link href="{% static 'css/general_design.css' %}" rel="stylesheet">
+		<link href="{% static 'css/mailstop.css' %}" rel="stylesheet">
+		<!---->
 		<title>Cruz Mail</title>
 
 
@@ -111,7 +112,7 @@
 		<div class="list2">
 			<div class="row">
 
-				<div class="col_title" style="background-color: lightskyblue; width:30%;">
+				<div class="col_xtitle" style=" width:30%;">
 
 					<div style="float:left;">
 						<input type="checkbox" v-on:click="change_to_true();" v-model="allTrue">
@@ -120,10 +121,10 @@
 					Status
 
 				</div>
-				<div class="col_title" style="background-color: lightskyblue; width:35%; height:19.667px;">
+				<div class="col_xtitle" style=" width:35%; ">
 					ID
 				</div>
-				<div class="col_title" style="background-color: lightskyblue; width:35%; height:19.667px;">
+				<div class="col_xtitle" style="width:35%; ">
 					Name
 				</div>
 
@@ -198,8 +199,7 @@
 	<script src="{% static 'js/jquery-3.2.1.js' %}"></script>
 	<script src="{% static 'js/vue.js' %}"></script>
 	<script src="{% static 'js/mailstop_html.js' %}"></script>
-	<link href="{% static 'css/general_design.css' %}" rel="stylesheet">
-	<link href="{% static 'css/mailstop.css' %}" rel="stylesheet">
+
 
 </body>
 
