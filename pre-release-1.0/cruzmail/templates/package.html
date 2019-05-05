@@ -258,8 +258,8 @@
 		<!--...................................buttons to update packages..................................................-->
 		<div class="text-center">
 			<button class="btn btn-primary" v-on:click="newPackageView = true;">New Package</button>
-			<button class="btn btn-primary" onclick="location.reload();" v-on:click="packageDelivered();">Deliver Package</button>
-      		<a href="{% url 'export_packages' %}" class="btn btn-primary">Export to CSV</a>
+			<button class="btn btn-primary" v-on:click="packageDelivered();" onclick="location.reload();">Deliver Package</button>
+      	<a href="{% url 'export_packages' %}" class="btn btn-primary">Export to CSV</a>
 			<button class="btn btn-primary" v-on:click="newImportView = true;">Import CSV</button>
 		</div>
 	</div>

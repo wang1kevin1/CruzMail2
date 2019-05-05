@@ -44,15 +44,17 @@
 		    ${test}
 	    </textarea>
 
-		<button v-on:click="queryMailstop();">Search</button>
+		<button v-on:click="queryMailstop();" style= "position:relative; left:47%; transform:translateX(-47%);">Search</button>
 
 		<!-- adding new mailstop overlay -->
 		<div id="overlay" v-if="newMailstopView==true">
-			<div style="font-size:30px" class="exit_button" v-on:click="newMailstopView=false;">
+		
+			<div style="font-size:30px; margin-right:1.4%; background: red;" class="exit_button"  v-on:click="newMailstopView=false;">
 					<img src="../static/img/tools/exit_button.png">
 			</div>
 			<div class="new_mailstop" style="overflow:scroll; overflow-x:hidden;">
-				New Mailstop
+		
+				<h1 style="text-align: center;">New Mailstop</h1>
 
 				<br>Mailstop ID
 				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_mailstop">
@@ -75,18 +77,19 @@
 			    </textarea>
 
 				<br>
-				<button v-on:click="addMailstop(); newMailstopView = false;">Add Mailstop</button>
+				<button v-on:click="addMailstop(); newMailstopView = false;" onclick="location.reload();" style="position:relative; left:50%; transform:translateX(-50%);">Add Mailstop</button>
 			</div>
 		</div>
 
 		<!-- Import overlay -->
 		<div id="overlay" v-if="newImportView==true">
-			<div style="font-size:30px" class="exit_button" v-on:click="newImportView=false;">
+			
+			<div style="font-size:30px; margin-right:1.4%; background: red;" class="exit_button" v-on:click="newImportView=false;">
 					<img src="../static/img/tools/exit_button.png">
 			</div>
 			<div class="new_import" style="overflow:scroll; overflow-x:hidden;">
-				Import CSV
-
+				
+				<h1 style="text-align: center;">Import CSV</h1>
 				<form action="{% url 'import_mailstops' %}" method="POST" enctype="multipart/form-data" class="form-horizontal"> 
 					{% csrf_token %}
 					<div class="form-group">
@@ -148,43 +151,33 @@
 							${info.ms_name}
 						</div>
 					</div>
-
+					
 					<div v-if="info.index == currentView">
-						<div class="col_title" style="background-color: lightgrey; width:30%;">
-							<div style="float:left;">
-								<input type="checkbox" v-model="info.isActive">
-								</input>
+
+							<!--exit button-->
+							<div style="font-size:30px; margin-right:1.4%; background: red;" class="exit_button" v-on:click="currentView=-1">
+									<img src="../static/img/tools/exit_button.png">
 							</div>
-
-							<div v-on:click="currentView = -1">
-								${info.ms_status}
+		
+								<!--rest of popup for mailstop details-->
+							<div class="new_mailstop" style="overflow:scroll; overflow-x:hidden;">
+								<h1 style="text-align: center;">Mailstop Information</h1>
+								<br>&nbsp;&nbsp;Route
+								<textarea style="background-color: rgb(236, 236, 250)" v-model="info.ms_route">
+									${info.ms_route}
+								</textarea>
+	
+								<br>&nbsp;&nbsp;Order
+								<textarea style="background-color: rgb(236, 236, 250)" v-model="info.ms_route_order">
+									${info.ms_route_order}
+								</textarea>
+	
+								<br>
+								<button v-on:click="updateMailstop()" onclick="location.reload();" style="position:relative; left:50%; transform:translateX(-50%);">
+									Update
+								</button>
+	
 							</div>
-						</div>
-						<div class="col_title" style="background-color: lightgrey; width:35%;" v-on:click="currentView = -1">
-							${info.mailstop}
-						</div>
-						<div class="col_title" style="background-color: lightgrey; width:35%;" v-on:click="currentView = -1">
-							${info.ms_name}
-						</div>
-
-
-						<br>&nbsp;&nbsp;Route
-						<textarea style="background-color: rgb(236, 236, 250)" v-model="info.ms_route">
-			    			${info.ms_route}
-	   				 	</textarea>
-
-						<br>&nbsp;&nbsp;Order
-						<textarea style="background-color: rgb(236, 236, 250)" v-model="info.ms_route_order">
-			    			${info.ms_route_order}
-	   				 	</textarea>
-
-						<br>
-						<button v-on:click="updateMailstop()">
-							Update
-						</button>
-
-						<div style="border-bottom:3px solid lightskyblue;">
-						</div>
 					</div>
 				</div>
 			</div>
@@ -192,7 +185,7 @@
 
 		<div class="text-center">
 			<button class="btn btn-primary" v-on:click="newMailstopView = true;">New Mailstop</button>
-			<button class="btn btn-primary" v-on:click="deactivateMailstop();">Deactivate Mailstop</button>
+			<button class="btn btn-primary" v-on:click="deactivateMailstop();" onclick="location.reload();">Deactivate Mailstop</button>
       <a href="{% url 'export_mailstops' %}" class="btn btn-primary">Export to CSV</a>
 			<button class="btn btn-primary" v-on:click="newImportView = true;">Import CSV</button>
 		</div>
