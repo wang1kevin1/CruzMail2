@@ -134,6 +134,21 @@
 					<option value="6 to 15">over 15</option>
 				</select>
 
+				<!--....................................................... dimensions .....................................................-->
+				<br>width
+				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_width">
+				    ${new_width}
+			    </textarea>
+			    <br>height
+				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_height">
+				    ${new_height}
+			    </textarea>
+			    <br>length
+				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_length">
+				    ${new_length}
+			    </textarea>
+			    <!--........................................................................................................................-->
+
 				<br>remark
 				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_remark">
 				    ${new_remark}
@@ -225,7 +240,7 @@
 						</select>
 
 						<br>&nbsp;&nbsp;weight
-						<select class="list" style="background-color: rgb(236, 236, 250)" v-model="new_weight">
+						<select class="list" style="background-color: rgb(236, 236, 250)" v-model="info.weight">
 							<option value="1 to 5">1 to 5</option>
 							<option value="6 to 15">6 to 15</option>
 							<option value="6 to 15">over 15</option>
@@ -234,6 +249,20 @@
 						<br>&nbsp;&nbsp;Recieve Date:
 						${info.date_rec}
 
+						<!--....................................................... dimensions .....................................................-->
+						<br>width
+						<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="info.pkg_width">
+						    ${info.pkg_width}
+					    </textarea>
+					    <br>height
+						<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="info.pkg_height">
+						    ${info.pkg_height}
+					    </textarea>
+					    <br>length
+						<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="info.pkg_length">
+						    ${info.pkg_length}
+					    </textarea>
+					    <!--........................................................................................................................-->
 
 						<br>
 						<button v-on:click="updatePackage()">

@@ -13,7 +13,12 @@ var myModel = {
     new_email: '',
     new_remark: '',
     new_mailstop: '',
+    
     new_weight: null,
+    new_height: null,
+    new_width:  null,
+    new_length: null,
+
     new_route: '',
 
     //stores the information of advanced search
@@ -67,7 +72,10 @@ var myViewModel = new Vue({
 		           		   "sign":     myViewModel.new_sign,
 		           		   "email":    myViewModel.new_email,
 		           		   "remark":   myViewModel.new_remark,
-		           		   "weight":   myViewModel.new_weight},
+		           		   "weight":   myViewModel.new_weight,
+		           		   "width":    myViewModel.new_width,
+		           		   "height":   myViewModel.new_height,
+		           		   "length":   myViewModel.new_length},
                      dataType: 'json',
                      success: function no(response){
                      },
@@ -113,7 +121,10 @@ var myViewModel = new Vue({
 				     	   "email":  objHold.email,
 				     	   "weight": objHold.weight,
 				     	   "name":   objHold.name,
-				     	   "sign":   objHold.sign},
+				     	   "sign":   objHold.sign,
+				     	   "width":  objHold.pkg_width,
+				     	   "height": objHold.pkg_height,
+				     	   "length": objHold.pkg_length},
                      dataType: 'json',
                      success: function no(response){
                      },
@@ -154,14 +165,18 @@ var myViewModel = new Vue({
 		         for(var key in response.params){
 			     
 			     objHold = response.params[key]
-			     myViewModel.Info.push({tracking: objHold.pkg_tracking,
-										state: objHold.pkg_status,
-										date_rec: objHold.pkg_date_rec,
-						    			name: objHold.name,
-						    			mailstop: objHold.mailstop,
-						    			sign: objHold.sign,
-				     					weight: objHold.weight,
-				     					email: objHold.email,
+			     myViewModel.Info.push({tracking:     objHold.pkg_tracking,
+										state:        objHold.pkg_status,
+										date_rec:     objHold.pkg_date_rec,
+						    			name:         objHold.name,
+						    			mailstop:     objHold.mailstop,
+						    			sign:         objHold.sign,
+				     					weight:       objHold.weight,
+				     					email:        objHold.email,
+				     					pkg_width:    objHold.pkg_width,
+				     					pkg_height:   objHold.pkg_height,
+				     					pkg_length:   objHold.pkg_length,
+
 						    			isDelivered:false,
 						    			index: index});
 			     index++;
