@@ -70,32 +70,48 @@
 .col_title{
   float:left;
   position:relative;
-  width:30%;
-  height:19.667px;
+  font-size: 2vw;
   text-align: center;
-  border-right:3px solid lightskyblue;
-  border-bottom:3px solid lightskyblue;
+  border-right:3px solid black;
+  border-bottom:3px solid black;
+  width:30%;
+  height:15%; 
+ 
+ 
 }
 .col_xtitle{ 
   float:left;
   width:35%;
   text-align: center;
-  border-right:3px solid lightskyblue;
-  border-bottom:3px solid lightskyblue;
+  border-right:3px black;
+  border-bottom:3px black;
+  height:5vw; 
+  font-size: 3vw;
+  background: lightsteelblue;
 }
 .col_results{
   float:left;
   width:32%;
-  border-right:3px solid lightskyblue;
-  border-bottom:3px solid lightskyblue;
+  border-right:3px solid rgb(255, 96, 96);
+  border-bottom:3px solid rgb(255, 96, 96);
 }
+
 .col_xresults{
   float:left;
   width:35%;
-  border-right:3px solid lightskyblue;
-  border-bottom:3px solid lightskyblue;
+  border-right:3px solid rgb(255, 96, 96);
+  border-bottom:3px solid rgb(255, 96, 96);
 }
-
+@media screen and (max-width: 800px) {
+  .col_title { 
+      font-size: 100%;
+     
+  }
+  .col_xtitle{
+      font-size: 125%;
+      height:5%; 
+  }
+}
 .buttons {   
   position: absolute;
   /*top: 35%;
@@ -120,6 +136,17 @@
   background-color: rgb(255,255,255);
   z-index:5;
 }
+
+.new_import{
+  position:absolute;
+  top: 20%;
+  right:10%;
+  width:80%;
+  height:70%;
+  background-color: rgb(255,255,255);
+  z-index:5;
+}
+
 #overlay {
 position: fixed; 
 

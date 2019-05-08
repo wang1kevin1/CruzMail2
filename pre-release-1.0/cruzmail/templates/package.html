@@ -10,8 +10,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<!-- Compiled and minified CSS -->
-		<!--
-		  		-->
+		<link href="{% static 'css/general_design.css' %}" rel="stylesheet">
+		<link href="{% static 'css/manage.css' %}" rel="stylesheet">
+		<!--						   -->
 		<title>Cruz Mail</title>
 
 
@@ -42,8 +43,8 @@
 		    ${search_pkg}
 	    </textarea>
 
-		<button v-on:click="queryPackage();">Search</button>
-		<button v-on:click="advancedSearchView = !advancedSearchView">more</button>
+		<button v-on:click="queryPackage();" style="position:relative; left:45%; transform:translateX(-45%);">Search</button>
+		<button v-on:click="advancedSearchView = !advancedSearchView" style="position:relative; left:45.5%; transform:translateX(-45.5%);">more</button>
 
 		<!--...................................Advanced Search UI................................................................-->
 		<div v-if="advancedSearchView">
@@ -81,12 +82,14 @@
 
 		<!--........................................ adding new package overlay ................................-->
 		<div id="overlay" v-if="newPackageView==true">
-			<div style="font-size:30px" class="exit_button" v-on:click="newPackageView=false">
-				<img src="../static/img/tools/exit_button.png">
+		
+			<div style="font-size:30px; margin-right:1.4%; background: red;" class="exit_button" v-on:click="newPackageView=false">
+					<img src="../static/img/tools/exit_button.png">
 			</div>
-			<div class="new_package" style="overflow:scroll; overflow-x:hidden;">
-				New Package
 
+			<div class="new_package" style="overflow:scroll; overflow-x:hidden;">
+
+				<h1 style="text-align: center;">Order Information</h1>
 				<br>Tracking Number
 				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_tracknum">
 				    ${new_tracknum}
@@ -155,7 +158,33 @@
 			    </textarea>
 
 				<br>
-				<button v-on:click="addPackage(); newPackageView = false;">Add Package</button>
+				<button onclick="location.reload();" v-on:click="addPackage(); newPackageView = false;" style="position:relative; left:50%; transform:translateX(-50%);">Add Package</button>
+			</div>
+		</div>
+
+		<!-- Import overlay -->
+		<div id="overlay" v-if="newImportView==true">
+			
+			<div style="font-size:30px; margin-right:1.4%; background: red;" class="exit_button" v-on:click="newImportView=false;">
+					<img src="../static/img/tools/exit_button.png">
+			</div>
+			<div class="new_import" style="overflow:scroll; overflow-x:hidden;">
+				
+				<h1 style="text-align: center;">Import CSV</h1>
+				<form action="{% url 'import_packages' %}" method="POST" enctype="multipart/form-data" class="form-horizontal"> 
+					{% csrf_token %}
+					<div class="form-group">
+							<label for="name" class="col-md-3 col-sm-3 col-xs-12 control-label">File: </label>
+							<div class="col-md-8">
+									<input type="file" name="package_csv" id="package_csv" required="True" class="form-control">
+							</div>                    
+					</div>
+					<div class="form-group">                    
+							<div class="col-md-3 col-sm-3 col-xs-12 col-md-offset-3" style="margin-bottom:10px;">
+								<button v-on:click="newImportView = false;" style="position:relative; left:50%; transform:translateX(-50%);">Upload</button>
+							</div> 
+					</div>
+					</form>
 			</div>
 		</div>
 
@@ -163,7 +192,7 @@
 		<div class="list2">
 			<div class="row">
 
-				<div class="col_title" style="background-color: lightcoral; width:30%;">
+				<div class="col_xtitle" style="width:30%;">
 
 					<div style="float:left;">
 						<input type="checkbox" v-on:click="change_to_true();" v-model="allTrue">
@@ -172,10 +201,10 @@
 					Status
 
 				</div>
-				<div class="col_title" style="background-color: lightcoral; width:35%; height:19.667px;">
-					Tracking#
+				<div class="col_xtitle" style="width:35%;">
+					Tracking #
 				</div>
-				<div class="col_title" style="background-color: lightcoral; width:35%; height:19.667px;">
+				<div class="col_xtitle" style="width:35%;">
 					Mailstop
 				</div>
 
@@ -186,7 +215,7 @@
 				<div v-for="info in Info" class="row" style="width:100%">
 
 					<div v-if="info.index != currentView">
-						<div class="col_title" style="width:30%;">
+						<div class="col_title" style="width:30%;">	<!--MODIFY THIS RIGHT HURR-->
 							<div style="float:left;">
 								<input type="checkbox" v-model="info.isDelivered">
 								</input>
@@ -206,38 +235,25 @@
 
 					<!--..................................extra details for package if needed...................................................-->
 					<div v-if="info.index == currentView">
-						<div class="col_title" style="background-color: rgb(0,121,136); width:30%;">
-							<div style="float:left;">
-								<input type="checkbox" v-model="info.isDelivered">
-								</input>
-							</div>
-
-							<div v-on:click="currentView = -1">
-								${info.state}
-							</div>
-						</div>
-						<div class="col_title" style="background-color: rgb(0,121,136); width:35%;" v-on:click="currentView = -1">
-							${info.tracking}
-						</div>
-						<div class="col_title" style="background-color: rgb(0,121,136); width:35%;" v-on:click="currentView = -1">
-							${info.mailstop}
+						<!--exit button-->
+						<div style="font-size:30px; margin-right:1.4%; background: red;" class="exit_button" v-on:click="currentView=-1">
+							<img src="../static/img/tools/exit_button.png">
 						</div>
 
-						<br>&nbsp;&nbsp;Name
-						<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="info.name">
-			    			${info.name}
-	   				 	</textarea>
+						<!--rest of popup for package details-->
+						<div class="new_package" style="overflow:scroll; overflow-x:hidden;">
 
-						<br>&nbsp;&nbsp;email
-						<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="info.email">
-			    			${info.email}
-	   				 	</textarea>
+							<h1 style="text-align: center;">Order Information</h1>
+							
+							<br>&nbsp;&nbsp;Name
+							<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="info.name">
+								${info.name}
+							</textarea>
 
-						<br>&nbsp;&nbsp;Signing?
-						<select class="list" style="background-color: rgb(236, 236, 250)" v-model="info.sign">
-							<option value="yes">Yes</option>
-							<option value="no">No</option>
-						</select>
+							<br>&nbsp;&nbsp;email
+							<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="info.email">
+								${info.email}
+							</textarea>
 
 						<br>&nbsp;&nbsp;weight
 						<select class="list" style="background-color: rgb(236, 236, 250)" v-model="info.weight">
@@ -246,9 +262,11 @@
 							<option value="6 to 15">over 15</option>
 						</select>
 
-						<br>&nbsp;&nbsp;Recieve Date:
-						${info.date_rec}
-
+							<br>&nbsp;&nbsp;Signing?
+							<select class="list" style="background-color: rgb(236, 236, 250)" v-model="info.sign">
+								<option value="yes">Yes</option>
+								<option value="no">No</option>
+							</select>
 						<!--....................................................... dimensions .....................................................-->
 						<br>width
 						<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="info.pkg_width">
@@ -264,12 +282,14 @@
 					    </textarea>
 					    <!--........................................................................................................................-->
 
-						<br>
-						<button v-on:click="updatePackage()">
-							Update
-						</button>
+							<br>&nbsp;&nbsp;Recieve Date:
+							${info.date_rec}
+							<br>
+							<button onclick="location.reload();" v-on:click="updatePackage()" style="position:relative; left:50%; transform:translateX(-50%);">
+								Update
+							</button>
 
-						<div style="border-bottom:3px solid rgb(255, 96, 96);">
+							
 						</div>
 					</div>
 				</div>
@@ -279,16 +299,15 @@
 		<!--...................................buttons to update packages..................................................-->
 		<div class="text-center">
 			<button class="btn btn-primary" v-on:click="newPackageView = true;">New Package</button>
-			<button class="btn btn-primary" v-on:click="packageDelivered();">Deliver Package</button>
-            <a href="{% url 'export_packages' %}" class="btn btn-primary">Export to CSV</a>
-            <a href="{% url 'import_packages' %}" class="btn btn-primary">Import CSV</a>
+			<button class="btn btn-primary" v-on:click="packageDelivered();" onclick="location.reload();">Deliver Package</button>
+      	<a href="{% url 'export_packages' %}" class="btn btn-primary">Export to CSV</a>
+			<button class="btn btn-primary" v-on:click="newImportView = true;">Import CSV</button>
 		</div>
 	</div>
 
 	<script src="{% static 'js/jquery-3.2.1.js' %}"></script>
 	<script src="{% static 'js/vue.js' %}"></script>
 	<script src="{% static 'js/package_html.js' %}"></script>
-	<link href="{% static 'css/general_design.css' %}" rel="stylesheet">
-	<link href="{% static 'css/manage.css' %}" rel="stylesheet">
+
 
 </html>

@@ -42,6 +42,14 @@ var myModel = {
     advancedSearchView: false,
 
     no_result_for_autofill: false,
+
+	//checks if the new package overlay is to be displayed
+	newPackageView: false,
+	
+	//checks if the import overlay is to be displayed
+	newImportView: false,
+
+
 	users:[],    
 };
 

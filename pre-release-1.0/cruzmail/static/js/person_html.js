@@ -2,15 +2,29 @@ var myModel = {
   name: "Who's Ashley",
   test: '',
   index: 0,
+  
+  //true if the general checkbox is checked
   allTrue: false,
 
+  // stores the information for a new person if needed
   new_person: '',
   new_ppl_email: '',
   new_ppl_status: '',
   new_mailstop: '',
+  
+  //stores the info for all the people
   Info: [],
+
+  //checks if extra data wants to be displayed
+  // -1: no person displays extra data
+  //positive number: p[erson] of the specific index displays extra data
   currentView: -1,
+
+  //checks if the new person overlay is to be displayed
   newPersonView: false,
+
+  //checks if the import overlay is to be displayed
+  newImportView: false,
 };
 
 var myViewModel = new Vue({
