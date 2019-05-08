@@ -82,7 +82,7 @@ LOGIN_REDIRECT_URL = '/manage'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cruzmail_db',
+        'NAME': 'cruzmail_db2',
         'USER': 'root',
         'PASSWORD' : '',
         'HOST' : '127.0.0.1',
