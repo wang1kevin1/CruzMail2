@@ -48,34 +48,34 @@
 
 		<!--...................................Advanced Search UI................................................................-->
 		<div v-if="advancedSearchView">
-			<br>&nbsp;&nbsp;<strong>Status</strong>
+			<br>&nbsp; &nbsp; &nbsp;<strong>Status</strong>
 			<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="adv_status">
 				<option value="yes">delivered</option>
 				<option value="no">received</option>
 			</textarea>
 
-			<br>&nbsp;&nbsp;<strong>Name</strong>
+			<br>&nbsp; &nbsp; &nbsp;<strong>Name</strong>
 			<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="adv_name">
 				${adv_name}
 			</textarea>
 
-			<br>&nbsp;&nbsp;<strong>Email</strong>
+			<br>&nbsp; &nbsp; &nbsp;<strong>Email</strong>
 			<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="adv_email">
 				${adv_email}
 			</textarea>
 
-			<br>&nbsp;&nbsp;<strong>Mailstop</strong>
+			<br>&nbsp; &nbsp; &nbsp;<strong>Mailstop</strong>
 			<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="adv_mailstop">
 				${adv_mailstop}
 			</textarea>
 
-			<br>&nbsp;&nbsp;<strong>Signature Required?</strong>
+			<br>&nbsp; &nbsp; &nbsp;<strong>Signature Required?</strong>
 			<select class="list" style="background-color: rgb(236, 236, 250)" v-model="adv_signing">
 				<option value="yes">Yes</option>
 				<option value="no">No</option>
 			</select>
 
-			<br>&nbsp;&nbsp;<strong>Weight</strong>
+			<br>&nbsp; &nbsp; &nbsp;<strong>Weight</strong>
 			<textarea class="list" style="background-color: rgb(236, 236, 250)">
 			</textarea>
 		</div>
@@ -96,7 +96,7 @@
 			    </textarea>
 
 			    <!--.............................................  auto fill choice UI .....................................................-->
-				<br><strong>Recipient *</strong>  <button v-on:click="queryPerson();">Autofill</button>
+				<br>&nbsp;&nbsp;<strong>Recipient *</strong>  <button v-on:click="queryPerson();">Autofill</button>
 				<div v-if="no_result_for_autofill">
 					No name in database
 				</div>
@@ -114,23 +114,23 @@
 				    ${new_name}
 			    </textarea>
 
-				<br><strong>Mailstop *</strong>
+				<br>&nbsp;&nbsp;<strong>Mailstop *</strong>
 				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_mailstop">
 				    ${new_mailstop}
 			    </textarea>
 
-				<br><strong>Email *</strong>
+				<br>&nbsp;&nbsp;<strong>Email *</strong>
 				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_email">
 				    ${new_email}
 			    </textarea>
 
-				<br><strong>Signature Required?</strong>
+				<br>&nbsp;&nbsp;<strong>Signature Required?</strong>
 				<select class="list" style="background-color: rgb(236, 236, 250)" v-model="new_sign">
 					<option value="Yes">Yes</option>
 					<option value="No">No</option>
 				</select>
 
-				<br><strong>Weight</strong>
+				<br>&nbsp;&nbsp;<strong>Weight</strong>
 				<select class="list" style="background-color: rgb(236, 236, 250)" v-model="new_weight">
 					<option value="1 to 5">1 to 5</option>
 					<option value="6 to 15">6 to 15</option>
@@ -138,21 +138,21 @@
 				</select>
 
 				<!--....................................................... dimensions .....................................................-->
-				<br><strong>Length</strong>
+				<br>&nbsp;&nbsp;<strong>Length</strong>
 				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_length">
 				    ${new_length}
 					</textarea>
-				<br><strong>Width</strong>
+				<br>&nbsp;&nbsp;<strong>Width</strong>
 				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_width">
 				    ${new_width}
 			    </textarea>  
-			  <br><strong>Height</strong>
+			  <br>&nbsp;&nbsp;<strong>Height</strong>
 				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_height">
 				    ${new_height}
 					</textarea>
 					<!--........................................................................................................................-->
 
-				<br><strong>Remark</strong>
+				<br>&nbsp;&nbsp;<strong>Remark</strong>
 				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_remark">
 				    ${new_remark}
 			    </textarea>
@@ -268,15 +268,15 @@
 								<option value="no">No</option>
 							</select>
 						<!--....................................................... dimensions .....................................................-->
-						<br><strong>Length</strong>
+						<br>&nbsp;&nbsp;<strong>Length</strong>
 						<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="info.pkg_length">
 						    ${info.pkg_length}
 							</textarea>
-							<br><strong>Width</strong>
+							<br>&nbsp;&nbsp;<strong>Width</strong>
 						<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="info.pkg_width">
 						    ${info.pkg_width}
 					    </textarea>
-					    <br><strong>Height</strong>
+					    <br>&nbsp;&nbsp;<strong>Height</strong>
 						<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="info.pkg_height">
 						    ${info.pkg_height}
 					    </textarea>
