@@ -40,7 +40,7 @@
 		<div class="body" style="background-color:#305371; height:20%;">
 		</div>
 
-		&nbsp; &nbsp; &nbsp;Search for Mailstops...
+		&nbsp; &nbsp; &nbsp;<strong>Search for Mailstops...</strong>
 		<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="test">
 		    ${test}
 	    </textarea>
@@ -57,22 +57,22 @@
 		
 				<h1 style="text-align: center;">New Mailstop</h1>
 
-				<br>Mailstop ID
+				<br><strong>Mailstop ID *</strong>
 				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_mailstop">
 				    ${new_mailstop}
 			    </textarea>
 
-				<br>Mailstop Name
+				<br><strong>Mailstop Name *</strong>
 				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_ms_name">
 				    ${new_ms_name}
 			    </textarea>
 
-				<br>Route
+				<br><strong>Route *</strong>
 				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_ms_route">
 				    ${new_ms_route}
 			    </textarea>
 
-				<br>Order
+				<br><strong>Order *</strong>
 				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_ms_route_order">
 				    ${new_ms_route_order}
 			    </textarea>
@@ -163,12 +163,12 @@
 								<!--rest of popup for mailstop details-->
 							<div class="new_mailstop" style="overflow:scroll; overflow-x:hidden;">
 								<h1 style="text-align: center;">Mailstop Information</h1>
-								<br>&nbsp;&nbsp;Route
+								<br>&nbsp;&nbsp;<strong>Route</strong>
 								<textarea style="background-color: rgb(236, 236, 250)" v-model="info.ms_route">
 									${info.ms_route}
 								</textarea>
 	
-								<br>&nbsp;&nbsp;Order
+								<br>&nbsp;&nbsp;<strong>Order</strong>
 								<textarea style="background-color: rgb(236, 236, 250)" v-model="info.ms_route_order">
 									${info.ms_route_order}
 								</textarea>
@@ -185,10 +185,10 @@
 		</div>
 
 		<div class="text-center">
-			<button class="btn btn-primary" v-on:click="newMailstopView = true;">New Mailstop</button>
-			<button class="btn btn-primary" v-on:click="deactivateMailstop();" onclick="location.reload();">Deactivate Mailstop</button>
+			<!--<button class="btn btn-primary" v-on:click="newMailstopView = true;">New Mailstop</button> -->
+			<!--<button class="btn btn-primary" v-on:click="deactivateMailstop();" onclick="location.reload();">Deactivate Mailstop</button>-->
       <a href="{% url 'export_mailstops' %}" class="btn btn-primary">Export to CSV</a>
-			<button class="btn btn-primary" v-on:click="newImportView = true;">Import CSV</button>
+			<button class="btn btn-primary" v-on:click="newImportView = true;">Import Mailstops</button>
 		</div>
 
 		

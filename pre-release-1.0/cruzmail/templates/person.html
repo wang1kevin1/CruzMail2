@@ -38,7 +38,7 @@
 
 		<div class="body" style="background-color:#305371; height:20%;"></div>
 
-		&nbsp; &nbsp; &nbsp;Search for People...
+		&nbsp; &nbsp; &nbsp;<strong>Search for People...</strong>
 		<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="test">
 		    ${test}
 	    </textarea>
@@ -54,17 +54,17 @@
 			<div class="new_person" style="overflow:scroll; overflow-x:hidden;">
 				
 				<h1 style="text-align: center;">New Person</h1>
-				<br>Name
+				<br><strong>Name *</strong>
 				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_person">
 				    ${new_person}
 			    </textarea>
 
-				<br>Email
+				<br><strong>Email *</strong>
 				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_ppl_email">
 				    ${new_ppl_email}
 			    </textarea>
 
-				<br>Mailstop
+				<br><strong>Mailstop *</strong>
 				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_mailstop">
 				    ${new_mailstop}
 			    </textarea>
@@ -156,7 +156,7 @@
 						<div class="new_person" style="overflow:scroll; overflow-x:hidden;">
 							
 							<h1 style="text-align: center;">People Information</h1>
-							<br>&nbsp;&nbsp;Email
+							<br>&nbsp;&nbsp;<strong>Email</strong>
 							<textarea style="background-color: rgb(236, 236, 250)" v-model="info.ppl_email">
 								${info.ppl_email}
 							</textarea>
@@ -173,10 +173,10 @@
 		</div>
 
 		<div class="text-center">
-			<button class="btn btn-primary" v-on:click="newPersonView = true;">New Person</button>
-			<button class="btn btn-primary" v-on:click="awayPerson();" onclick="location.reload();">Mark as Away</button>
+			<!--<button class="btn btn-primary" v-on:click="newPersonView = true;">New Person</button>-->
+			<!--<button class="btn btn-primary" v-on:click="awayPerson();" onclick="location.reload();">Mark as Away</button>-->
 			<a href="{% url 'export_people' %}" class="btn btn-primary">Export to CSV</a>
-      <button class="btn btn-primary" v-on:click="newImportView = true;">Import CSV</button>
+      <button class="btn btn-primary" v-on:click="newImportView = true;">Import People</button>
 		</div>
 
 	</div>

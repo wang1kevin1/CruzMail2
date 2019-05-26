@@ -332,9 +332,12 @@ def import_packages(request):
                 pkg_sign=row[4],
                 pkg_email=row[5],
                 pkg_weight=row[6],
-                pkg_date_rec=row[7],
-                pkg_date_del=row[8],
-                pkg_remarks=row[9],
+                pkg_height=row[7],
+                pkg_width=row[8],
+                pkg_length=row[9],
+                pkg_date_rec=row[10],
+                pkg_date_del=row[11],
+                pkg_remarks=row[12],
             )
 
     return redirect('/manage')
@@ -369,7 +372,6 @@ def import_mailstops(request):
             )
     
     return redirect('/mailstop')
-
 
 @csrf_exempt
 def clear_table(tableName):
