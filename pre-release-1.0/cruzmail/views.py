@@ -368,7 +368,7 @@ def import_mailstops(request):
                 ms_name=row[1],
                 ms_route=row[2],
                 ms_route_order=row[3],
-                ms_status=row[4],
+                ms_status='Active',
             )
     
     return redirect('/mailstop')
