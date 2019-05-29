@@ -296,10 +296,10 @@ def import_people(request):
         # Creates a new model for each row in the csv file
         for row in reader:
             _, created = people_master.objects.get_or_create(
-                name=row[0],
-                ppl_email=row[1],
-                ppl_status=row[2],
-                mailstop=row[3],
+                name=row[1]+" "+row[2],
+                ppl_email=row[6]+"@ucsc.edu",
+                ppl_status='Available',
+                mailstop=row[5],
             )
 
     return redirect('/person')
