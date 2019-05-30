@@ -17,8 +17,8 @@
 
 
 
-		<header>
-			<h1 class="logo"><img src="../static/img/pages/thumbnail_package.png"> Packages</h1>
+		<header style="background:#01589d;"> 
+			<h1 class="logo" style="color:white;"><img style="width:1em;" src="../static/img/pages/thumbnail_package.png"> Packages</h1>
 			<input type="checkbox" id="nav-toggle" class="nav-toggle">
 			<nav>
 				<ul>
@@ -36,7 +36,7 @@
 	<!--...................................Header for Manage................................................................-->
 	<div id="my_view">
 
-		<div class="body" style="background-color:#305371; height:20%;"></div>
+		<div class="body" style="background-color:white; height:20%;"></div>
 
 		&nbsp; &nbsp; &nbsp;Search by Tracking Number
 		<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="search_pkg">
@@ -47,56 +47,57 @@
 		<button v-on:click="advancedSearchView = !advancedSearchView" style="position:relative; left:45.5%; transform:translateX(-45.5%);">more</button>
 
 		<!--...................................Advanced Search UI................................................................-->
-		<div v-if="advancedSearchView">
-			<br>&nbsp;&nbsp;Status
+		<div v-if="advancedSearchView" style="background: #006aad; margin: 2%; border-style: solid;">
+			<p class="small_text"><br>&nbsp;&nbsp;Status</p>
 			<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="adv_status">
 				<option value="yes">delivered</option>
 				<option value="no">received</option>
 			</textarea>
 
-			<br>&nbsp;&nbsp;Name
+			<p class="small_text"><br>&nbsp;&nbsp;Name</p>
 			<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="adv_name">
 				${adv_name}
 			</textarea>
 
-			<br>&nbsp;&nbsp;Email
+			<p class="small_text"><br>&nbsp;&nbsp;Email</p>
 			<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="adv_email">
 				${adv_email}
 			</textarea>
 
-			<br>&nbsp;&nbsp;Mailstop
+			<p class="small_text"><br>&nbsp;&nbsp;Mailstop</p>
 			<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="adv_mailstop">
 				${adv_mailstop}
 			</textarea>
 
-			<br>&nbsp;&nbsp;Signing?
+			<p class="small_text"><br>&nbsp;&nbsp;Signature?</p>
 			<select class="list" style="background-color: rgb(236, 236, 250)" v-model="adv_signing">
 				<option value="yes">Yes</option>
 				<option value="no">No</option>
 			</select>
 
-			<br>&nbsp;&nbsp;Weight
+			<p class="small_text"><br>&nbsp;&nbsp;Weight</p>
 			<textarea class="list" style="background-color: rgb(236, 236, 250)">
 			</textarea>
+			<br>&nbsp;&nbsp;
 		</div>
 
 		<!--........................................ adding new package overlay ................................-->
 		<div id="overlay" v-if="newPackageView==true">
 		
-			<div style="font-size:30px; margin-right:1.4%; background: red;" class="exit_button" v-on:click="newPackageView=false">
-					<img src="../static/img/tools/exit_button.png">
-			</div>
+			
 
 			<div class="new_package" style="overflow:scroll; overflow-x:hidden;">
-
+				<div style="font-size:30px; margin-right:1.4%; background: red;" class="exit_button" v-on:click="newPackageView=false">
+					<img src="../static/img/tools/exit_button.png">
+				</div>
 				<h1 style="text-align: center;">Order Information</h1>
-				<br>Tracking Number
+				<br>&nbsp;&nbsp;Tracking Number
 				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_tracknum">
 				    ${new_tracknum}
 			    </textarea>
 
 			    <!--.............................................  auto fill choice UI .....................................................-->
-				<br>name  <button v-on:click="queryPerson();">Autofill</button>
+				<br>&nbsp;&nbsp;name  <button v-on:click="queryPerson();">Autofill</button>
 				<div v-if="no_result_for_autofill">
 					No name in database
 				</div>
@@ -114,23 +115,23 @@
 				    ${new_name}
 			    </textarea>
 
-				<br>mailstop
+				<br>&nbsp;&nbsp;mailstop
 				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_mailstop">
 				    ${new_mailstop}
 			    </textarea>
 
-				<br>email
+				<br>&nbsp;&nbsp;email
 				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_email">
 				    ${new_email}
 			    </textarea>
 
-				<br>sign
+				<br>&nbsp;&nbsp;sign
 				<select class="list" style="background-color: rgb(236, 236, 250)" v-model="new_sign">
 					<option value="Yes">Yes</option>
 					<option value="No">No</option>
 				</select>
 
-				<br>weight
+				<br>&nbsp;&nbsp;weight
 				<select class="list" style="background-color: rgb(236, 236, 250)" v-model="new_weight">
 					<option value="1 to 5">1 to 5</option>
 					<option value="6 to 15">6 to 15</option>
@@ -138,21 +139,21 @@
 				</select>
 
 				<!--....................................................... dimensions .....................................................-->
-				<br>width
+				<br>&nbsp;&nbsp;width
 				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_width">
 				    ${new_width}
 			    </textarea>
-			    <br>height
+			    <br>&nbsp;&nbsp;height
 				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_height">
 				    ${new_height}
 			    </textarea>
-			    <br>length
+			    <br>&nbsp;&nbsp;length
 				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_length">
 				    ${new_length}
 			    </textarea>
 			    <!--........................................................................................................................-->
 
-				<br>remark
+				<br>&nbsp;&nbsp;remark
 				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_remark">
 				    ${new_remark}
 			    </textarea>
@@ -165,11 +166,11 @@
 		<!-- Import overlay -->
 		<div id="overlay" v-if="newImportView==true">
 			
-			<div style="font-size:30px; margin-right:1.4%; background: red;" class="exit_button" v-on:click="newImportView=false;">
-					<img src="../static/img/tools/exit_button.png">
-			</div>
+			
 			<div class="new_import" style="overflow:scroll; overflow-x:hidden;">
-				
+				<div style="font-size:30px; margin-right:1.4%; background: red;" class="exit_button" v-on:click="newImportView=false;">
+					<img src="../static/img/tools/exit_button.png">
+				</div>
 				<h1 style="text-align: center;">Import CSV</h1>
 				<form action="{% url 'import_packages' %}" method="POST" enctype="multipart/form-data" class="form-horizontal"> 
 					{% csrf_token %}
@@ -235,16 +236,16 @@
 
 					<!--..................................extra details for package if needed...................................................-->
 					<div v-if="info.index == currentView">
-						<!--exit button-->
-						<div style="font-size:30px; margin-right:1.4%; background: red;" class="exit_button" v-on:click="currentView=-1">
-							<img src="../static/img/tools/exit_button.png">
-						</div>
-
+						
 						<!--rest of popup for package details-->
 						<div class="new_package" style="overflow:scroll; overflow-x:hidden;">
 
 							<h1 style="text-align: center;">Order Information</h1>
-							
+							<!--exit button-->
+						<div style="font-size:30px; margin-right:1.4%; background: red;" class="exit_button" v-on:click="currentView=-1">
+							<img src="../static/img/tools/exit_button.png">
+						</div>
+
 							<br>&nbsp;&nbsp;Name
 							<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="info.name">
 								${info.name}
@@ -268,15 +269,15 @@
 								<option value="no">No</option>
 							</select>
 						<!--....................................................... dimensions .....................................................-->
-						<br>width
+						<br>&nbsp;&nbsp;width
 						<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="info.pkg_width">
 						    ${info.pkg_width}
 					    </textarea>
-					    <br>height
+					    <br>&nbsp;&nbsp;height
 						<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="info.pkg_height">
 						    ${info.pkg_height}
 					    </textarea>
-					    <br>length
+					    <br>&nbsp;&nbsp;length
 						<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="info.pkg_length">
 						    ${info.pkg_length}
 					    </textarea>
