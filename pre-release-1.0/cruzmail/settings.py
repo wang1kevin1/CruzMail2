@@ -23,10 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '7_=0u17^xlw8cwcp6z(9&_+a*@wmk@f7v0__&ialz1ily8gzgx'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-#ALLOWED_HOSTS = ['0.0.0.0']
-
+DEBUG = False
 
 # Application definition
 
@@ -82,11 +79,10 @@ LOGIN_REDIRECT_URL = '/manage'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cruzmail_db',
-        'USER': 'root',
-        'PASSWORD' : '',
-        'HOST' : '127.0.0.1',
-        'PORT' : '3306',
+        'NAME': 'cruzmail$cruzmail_db',
+        'USER': 'cruzmail',
+        'PASSWORD' : 'campusmail',
+        'HOST' : 'cruzmail.mysql.pythonanywhere-services.com',
     }
 }
 
@@ -135,6 +131,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, '_static_root')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = (
+        os.path.join(BASE_DIR, "cruzmail/account/templates"),
+        os.path.join(BASE_DIR, "cruzmail/static/bootstrap"),
+        os.path.join(BASE_DIR, "cruzmail/static/img"),
+        os.path.join(BASE_DIR, "cruzmail/static/css"),
+        os.path.join(BASE_DIR, "cruzmail/static/js"),
+        os.path.join(BASE_DIR, "cruzmail/static/popper"),
+        )
 
 ALLOWED_HOSTS = ['192.168.56.1', '127.0.0.1', '10.0.0.164', 'localhost', '*']
