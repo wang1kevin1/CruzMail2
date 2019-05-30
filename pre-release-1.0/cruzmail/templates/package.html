@@ -158,7 +158,7 @@
 			    </textarea>
 
 				<br>
-				<button onclick="location.reload();" v-on:click="addPackage(); newPackageView = false;" style="position:relative; left:50%; transform:translateX(-50%);">Add Package</button>
+				<button  v-on:click="addPackage(); newPackageView = false;" style="position:relative; left:50%; transform:translateX(-50%);">Add Package</button>
 			</div>
 		</div>
 
@@ -234,7 +234,7 @@
 					</div>
 
 					<!--..................................extra details for package if needed...................................................-->
-					<div v-if="info.index == currentView">
+					<div id="overlay" v-if="info.index == currentView">
 						<!--exit button-->
 						<div style="font-size:30px; margin-right:1.4%; background: red;" class="exit_button" v-on:click="currentView=-1">
 							<img src="../static/img/tools/exit_button.png">
@@ -280,13 +280,18 @@
 						<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="info.pkg_height">
 						    ${info.pkg_height}
 					    </textarea>
+
+					    <br>&nbsp;&nbsp;<strong>Remark</strong>
+					    <textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="info.pkg_remarks">
+						    ${info.pkg_remarks}
+					    </textarea>
 					    
 					    <!--........................................................................................................................-->
 
 							<br>&nbsp;&nbsp;<strong>Date Received</strong>
 							${info.date_rec}
 							<br>
-							<button onclick="location.reload();" v-on:click="updatePackage()" style="position:relative; left:50%; transform:translateX(-50%);">
+							<button v-on:click="updatePackage()" style="position:relative; left:50%; transform:translateX(-50%);">
 								Update
 							</button>
 
@@ -300,7 +305,7 @@
 		<!--...................................buttons to update packages..................................................-->
 		<div class="text-center">
 			<button class="btn btn-primary" v-on:click="newPackageView = true;">New Package</button>
-			<button class="btn btn-primary" v-on:click="packageDelivered();" onclick="location.reload();">Deliver Package</button>
+			<button class="btn btn-primary" v-on:click="packageDelivered();" >Deliver Package</button>
       	<a href="{% url 'export_packages' %}" class="btn btn-primary">Export to CSV</a>
 			<button class="btn btn-primary" v-on:click="newImportView = true;">Import CSV</button>
 		</div>

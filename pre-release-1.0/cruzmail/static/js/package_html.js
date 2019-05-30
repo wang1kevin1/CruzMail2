@@ -69,6 +69,7 @@ var myViewModel = new Vue({
 			myViewModel.Info[key].isDelivered = allTrue;
 	    }
 	},
+
 	addPackage: addPackages = function(){
 
 		//make ajax with the correct inputs
@@ -86,6 +87,7 @@ var myViewModel = new Vue({
 		           		   "length":   myViewModel.new_length},
                      dataType: 'json',
                      success: function no(response){
+                     	location.reload();
                      },
                      error: function(response){
                          console.log("invalid inputs\n");
@@ -107,6 +109,7 @@ var myViewModel = new Vue({
 	       	               			 "pkg_email": myViewModel.Info[key].email},
 	                    	   dataType: 'json',
 	                           success: function no(response){
+	                           		location.reload();
 	                           },
 	                           error: function(response){
 	                               console.log("invalid inputs\n");
@@ -135,6 +138,7 @@ var myViewModel = new Vue({
 				     	   "length": objHold.pkg_length},
                      dataType: 'json',
                      success: function no(response){
+                     	location.reload();
                      },
                      error: function(response){
                          console.log("invalid inputs\n");
@@ -184,6 +188,7 @@ var myViewModel = new Vue({
 				     					pkg_width:    objHold.pkg_width,
 				     					pkg_height:   objHold.pkg_height,
 				     					pkg_length:   objHold.pkg_length,
+				     					pkg_remarks:  objHold.pkg_remarks,
 
 						    			isDelivered:false,
 						    			index: index});

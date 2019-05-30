@@ -39,6 +39,7 @@ def query_package(request):
                pkg_width = r.pkg_width,
                pkg_height = r.pkg_height,
                pkg_length = r.pkg_length,
+               pkg_remarks = r.pkg_remarks
               )
       params.append(t)
 
@@ -72,6 +73,15 @@ def update_package(request):
 
     if request.user is None:
       return
+    height = request.POST.get('height')
+    width  = request.POST.get('width')
+    length = request.POST.get('height')
+    if height is '':
+      height = None
+    if width is '':
+      width = None
+    if length is '':
+      length = None
 
     #update package information based on the data from request parameter
     p = packages_master.objects.get(pkg_tracking=request.POST.get('track'))
@@ -80,9 +90,9 @@ def update_package(request):
     p.pkg_weight = request.POST.get('weight')
     p.pkg_sign =   request.POST.get('sign')
 
-    p.pkg_width =  request.POST.get('width')
-    p.pkg_height = request.POST.get('height')
-    p.pkg_length = request.POST.get('length')
+    p.pkg_width =  width
+    p.pkg_height = height
+    p.pkg_length = length
     
     p.save()
     return JsonResponse(dict(test="ok"))
@@ -93,6 +103,15 @@ def add_package(request):
     if request.user is None:
       return
 
+    height = request.POST.get('height')
+    width  = request.POST.get('width')
+    length = request.POST.get('height')
+    if height is '':
+      height = None
+    if width is '':
+      width = None
+    if length is '':
+      length = None
     #inputs package information based on the data from request parameter
     packages_master.objects.create(pkg_tracking = request.POST.get('track'),
                                   name =        request.POST.get('name'),
@@ -102,9 +121,9 @@ def add_package(request):
                                   pkg_email =   request.POST.get('email'),
                                   pkg_weight =  request.POST.get('weight'),
                                   pkg_remarks = request.POST.get('remark'),
-                                  pkg_height =  request.POST.get('height'),
-                                  pkg_width =   request.POST.get('width'),
-                                  pkg_length =  request.POST.get('height'))
+                                  pkg_height =  height,
+                                  pkg_width =   width,
+                                  pkg_length =  length)
 
     send_mail(
     'PACKAGE ' + request.POST.get('track'),
