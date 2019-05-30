@@ -124,12 +124,6 @@
 				    ${new_email}
 			    </textarea>
 
-				<br>&nbsp;&nbsp;<strong>Signature Required?</strong>
-				<select class="list" style="background-color: rgb(236, 236, 250)" v-model="new_sign">
-					<option value="Yes">Yes</option>
-					<option value="No">No</option>
-				</select>
-
 				<br>&nbsp;&nbsp;<strong>Weight</strong>
 				<select class="list" style="background-color: rgb(236, 236, 250)" v-model="new_weight">
 					<option value="1 to 5">1 to 5</option>
@@ -138,18 +132,18 @@
 				</select>
 
 				<!--....................................................... dimensions .....................................................-->
-				<br>&nbsp;&nbsp;<strong>Length</strong>
-				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_length">
+				<br>&nbsp;&nbsp;<strong>Length x Width x Height</strong>
+
+				<br>&nbsp;
+				<textarea rows="1" cols="4" style="background-color: rgb(236, 236, 250);resize:none;" v-model="new_length">
 				    ${new_length}
-					</textarea>
-				<br>&nbsp;&nbsp;<strong>Width</strong>
-				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_width">
+				</textarea>
+				<textarea rows="1" cols="4" style="background-color: rgb(236, 236, 250);resize:none;" v-model="new_width">
 				    ${new_width}
 			    </textarea>  
-			  <br>&nbsp;&nbsp;<strong>Height</strong>
-				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_height">
+				<textarea rows="1" cols="4" style="background-color: rgb(236, 236, 250);resize:none;" v-model="new_height">
 				    ${new_height}
-					</textarea>
+				</textarea>
 					<!--........................................................................................................................-->
 
 				<br>&nbsp;&nbsp;<strong>Remark</strong>
@@ -262,24 +256,19 @@
 							<option value="6 to 15">over 15</option>
 						</select>
 
-							<br>&nbsp;&nbsp;<strong>Signature Required?</strong>
-							<select class="list" style="background-color: rgb(236, 236, 250)" v-model="info.sign">
-								<option value="yes">Yes</option>
-								<option value="no">No</option>
-							</select>
 						<!--....................................................... dimensions .....................................................-->
-						<br>&nbsp;&nbsp;<strong>Length</strong>
-						<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="info.pkg_length">
+						<br>&nbsp;&nbsp;<strong>Length x Width x Height</strong>
+
+						<br>&nbsp;
+						<textarea rows="1" cols="4" style="background-color: rgb(236, 236, 250);resize:none;" v-model="info.pkg_length">
 						    ${info.pkg_length}
-							</textarea>
-							<br>&nbsp;&nbsp;<strong>Width</strong>
-						<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="info.pkg_width">
+						</textarea>
+						<textarea rows="1" cols="4" style="background-color: rgb(236, 236, 250);resize:none;" v-model="info.pkg_width">
 						    ${info.pkg_width}
-					    </textarea>
-					    <br>&nbsp;&nbsp;<strong>Height</strong>
-						<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="info.pkg_height">
+					    </textarea>  
+						<textarea rows="1" cols="4" style="background-color: rgb(236, 236, 250);resize:none;" v-model="info.pkg_height">
 						    ${info.pkg_height}
-					    </textarea>
+						</textarea>
 
 					    <br>&nbsp;&nbsp;<strong>Remark</strong>
 					    <textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="info.pkg_remarks">
