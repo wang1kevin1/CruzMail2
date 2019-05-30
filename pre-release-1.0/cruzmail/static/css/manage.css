@@ -18,8 +18,9 @@
 .small_text{
     color: white; 
     font-weight: bold;
-    margin-bottom: .1%;
-    margin-top: .1%;
+    padding-bottom: 0;
+    padding-top: .1%;
+    height: .5%;
 }
 
 .list{
