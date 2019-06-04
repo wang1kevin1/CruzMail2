@@ -15,6 +15,14 @@
     font-size: 80px;
 }
 
+.small_text{
+    color: white; 
+    font-weight: bold;
+    padding-bottom: 0;
+    padding-top: .1%;
+    height: .5%;
+}
+
 .list{
     margin-top:10px;
     margin-left:3%;
@@ -87,7 +95,7 @@
     border-bottom:3px black;
     height:5vw; 
     font-size: 3vw;
-    background: lightsteelblue;
+    background: #006aad;
 }
 .col_results{
     float:left;
@@ -115,8 +123,6 @@
 .buttons {
                
     position: absolute;
-    /*top: 35%;
-    left: 30%;*/
     transform: translate(-50%, -50%);
     color:rgb(0, 0, 0);
     width: 120px;
@@ -132,7 +138,7 @@
 
 .new_package{
     position:absolute;
-    top: 20%;
+    top: 25%;
     right:10%;
     width:80%;
     height:70%;
@@ -166,8 +172,8 @@
 
 .exit_button{
     position:absolute;
-    top:20%;
-    right:10%;
+    top:0%;
+    right:-1%;
     z-index:10;
 
 }

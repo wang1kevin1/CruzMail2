@@ -21,7 +21,7 @@
 
     body {
       margin: 0;
-      background: #305371;
+      background:white;
       font-family: 'Work Sans', sans-serif;
       font-weight: 400;
     }
@@ -40,7 +40,7 @@
     /* navigation styles start here */
 
     header {
-      background: var(--background);
+      background: #01589d;
       text-align: center;
       position: fixed;
       z-index: 999;
@@ -137,8 +137,38 @@
       opacity: 1;
       transition: opacity 250ms ease-in-out 250ms;
     }
-
+    
+    
+    .b1 {
+        top: 40%; left: 25%;
+      }
+      .b2{
+        top: 70%; left: 25%;
+      }
+      .b3{
+        top: 40%; left: 75%;
+      }
+      .b4{
+        top: 70%; left: 75%;
+      }
+    
     @media screen and (min-width: 800px) {
+
+
+      .b1 {
+      top: 60%; left: 21.86%;
+      }
+      .b2{
+        top: 60%; left: 40.62%;
+      }
+      .b3{
+        top: 60%; left: 59.38%;
+      }
+      .b4{
+        top: 60%; left: 78.13%
+      }
+
+
       .nav-toggle-label {
         display: none;
       }
@@ -209,15 +239,16 @@
     }
 
     button {
-      background: none;
+      background: #305371;
       color: #ccc;
-      width: 128px;
-      height: 128px;
+      width: 160px;
+      height: 160px;
       border: 2px solid #fff;
       font-size: 18px;
       border-radius: 4px;
       transition: .6s;
       overflow: hidden;
+      border-color: #f1af13
     }
 
     button:hover {
@@ -233,51 +264,6 @@
       width: 80%
     }
 
-    /*button:focus {
-    outline: none;
-}
-button:before {
-    content: '';
-    display: block;
-    position: absolute;
-    background: rgba(255,255,255, .5);
-    width: 60px;
-    height: 100%;
-    left: 0;
-    top: 0;
-    opacity: .5s;
-    filter: blur(30px);
-    transform: translateX(-130px) skewX(-15deg);
-}
-
-button:after{
-    content: '';
-    display: block;
-    position: absolute;
-    background: rgba(255,255,255, .2);
-    width: 30px;
-    height: 100%;
-    left: 30px;
-    top: 0;
-    opacity: 0;
-    filter: blur(30px);
-    transform: translate(-100px) scaleX(-15deg);
-}
-
-
-button:hover:before {
-    transform: translateX(300px) skewX(-15deg);
-    opacity: .6;
-    transition: .7s;
-  
- }
- 
- button:hover:after {
-    transform: translateX(300px) skewX(-15deg);
-    opacity: 1;
-    transition: .7s;
-    
- }*/
   </style>
 
 
@@ -286,7 +272,6 @@ button:hover:before {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <!-- Compiled and minified CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
   <title>Cruz Mail</title>
 
@@ -294,11 +279,11 @@ button:hover:before {
 
   <!--....................... logout and admin redirect buttons .................................-->
   <header>
-    <h1 class="logo">CruzMail</h1>
+    <h1 class="logo" style="color:white; ">CruzMail</h1>
     <input type="checkbox" id="nav-toggle" class="nav-toggle">
-    <nav>
+    <nav style = "background: #01589d">
       <ul>
-        <li><a class="nav-link" href="{% url 'collection' %}">Admin</a></li>
+        <li><a class="nav-link" href="http://cruzmail.pythonanywhere.com/admin/login/?next=/admin/">Admin</a></li>
         <li><a class="nav-link" href="{% url 'logging_out' %}">Logout</a></li>
       </ul>
     </nav>
@@ -313,13 +298,13 @@ button:hover:before {
 <body>
   <div class="wrapper">
     <div class="btn">
-      <button type="button" style="top: 40%; left: 25%;" onclick="window.location.href='/manage'">
+      <button class="b1" type="button" onclick="window.location.href='/manage'">
         <img src="../static/img/pages/menu_package.png">Packages</button>
-      <button type="button" style="top: 70%; left: 25%;" onclick="window.location.href='/mailstop'">
+      <button class="b2" type="button" onclick="window.location.href='/mailstop'">
         <img src="../static/img/pages/menu_mailstop.png">Mailstops</button>
-      <button type="button" style="top: 40%; left: 75%;" onclick="window.location.href='/person'">
+      <button class="b3" type="button" onclick="window.location.href='/person'">
         <img src="../static/img/pages/menu_people.png">People</button>
-      <button type="button" style="top: 70%; left: 75%">
+      <button class="b4" type="button" >
         <img src="../static/img/pages/menu_help.png">Help Center</button>
     </div>
   </div>

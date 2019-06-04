@@ -83,6 +83,7 @@ DATABASES = {
         'USER': 'cruzmail',
         'PASSWORD' : 'campusmail',
         'HOST' : 'cruzmail.mysql.pythonanywhere-services.com',
+        'PORT' : '3306',
     }
 }
 

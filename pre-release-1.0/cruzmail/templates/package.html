@@ -12,13 +12,13 @@
 		<!-- Compiled and minified CSS -->
 		<link href="{% static 'css/general_design.css' %}" rel="stylesheet">
 		<link href="{% static 'css/manage.css' %}" rel="stylesheet">
-		<!--						   -->
+		<!---->
 		<title>Cruz Mail</title>
 
 
 
-		<header>
-			<h1 class="logo"><img src="../static/img/pages/thumbnail_package.png"> Packages</h1>
+		<header style="background:#01589d; height: 20%"> 
+			<h1 class="logo" style="color:white;"><img style="width:.75em;" src="../static/img/pages/thumbnail_package.png"> Packages</h1>
 			<input type="checkbox" id="nav-toggle" class="nav-toggle">
 			<nav>
 				<ul>
@@ -36,59 +36,59 @@
 	<!--...................................Header for Manage................................................................-->
 	<div id="my_view">
 
-		<div class="body" style="background-color:#305371; height:20%;"></div>
+		<div class="body" style="background-color:white; height:20%;"></div>
 
-		&nbsp; &nbsp; &nbsp;<strong>Search by Tracking Number...</strong>
-		<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="search_pkg">
+		<textarea placeholder="Search by Tracking Number..."  class="list" style="background-color: rgb(236, 236, 250)" v-model="search_pkg">
 		    ${search_pkg}
 	    </textarea>
 
 		<button v-on:click="queryPackage();" style="position:relative; left:45%; transform:translateX(-45%);">Search</button>
-		<button v-on:click="advancedSearchView = !advancedSearchView" style="position:relative; left:45.5%; transform:translateX(-45.5%);">more</button>
+		<button v-on:click="advancedSearchView = !advancedSearchView" style="position:relative; left:45.5%; transform:translateX(-45.5%);">More</button>
 
 		<!--...................................Advanced Search UI................................................................-->
-		<div v-if="advancedSearchView">
-			<br>&nbsp; &nbsp; &nbsp;<strong>Status</strong>
+		<div v-if="advancedSearchView" style="background: gray; margin: 2%; border-style: solid;">
+			<p class="small_text">&nbsp;&nbsp;Status</p>
 			<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="adv_status">
 				<option value="yes">delivered</option>
 				<option value="no">received</option>
 			</textarea>
 
-			<br>&nbsp; &nbsp; &nbsp;<strong>Name</strong>
+			<p class="small_text">&nbsp;&nbsp;Name</p>
 			<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="adv_name">
 				${adv_name}
 			</textarea>
 
-			<br>&nbsp; &nbsp; &nbsp;<strong>Email</strong>
+			<p class="small_text">&nbsp;&nbsp;Email</p>
 			<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="adv_email">
 				${adv_email}
 			</textarea>
 
-			<br>&nbsp; &nbsp; &nbsp;<strong>Mailstop</strong>
+			<p class="small_text">&nbsp;&nbsp;Mailstop</p>
 			<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="adv_mailstop">
 				${adv_mailstop}
 			</textarea>
 
-			<br>&nbsp; &nbsp; &nbsp;<strong>Signature Required?</strong>
+			<p class="small_text">&nbsp;&nbsp;Signature?</p>
 			<select class="list" style="background-color: rgb(236, 236, 250)" v-model="adv_signing">
 				<option value="yes">Yes</option>
 				<option value="no">No</option>
 			</select>
 
-			<br>&nbsp; &nbsp; &nbsp;<strong>Weight</strong>
+			<p class="small_text">&nbsp;&nbsp;Weight</p>
 			<textarea class="list" style="background-color: rgb(236, 236, 250)">
 			</textarea>
+			<br>&nbsp;&nbsp;
 		</div>
 
 		<!--........................................ adding new package overlay ................................-->
 		<div id="overlay" v-if="newPackageView==true">
 		
-			<div style="font-size:30px; margin-right:1.4%; background: red;" class="exit_button" v-on:click="newPackageView=false">
-					<img src="../static/img/tools/exit_button.png">
-			</div>
+			
 
 			<div class="new_package" style="overflow:scroll; overflow-x:hidden;">
-
+				<div style="font-size:30px; margin-right:1.4%; background: red;" class="exit_button" v-on:click="newPackageView=false">
+					<img src="../static/img/tools/exit_button.png">
+				</div>
 				<h1 style="text-align: center;">Order Information</h1>
 				<br><strong>Tracking # *</strong>
 				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_tracknum">
@@ -159,11 +159,11 @@
 		<!-- Import overlay -->
 		<div id="overlay" v-if="newImportView==true">
 			
-			<div style="font-size:30px; margin-right:1.4%; background: red;" class="exit_button" v-on:click="newImportView=false;">
-					<img src="../static/img/tools/exit_button.png">
-			</div>
+			
 			<div class="new_import" style="overflow:scroll; overflow-x:hidden;">
-				
+				<div style="font-size:30px; margin-right:1.4%; background: red;" class="exit_button" v-on:click="newImportView=false;">
+					<img src="../static/img/tools/exit_button.png">
+				</div>
 				<h1 style="text-align: center;">Import CSV</h1>
 				<form action="{% url 'import_packages' %}" method="POST" enctype="multipart/form-data" class="form-horizontal"> 
 					{% csrf_token %}
@@ -228,17 +228,18 @@
 					</div>
 
 					<!--..................................extra details for package if needed...................................................-->
+					
 					<div id="overlay" v-if="info.index == currentView">
-						<!--exit button-->
-						<div style="font-size:30px; margin-right:1.4%; background: red;" class="exit_button" v-on:click="currentView=-1">
-							<img src="../static/img/tools/exit_button.png">
-						</div>
-
+						
 						<!--rest of popup for package details-->
 						<div class="new_package" style="overflow:scroll; overflow-x:hidden;">
 
 							<h1 style="text-align: center;">Order Information</h1>
-							
+							<!--exit button-->
+						<div style="font-size:30px; margin-right:1.4%; background: red;" class="exit_button" v-on:click="currentView=-1">
+							<img src="../static/img/tools/exit_button.png">
+						</div>
+
 							<br>&nbsp;&nbsp;<strong>Recipient</strong>
 							<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="info.name">
 								${info.name}
