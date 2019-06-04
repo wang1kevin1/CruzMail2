@@ -87,7 +87,7 @@
   border-bottom:3px black;
   height:5vw; 
   font-size: 3vw;
-  background: lightsteelblue;
+  background: #006aad;
 }
 .col_results{
   float:left;
@@ -163,8 +163,8 @@ cursor: pointer;
 
 .exit_button{
   position:absolute;
-  top:20%;
-  right:10%;
+  top:0%;
+  right:-1%;
   z-index:10;
 
 }

@@ -18,8 +18,8 @@
 
 
 
-		<header>
-			<h1 class="logo"><img src="../static/img/pages/thumbnail_mailstop.png"> Mailstops</h1>
+		<header style="background:#01589d; height: 20%">
+			<h1 class="logo" style="color:white;"><img img style="width:.75em;" src="../static/img/pages/thumbnail_mailstop.png"> Mailstops</h1>
 			<input type="checkbox" id="nav-toggle" class="nav-toggle">
 			<nav>
 				<ul>
@@ -37,11 +37,10 @@
 	<!--...................................Header for People................................................................-->
 	<div id="mailstop_view">
 
-		<div class="body" style="background-color:#305371; height:20%;">
+		<div class="body" style="background-color:white; height:20%;">
 		</div>
 
-		&nbsp; &nbsp; &nbsp;Search for Mailstops...
-		<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="test">
+		<textarea placeholder="Search for Mailstops..." class="list" style="background-color: rgb(236, 236, 250)" v-model="test">
 		    ${test}
 	    </textarea>
 
@@ -50,11 +49,11 @@
 		<!-- adding new mailstop overlay -->
 		<div id="overlay" v-if="newMailstopView==true">
 		
-			<div style="font-size:30px; margin-right:1.4%; background: red;" class="exit_button"  v-on:click="newMailstopView=false;">
-					<img src="../static/img/tools/exit_button.png">
-			</div>
+			
 			<div class="new_mailstop" style="overflow:scroll; overflow-x:hidden;">
-		
+				<div style="font-size:30px; margin-right:1.4%; background: red;" class="exit_button"  v-on:click="newMailstopView=false;">
+					<img src="../static/img/tools/exit_button.png">
+				</div>
 				<h1 style="text-align: center;">New Mailstop</h1>
 
 				<br>Mailstop ID
@@ -85,11 +84,11 @@
 		<!-- Import overlay -->
 		<div id="overlay" v-if="newImportView==true">
 			
-			<div style="font-size:30px; margin-right:1.4%; background: red;" class="exit_button" v-on:click="newImportView=false;">
-					<img src="../static/img/tools/exit_button.png">
-			</div>
+			
 			<div class="new_import" style="overflow:scroll; overflow-x:hidden;">
-				
+				<div style="font-size:30px; margin-right:1.4%; background: red;" class="exit_button" v-on:click="newImportView=false;">
+					<img src="../static/img/tools/exit_button.png">
+				</div>
 				<h1 style="text-align: center;">Import CSV</h1>
 				<form action="{% url 'import_mailstops' %}" method="POST" enctype="multipart/form-data" class="form-horizontal"> 
 					{% csrf_token %}
@@ -156,12 +155,13 @@
 					<div v-if="info.index == currentView">
 
 							<!--exit button-->
-							<div style="font-size:30px; margin-right:1.4%; background: red;" class="exit_button" v-on:click="currentView=-1">
-									<img src="../static/img/tools/exit_button.png">
-							</div>
+							
 		
 								<!--rest of popup for mailstop details-->
 							<div class="new_mailstop" style="overflow:scroll; overflow-x:hidden;">
+								<div style="font-size:30px; margin-right:1.4%; background: red;" class="exit_button" v-on:click="currentView=-1">
+									<img src="../static/img/tools/exit_button.png">
+								</div>
 								<h1 style="text-align: center;">Mailstop Information</h1>
 								<br>&nbsp;&nbsp;Route
 								<textarea style="background-color: rgb(236, 236, 250)" v-model="info.ms_route">
