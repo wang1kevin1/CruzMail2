@@ -17,7 +17,7 @@
 
 
 
-		<header style="background:#01589d;"> 
+		<header style="background:#01589d; height: 20%"> 
 			<h1 class="logo" style="color:white;"><img style="width:1em;" src="../static/img/pages/thumbnail_package.png"> Packages</h1>
 			<input type="checkbox" id="nav-toggle" class="nav-toggle">
 			<nav>
@@ -38,8 +38,7 @@
 
 		<div class="body" style="background-color:white; height:20%;"></div>
 
-		&nbsp; &nbsp; &nbsp;Search by Tracking Number
-		<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="search_pkg">
+		<textarea placeholder="Search by Tracking Number"  class="list" style="background-color: rgb(236, 236, 250)" v-model="search_pkg">
 		    ${search_pkg}
 	    </textarea>
 

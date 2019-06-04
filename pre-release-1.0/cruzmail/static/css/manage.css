@@ -123,8 +123,6 @@
 .buttons {
                
     position: absolute;
-    /*top: 35%;
-    left: 30%;*/
     transform: translate(-50%, -50%);
     color:rgb(0, 0, 0);
     width: 120px;

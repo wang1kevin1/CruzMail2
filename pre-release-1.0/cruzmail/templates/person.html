@@ -3,6 +3,7 @@
 <html>
 
 <head>
+	
 	<html lang="en">
 
 	<head>
@@ -11,14 +12,15 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<!-- Compiled and minified CSS -->
-		<!--
-		  		-->
+		<link href="{% static 'css/general_design.css' %}" rel="stylesheet">
+		<link href="{% static 'css/person.css' %}" rel="stylesheet">
+		<!--						   -->
 		<title>Cruz Mail</title>
 
 
 
-		<header>
-			<h1 class="logo"><img src="../static/img/pages/thumbnail_people.png">  People</h1>
+		<header style="background:#01589d; height:20%;">
+			<h1 class="logo"style="color:white;" ><img style="width:.75em;" src="../static/img/pages/thumbnail_people.png">  People</h1>
 			<input type="checkbox" id="nav-toggle" class="nav-toggle">
 			<nav>
 				<ul>
@@ -36,10 +38,8 @@
 	<!--...................................Header for People................................................................-->
 	<div id="person_view">
 
-		<div class="body" style="background-color:#305371; height:20%;"></div>
-
-		&nbsp; &nbsp; &nbsp;Search for People...
-		<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="test">
+		<div class="body" style="background-color:white; height:20%; "></div>
+		<textarea placeholder = "Search for People"class="list" style="background-color: rgb(236, 236, 250)" v-model="test">
 		    ${test}
 	    </textarea>
 
@@ -48,12 +48,13 @@
 		<!-- adding new person overlay -->
 		<div id="overlay" v-if="newPersonView==true">
 			
-			<div style="font-size:30px; margin-right:1.4%; background: red;" class="exit_button" v-on:click="newPersonView=false;">
-					<img src="../static/img/tools/exit_button.png">
-			</div>
+			
 			<div class="new_person" style="overflow:scroll; overflow-x:hidden;">
 				
 				<h1 style="text-align: center;">New Person</h1>
+				<div style="font-size:30px; margin-right:1.4%; background: red;" class="exit_button" v-on:click="newPersonView=false;">
+					<img src="../static/img/tools/exit_button.png">
+				</div>
 				<br>Name
 				<textarea class="list" style="background-color: rgb(236, 236, 250)" v-model="new_person">
 				    ${new_person}
@@ -77,12 +78,13 @@
 		<!-- Import overlay -->
 		<div id="overlay" v-if="newImportView==true">
 			
-			<div style="font-size:30px; margin-right:1.4%; background: red;" class="exit_button" v-on:click="newImportView=false;">
-					<img src="../static/img/tools/exit_button.png">
-			</div>
+			
 			<div class="new_import" style="overflow:scroll; overflow-x:hidden;">
 				
 				<h1 style="text-align: center;">Import CSV</h1>
+				<div style="font-size:30px; margin-right:1.4%; background: red;" class="exit_button" v-on:click="newImportView=false;">
+					<img src="../static/img/tools/exit_button.png">
+				</div>
 				<form action="{% url 'import_people' %}" method="POST" enctype="multipart/form-data" class="form-horizontal"> 
 					{% csrf_token %}
 					<div class="form-group">
@@ -147,15 +149,16 @@
 
 					<div v-if="info.index == currentView">
 						
-							<!--exit button-->
-							<div style="font-size:30px; margin-right:1.4%; background: red;" class="exit_button" v-on:click="currentView=-1">
-									<img src="../static/img/tools/exit_button.png">
-							</div>
+							
 		
 							<!--rest of popup for people details-->
 						<div class="new_person" style="overflow:scroll; overflow-x:hidden;">
 							
 							<h1 style="text-align: center;">People Information</h1>
+							<!--exit button-->
+							<div style="font-size:30px; margin-right:1.4%; background: red;" class="exit_button" v-on:click="currentView=-1">
+								<img src="../static/img/tools/exit_button.png">
+							</div>
 							<br>&nbsp;&nbsp;Email
 							<textarea style="background-color: rgb(236, 236, 250)" v-model="info.ppl_email">
 								${info.ppl_email}
@@ -185,8 +188,6 @@
 	<script src="{% static 'js/jquery-3.2.1.js' %}"></script>
 	<script src="{% static 'js/vue.js' %}"></script>
 	<script src="{% static 'js/person_html.js' %}"></script>
-	<link href="{% static 'css/general_design.css' %}" rel="stylesheet">
-	<link href="{% static 'css/person.css' %}" rel="stylesheet">
 
 </body>
 
