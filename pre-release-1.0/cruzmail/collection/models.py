@@ -35,9 +35,9 @@ class people_master(models.Model):
    ppl_email   = models.CharField(max_length = 100, default = '')
 
    ppl_status_choice = (
-       ('Available', 'Available'),
-       ('Away', 'Away'),)
-   ppl_status = models.CharField(max_length = 9, choices = ppl_status_choice, default = 'Available')
+       ('Active', 'Active'),
+       ('Inactive', 'Inactive'),)
+   ppl_status = models.CharField(max_length = 9, choices = ppl_status_choice, default = 'Active')
 
    mailstop = models.CharField(max_length = 50, default = '')
 
