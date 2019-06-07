@@ -231,7 +231,7 @@ def away_person(request):
       return
 
     t = people_master.objects.get(name=request.POST.get('name'))
-    t.ppl_status='Away'
+    t.ppl_status='Inactive'
     t.save()
     return JsonResponse(dict(test="ok"))
 
@@ -256,7 +256,7 @@ def add_person(request):
 
     people_master.objects.create(name        = request.POST.get('ppl_name'),
                                  ppl_email   = request.POST.get('ppl_email'),
-                                 ppl_status  = 'Available',
+                                 ppl_status  = 'Active',
                                  mailstop    = request.POST.get('mailstop'),
                                 )
     return JsonResponse(dict(test="ok"))
@@ -312,13 +312,14 @@ def import_people(request):
     # Read uploaded CSV and import data
     with open("/tmp/people_csv.csv") as f:
         reader = csv.reader(f)
+
         # Creates a new model for each row in the csv file
         for row in reader:
             _, created = people_master.objects.get_or_create(
-                name=row[1]+" "+row[0],
-                ppl_email=row[5]+"@ucsc.edu",
-                ppl_status='Available',
-                mailstop=row[4],
+                name=row[2]+" "+row[1],
+                ppl_email=row[6]+"@ucsc.edu",
+                ppl_status=row[4],
+                mailstop=row[5],
             )
 
     return redirect('/person')

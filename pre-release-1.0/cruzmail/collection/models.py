@@ -8,6 +8,7 @@ from django.dispatch import receiver
 from django import forms
 from django.contrib.auth.tokens import *
 import datetime
+import uuid
 from django.http import HttpResponse
 
 class mailstops_master(models.Model):
@@ -29,13 +30,14 @@ class mailstops_master(models.Model):
    ms_status = models.CharField(max_length = 8, choices = ms_status_choice, default = 'Active')
 
 class people_master(models.Model):
+   sys_id      = models.CharField(max_length = 32, primary_key = True, default = uuid.uuid1)
    name        = models.CharField(max_length = 50, default = '')
-   ppl_email   = models.CharField(max_length = 100, primary_key = True, default = '')
+   ppl_email   = models.CharField(max_length = 100, default = '')
 
    ppl_status_choice = (
-       ('Available', 'Available'),
-       ('Away', 'Away'),)
-   ppl_status = models.CharField(max_length = 9, choices = ppl_status_choice, default = 'Available')
+       ('Active', 'Active'),
+       ('Inactive', 'Inactive'),)
+   ppl_status = models.CharField(max_length = 9, choices = ppl_status_choice, default = 'Active')
 
    mailstop = models.CharField(max_length = 50, default = '')
 
@@ -50,7 +52,7 @@ class packages_master(models.Model):
 
 
    pkg_status_choice = (
-       ('recieved', 'recieved'),
+       ('received', 'received'),
        ('delivered', 'delivered'))
    pkg_status   = models.CharField(max_length = 9, choices = pkg_status_choice, default = '')
 
