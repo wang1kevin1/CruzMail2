@@ -30,7 +30,7 @@ class mailstops_master(models.Model):
    ms_status = models.CharField(max_length = 8, choices = ms_status_choice, default = 'Active')
 
 class people_master(models.Model):
-   sys_id      = models.CharField(max_length = 32, primary_key = True, default = uuid.uuid1)
+   sys_id      = models.CharField(max_length = 64, primary_key = True, default = uuid.uuid1)
    name        = models.CharField(max_length = 50, default = '')
    ppl_email   = models.CharField(max_length = 100, default = '')
 
