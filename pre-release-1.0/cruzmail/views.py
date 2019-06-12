@@ -10,6 +10,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, permission_required
 
 from django.core.mail import send_mail
+from background_task import background
+
+
 # PACKAGE VIEWS-------------------------------------------------------------------------------------------------------------
 @csrf_exempt
 def query_package(request):
@@ -294,8 +297,10 @@ def export_csv(request, tableName):
     return response
 
 @csrf_exempt
+#@background(schedule=120)
 def import_people(request):
 
+    #request = request.__dict__
     if request.user is None:
         return
 

@@ -54,17 +54,7 @@
 							</li>
 
 							<!-- Create Account -->
-							<li {% if params.category != "account" and params.category != "collections" and params.category != "inbox" %} 
-									{% if params.category == 'create' %}
-										class="nav-item active"
-									{ % else % }
-										class="nav-item"
-									{%  endif %}
-								{% else %}
-									style="display: none" 
-								{% endif %}>
-								<a class="nav-link" href="{% url 'create' %}">Sign Up</a>
-							</li>
+
 
 							<!-- Logout -->
 							<li {% if params.category == "collections" or params.category == "account" or params.category == "inbox" %}
