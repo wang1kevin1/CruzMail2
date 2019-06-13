@@ -36,6 +36,7 @@ class people_master(models.Model):
 
    ppl_status_choice = (
        ('Active', 'Active'),
+       ('Pending', 'Pending'),
        ('Inactive', 'Inactive'),)
    ppl_status = models.CharField(max_length = 9, choices = ppl_status_choice, default = 'Active')
 
