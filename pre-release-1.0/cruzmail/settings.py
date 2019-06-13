@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '7_=0u17^xlw8cwcp6z(9&_+a*@wmk@f7v0__&ialz1ily8gzgx'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 #ALLOWED_HOSTS = ['0.0.0.0']
 
@@ -80,13 +80,13 @@ LOGIN_REDIRECT_URL = '/manage'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cruzmail$default',
-        'USER': 'cruzmail',
-        'PASSWORD' : 'campusmail',
-        'HOST' : 'cruzmail.mysql.pythonanywhere-services.com',
+        'NAME': 'tests',
+        'USER': 'root',
+        'PASSWORD' : 'hihihihi1',
+        'HOST' : '127.0.0.1',
+        'PORT' : '3306',
     }
 }
-
 # auto email ..... password = cruzmailtest123
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
