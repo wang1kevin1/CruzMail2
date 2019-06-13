@@ -100,7 +100,14 @@
 
     }
 
-    /*stuff i just found online*/
+
+   .box { 
+      display: -webkit-flex; display: -ms-flexbox; display: flex; overflow: hidden;
+      word-wrap: break-word;
+      text-align: center;    
+    }
+
+    /*For Navigation Bar*/
     .nav-toggle {
       position: absolute !important;
       top: -9999px !important;
@@ -261,3 +268,4 @@
         background: #5c5b5b;
         cursor: pointer;
       }
+

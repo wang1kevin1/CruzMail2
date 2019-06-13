@@ -53,9 +53,9 @@ class packages_master(models.Model):
 
 
    pkg_status_choice = (
-       ('received', 'received'),
+       ('not delivered', 'not delivered'),
        ('delivered', 'delivered'))
-   pkg_status   = models.CharField(max_length = 9, choices = pkg_status_choice, default = '')
+   pkg_status   = models.CharField(max_length = 20, choices = pkg_status_choice, default = '')
 
    pkg_sign_choice = (
        ('y', 'yes'),

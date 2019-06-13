@@ -133,7 +133,7 @@
 			<div style="overflow:scroll; height: 50%; overflow-x:hidden; overflow-y:overlay;">
 				<div v-for="info in Info" class="row" style="width:100%">
 
-					<div v-if="info.index != currentView">
+					<div class="box" v-if="info.index != currentView">
 						<div class="col_title" style="width:30%;">
 							<div style="float:left;">
 								<input type="checkbox" v-model="info.isActive">

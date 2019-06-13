@@ -25,11 +25,11 @@ def query_package(request):
     index = request.POST.get('index')
 
     #gets proper queries and stores it into an array
-    for r in packages_master.objects.filter(pkg_tracking__startswith =     request.POST.get('search'),
-                                            mailstop__startswith =     request.POST.get('mailstop'),
-                                            name__startswith =         request.POST.get('name'),
-                                            pkg_email__startswith =    request.POST.get('email'),
-                                            pkg_status__startswith =   request.POST.get('status'),):
+    for r in packages_master.objects.filter(pkg_tracking__icontains = request.POST.get('search'),
+                                            mailstop__icontains =     request.POST.get('mailstop'),
+                                            name__icontains =         request.POST.get('name'),
+                                            pkg_email__icontains =    request.POST.get('email'),
+                                            pkg_status__icontains =   request.POST.get('status'),):
 
       t = dict(pkg_tracking = r.pkg_tracking,
                pkg_status = r.pkg_status,
@@ -55,9 +55,6 @@ def package_delivered(request):
     if request.user is None:
       return
 
-    print(request.user)
-    print(request.POST)
-
     #updates package as delievered and saves it
     #t = packages_master.objects.get(pkg_tracking=request.POST.get('pkg_tracking'))
 
@@ -67,7 +64,6 @@ def package_delivered(request):
     'cruzmail.ucsc@gmail.com',
     [request.POST.get('pkg_email')],
     )
-
 
     p = packages_master.objects.get(pkg_tracking=request.POST.get('pkg_tracking'))
     p.pkg_status = 'delivered'
@@ -119,11 +115,17 @@ def add_package(request):
       width = None
     if length is '':
       length = None
+
+    #if user puts in no tracking number, enter a random one
+    tracking_num = request.POST.get('track')
+    if tracking_num is '' or tracking_num is None:
+      tracking_num = packages_master.objects.count() + 1
+
     #inputs package information based on the data from request parameter
-    packages_master.objects.create(pkg_tracking = request.POST.get('track'),
+    packages_master.objects.create(pkg_tracking = tracking_num,
                                   name =        request.POST.get('name'),
                                   mailstop =    request.POST.get('mailstop'),
-                                  pkg_status =  'received',
+                                  pkg_status =  'not delivered',
                                   pkg_sign =    request.POST.get('sign'),
                                   pkg_email =   request.POST.get('email'),
                                   pkg_weight =  request.POST.get('weight'),

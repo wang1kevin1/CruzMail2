@@ -50,7 +50,7 @@
 			<p class="small_text">&nbsp;&nbsp;Status</p>
 			<select class="list" style="background-color: rgb(236, 236, 250)" v-model="adv_status">
 				<option value="delivered">delivered</option>
-				<option value="received">received</option>
+				<option value="not delivered">not delivered</option>
 			</select>
 
 			<p class="small_text">&nbsp;&nbsp;Name</p>
@@ -199,8 +199,8 @@
 			<div style="overflow:scroll; height: 50%; overflow-x:hidden; overflow-y:overlay;">
 				<div v-for="info in Info" class="row" style="width:100%">
 
-					<div v-if="info.index != currentView">
-						<div class="col_title" style="width:30%;">	<!--MODIFY THIS RIGHT HURR-->
+					<div class="box" v-if="info.index != currentView">
+						<div class="col_title" style="width:30%;">
 							<div style="float:left;">
 								<input type="checkbox" v-model="info.isDelivered">
 								</input>
