@@ -84,6 +84,7 @@ DATABASES = {
         'USER': 'cruzmail',
         'PASSWORD' : 'campusmail',
         'HOST' : 'cruzmail.mysql.pythonanywhere-services.com',
+    }
 }
 
 # auto email ..... password = cruzmailtest123
