@@ -10,7 +10,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, permission_required
 
 from django.core.mail import send_mail
-from background_task import background
+#from background_task import background
 
 
 # PACKAGE VIEWS-------------------------------------------------------------------------------------------------------------
@@ -221,8 +221,7 @@ def query_person(request):
 
     params = []
     index = int(request.POST.get('index'))
-    for r in people_master.objects.filter(name__contains = request.POST.get('search')):
-
+    for r in people_master.objects.filter(name__icontains = request.POST.get('search')):
       t = dict(name       = r.name,
                ppl_email  = r.ppl_email,
                ppl_status = r.ppl_status,
@@ -479,6 +478,10 @@ def manage(request):
 @login_required(login_url='/account/login')
 def menu(request):
   return render(request, 'menu.html')
+
+@login_required(login_url='/account/login')
+def help(request):
+  return render(request, 'help.html')
 
 
 @login_required(login_url='/account/login')
