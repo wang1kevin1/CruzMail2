@@ -10,7 +10,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, permission_required
 
 from django.core.mail import send_mail
-from background_task import background
+#from background_task import background
 
 
 # PACKAGE VIEWS-------------------------------------------------------------------------------------------------------------
@@ -296,7 +296,7 @@ def export_csv(request, tableName):
     return response
 
 @csrf_exempt
-@background(schedule=120)
+#@background(schedule=120)
 def import_people(request):
 
     #request = request.__dict__
