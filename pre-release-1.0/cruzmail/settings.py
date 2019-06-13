@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'cruzmail.collection',
     'cruzmail.account',
-    'background_task'
     #'cruzmail.inbox',
 ]
 
