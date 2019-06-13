@@ -289,7 +289,6 @@
 			<button class="btn btn-primary" v-on:click="packageDelivered();" >Deliver Package</button>
 		{% if request.user.is_superuser %}
       	<a href="{% url 'export_packages' %}" class="btn btn-primary">Export to CSV</a>
-			<button class="btn btn-primary" v-on:click="newImportView = true;">Import CSV</button>
 			{% endif %}
 		</div>
 	</div>

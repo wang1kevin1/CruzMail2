@@ -47,7 +47,7 @@ class people_master(models.Model):
        #unique_together = (('name', 'mailstop'),)
 
 class packages_master(models.Model):
-   pkg_tracking = models.CharField(max_length = 50, primary_key = True, default = uuid.uuid4)
+   pkg_tracking = models.CharField(max_length = 50, primary_key = True, default = '')
    name         = models.CharField(max_length = 50, default = '')
    mailstop     = models.CharField(max_length = 50, default = '')
 
