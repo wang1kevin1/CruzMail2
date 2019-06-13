@@ -43,13 +43,13 @@
       Package Not Found
     </div>
         <div class="info">Status:</div>
-        <div class="results" v-if="customer_search"> ${customer_status} </div>
+        <div class="results" v-if="customer_search && customer_status != null"> ${customer_status}</div>
 
         <div class="info">Tracking Number:</div>
-        <div class="results" v-if="customer_search"> ${customer_track_num} </div>
+        <div class="results" v-if="customer_search && customer_status != null"> ${customer_track_num} </div>
 
         <div class="info">Destination:</div>
-        <div class="results" v-if="customer_search">${customer_dest}</div>
+        <div class="results" v-if="customer_search && customer_status != null">${customer_dest}</div>
 
         <!--<div class = "info">Date/Time Delivered:</div>
                         <div class = "results"> March 9 10:00 am </div>
