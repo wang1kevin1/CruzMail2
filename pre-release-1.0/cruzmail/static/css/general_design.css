@@ -63,7 +63,7 @@
       font-family: 'Work Sans', sans-serif;
       color: white;
       border-radius: 0 5px 5px 0;
-      cursor: pointer;
+      
       background: #2C5779;
       box-shadow: 0 5px 25px 0 rgba(0, 0, 0, .5);
       width: 10%;
@@ -151,7 +151,7 @@
       text-align: left;
       top: 100%;
       left: 0;
-      background: var(--background);
+      background: #01589d;
       width: 100%;
       transform: scale(1, 0);
       transform-origin: top;

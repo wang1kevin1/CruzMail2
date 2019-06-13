@@ -1,3 +1,9 @@
+.box { 
+    display: -webkit-flex; display: -ms-flexbox; display: flex; overflow: hidden;
+    word-wrap: break-word;
+    text-align: center;    
+}
+
 /*dividers for manager top bar*/
 .row:after {
     content: "";
@@ -83,9 +89,9 @@
     border-right:3px solid black;
     border-bottom:3px solid black;
     width:30%;
-    height:15%; 
-   
-   
+    /*height:15%; 
+    flex: 1; add this to give it more space
+   */
 }
 .col_xtitle{ 
     float:left;
