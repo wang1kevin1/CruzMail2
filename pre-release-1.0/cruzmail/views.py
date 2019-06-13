@@ -476,6 +476,10 @@ def manage(request):
 def menu(request):
   return render(request, 'menu.html')
 
+@login_required(login_url='/account/login')
+def help(request):
+  return render(request, 'help.html')
+
 
 @login_required(login_url='/account/login')
 def collection(request):
