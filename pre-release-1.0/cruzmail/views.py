@@ -297,7 +297,7 @@ def export_csv(request, tableName):
     return response
 
 @csrf_exempt
-#@background(schedule=120)
+@background(schedule=120)
 def import_people(request):
 
     #request = request.__dict__

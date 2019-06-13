@@ -187,8 +187,10 @@
 		<div class="text-center">
 			<!--<button class="btn btn-primary" v-on:click="newMailstopView = true;">New Mailstop</button> -->
 			<!--<button class="btn btn-primary" v-on:click="deactivateMailstop();" onclick="location.reload();">Deactivate Mailstop</button>-->
+{% if request.user.is_superuser %}
       <a href="{% url 'export_mailstops' %}" class="btn btn-primary">Export to CSV</a>
 			<button class="btn btn-primary" v-on:click="newImportView = true;">Import Mailstops</button>
+			{% endif %}
 		</div>
 
 		
