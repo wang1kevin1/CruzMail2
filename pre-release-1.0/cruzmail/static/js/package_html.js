@@ -105,7 +105,7 @@ var myViewModel = new Vue({
 	 	//iterates through packages and checks which packages should be marked
 	    for(var key in myViewModel.Info){
 	    	//console.log(myViewModel.Info[key].state);
-			if(myViewModel.Info[key].isDelivered && myViewModel.Info[key].state == "received")
+			if(myViewModel.Info[key].isDelivered && myViewModel.Info[key].state == "not delivered")
 				//console.log("a");
 		 	   $.ajax({ type: "POST",
 	                  	   url:  '/package_delivered' ,
@@ -122,7 +122,6 @@ var myViewModel = new Vue({
 	                   });
 	    }
 	    //myViewModel.queryPackage();
-
 	},
 	updatePackage: updatePackages = function(){
 

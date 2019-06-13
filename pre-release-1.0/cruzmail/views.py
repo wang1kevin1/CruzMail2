@@ -29,7 +29,7 @@ def query_package(request):
                                             mailstop__icontains =     request.POST.get('mailstop'),
                                             name__icontains =         request.POST.get('name'),
                                             pkg_email__icontains =    request.POST.get('email'),
-                                            pkg_status__icontains =   request.POST.get('status'),):
+                                            pkg_status__iexact =   request.POST.get('status'),):
 
       t = dict(pkg_tracking = r.pkg_tracking,
                pkg_status = r.pkg_status,
@@ -301,12 +301,9 @@ def export_csv(request, tableName):
     return response
 
 @csrf_exempt
-@background(schedule=120)
+#@background(schedule=120)
 def import_people(request):
-
-    #request = request.__dict__
-    if request.user is None:
-        return
+    print("error")
 
     # Delete values in people table
     clear_table(people_master)
