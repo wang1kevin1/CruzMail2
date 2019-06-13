@@ -156,9 +156,11 @@ var myViewModel = new Vue({
 	    //resets all views
 	    myViewModel.allTrue = false;
 	    myViewModel.currentView = -1;
-	    customer_status = null;
-		customer_track_num = null;
-		customer_dest = null;
+
+	    //resets customer's previous query
+	    myViewModel.customer_status = null;
+		myViewModel.customer_track_num = null;
+		myViewModel.customer_dest = null;
 
 	    //gets all the packages with search funtionalities
 	    $.ajax({ type: "POST",
@@ -172,9 +174,13 @@ var myViewModel = new Vue({
 		       	   "signing":  myViewModel.adv_signing }, 
 		     dataType: 'json',
 		     success: function good(response){
-		     customer_search = true;
-			 console.log(response.params);
+
+		     //user has searched
+		     myViewModel.customer_search = true;
+
 			 myViewModel.Info = [];
+
+			 //variable for keeping track of when an item is added
 			 var index = 0;
 			 var objHold;
 
@@ -200,13 +206,15 @@ var myViewModel = new Vue({
 								    			index: index});
 					     index++;
 					 if(myViewModel.search_pkg == objHold.pkg_tracking){
-					 	customer_status = objHold.pkg_status;
-						customer_track_num = objHold.pkg_tracking;
-						customer_dest = objHold.mailstop;
+					 	myViewModel.customer_status = objHold.pkg_status;
+						myViewModel.customer_track_num = objHold.pkg_tracking;
+						myViewModel.customer_dest = objHold.mailstop;
 
 					 }
+					 
 				//console.log(response.params[key]);
 			 }
+
 		     },
 		     error: function(response){
 			 console.log("invalid inputs\n");
