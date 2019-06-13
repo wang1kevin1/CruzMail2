@@ -136,7 +136,7 @@ def add_package(request):
 
     send_mail(
     'PACKAGE ' + request.POST.get('track'),
-    'This is a notification that your package has arrived at the UCSC barn. It will take another 1 to 2 days to deliver the package to your location.',
+    'This is a notification that your package has arrived at the UCSC barn. It will take another 1 to 2 days to deliver the package to your location. You can find more information on cruzmail.pythonanywhere.com',
     'cruzmail.ucsc@gmail.com',
     [request.POST.get('email')],
     )
