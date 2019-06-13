@@ -148,7 +148,7 @@ def query_mailstop(request):
     search = request.POST.get('search')
     index = int(request.POST.get('index'))
     for r in mailstops_master.objects.all():
-      if search is None or (len(search) <= len(r.mailstop) and search == r.mailstop[0:len(search)]):
+      if search is None or (len(search) <= len(r.mailstop) and search == r.mailstop[0:len(search)]) or (len(search) <= len(r.ms_name) and search == r.ms_name[0:len(search)]):
         t = dict(mailstop       = r.mailstop,
                  ms_name        = r.ms_name,
                  ms_route       = r.ms_route,
