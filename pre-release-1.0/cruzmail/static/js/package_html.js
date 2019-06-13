@@ -24,7 +24,7 @@ var myModel = {
     //stores the information of advanced search
     adv_mailstop: '',
     adv_name: '',
-    adv_status: 'received',
+    adv_status: 'not delivered',
     adv_email: '',
     adv_signing: '',
 

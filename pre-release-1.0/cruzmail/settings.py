@@ -80,14 +80,13 @@ LOGIN_REDIRECT_URL = '/manage'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cruzmail_db',
+        'NAME': 'tests',
         'USER': 'root',
-        'PASSWORD' : '',
+        'PASSWORD' : 'hihihihi1',
         'HOST' : '127.0.0.1',
         'PORT' : '3306',
     }
 }
-
 
 # auto email ..... password = cruzmailtest123
 EMAIL_USE_TLS = True
