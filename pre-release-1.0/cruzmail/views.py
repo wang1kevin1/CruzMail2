@@ -46,6 +46,7 @@ def query_package(request):
               )
       params.append(t)
 
+    print(params)
     return JsonResponse(dict(params= params))
 
 @csrf_exempt
@@ -54,12 +55,15 @@ def package_delivered(request):
     if request.user is None:
       return
 
+    print(request.user)
+    print(request.POST)
+
     #updates package as delievered and saves it
     #t = packages_master.objects.get(pkg_tracking=request.POST.get('pkg_tracking'))
 
     send_mail(
-    'PACKAGE ' + request.POST.get('pkg_tracking') + ' DELIVERED',
-    'This is a notification that your package has been delivered',
+    'PACKAGE ' + request.POST.get('pkg_tracking') + ' DELIVERED TO ' + request.POST.get('mailstop'),
+    'Your package has been delivered to the mailstop at ' + request.POST.get('mailstop') + '.',
     'cruzmail.ucsc@gmail.com',
     [request.POST.get('pkg_email')],
     )
@@ -130,7 +134,7 @@ def add_package(request):
 
     send_mail(
     'PACKAGE ' + request.POST.get('track'),
-    'This is a notification that your package has arrived at the UCSC barn. It will take another 1 to 2 days to deliver the package to your location google.com',
+    'This is a notification that your package has arrived at the UCSC barn. It will take another 1 to 2 days to deliver the package to your location.',
     'cruzmail.ucsc@gmail.com',
     [request.POST.get('email')],
     )

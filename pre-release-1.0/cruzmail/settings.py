@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'cruzmail.collection',
     'cruzmail.account',
+    'background_task'
     #'cruzmail.inbox',
 ]
 
@@ -78,10 +79,10 @@ LOGIN_REDIRECT_URL = '/manage'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': '24PhKsjUgY',
-        'USER': '24PhKsjUgY',
-        'PASSWORD' : 'sRHmLWCwvY',
-        'HOST' : 'remotemysql.com',
+        'NAME': 'cruzmail_db',
+        'USER': 'root',
+        'PASSWORD' : '',
+        'HOST' : '127.0.0.1',
         'PORT' : '3306',
     }
 }
