@@ -34,23 +34,22 @@
       <input class="submit_button" name="submit" value="Search" v-on:click="queryPackage();">
     </form>
 
-    <div v-if="Info.length == 0">
-      Package Not Found
-    </div>
-
 
     <!--results box-->
 
     <div class="wrapper" style="align-self: auto;">
       <div class="trackInfo">
+        <div v-if="customer_search == null && customer_search">
+      Package Not Found
+    </div>
         <div class="info">Status:</div>
-        <div class="results" v-if="Info.length > 0"> ${Info[0].state} </div>
+        <div class="results" v-if="customer_search"> ${customer_status} </div>
 
         <div class="info">Tracking Number:</div>
-        <div class="results" v-if="Info.length > 0"> ${Info[0].tracking} </div>
+        <div class="results" v-if="customer_search"> ${customer_track_num} </div>
 
         <div class="info">Destination:</div>
-        <div class="results" v-if="Info.length > 0">${Info[0].mailstop}</div>
+        <div class="results" v-if="customer_search">${customer_dest}</div>
 
         <!--<div class = "info">Date/Time Delivered:</div>
                         <div class = "results"> March 9 10:00 am </div>

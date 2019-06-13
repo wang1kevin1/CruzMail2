@@ -24,7 +24,7 @@ var myModel = {
     //stores the information of advanced search
     adv_mailstop: '',
     adv_name: '',
-    adv_status: '',
+    adv_status: 'received',
     adv_email: '',
     adv_signing: '',
 
@@ -49,7 +49,11 @@ var myModel = {
 	//checks if the import overlay is to be displayed
 	newImportView: false,
 
-
+	//keeps track of whether the user has tried searching yet
+	customer_search: false,
+	customer_status: null,
+	customer_track_num: null,
+	customer_dest: null,
 	users:[],    
 };
 
@@ -152,6 +156,9 @@ var myViewModel = new Vue({
 	    //resets all views
 	    myViewModel.allTrue = false;
 	    myViewModel.currentView = -1;
+	    customer_status = null;
+		customer_track_num = null;
+		customer_dest = null;
 
 	    //gets all the packages with search funtionalities
 	    $.ajax({ type: "POST",
@@ -165,7 +172,7 @@ var myViewModel = new Vue({
 		       	   "signing":  myViewModel.adv_signing }, 
 		     dataType: 'json',
 		     success: function good(response){
-
+		     customer_search = true;
 			 console.log(response.params);
 			 myViewModel.Info = [];
 			 var index = 0;
@@ -175,29 +182,35 @@ var myViewModel = new Vue({
 			 	 //adds extra variables into each package that are needed
 			 	 //isDelivered index 
 		         for(var key in response.params){
-			     
-			     objHold = response.params[key]
-			     myViewModel.Info.push({tracking:     objHold.pkg_tracking,
-										state:        objHold.pkg_status,
-										date_rec:     objHold.pkg_date_rec,
-						    			name:         objHold.name,
-						    			mailstop:     objHold.mailstop,
-						    			sign:         objHold.sign,
-				     					weight:       objHold.weight,
-				     					email:        objHold.email,
-				     					pkg_width:    objHold.pkg_width,
-				     					pkg_height:   objHold.pkg_height,
-				     					pkg_length:   objHold.pkg_length,
-				     					pkg_remarks:  objHold.pkg_remarks,
+					     objHold = response.params[key]
+					     myViewModel.Info.push({tracking:     objHold.pkg_tracking,
+												state:        objHold.pkg_status,
+												date_rec:     objHold.pkg_date_rec,
+								    			name:         objHold.name,
+								    			mailstop:     objHold.mailstop,
+								    			sign:         objHold.sign,
+						     					weight:       objHold.weight,
+						     					email:        objHold.email,
+						     					pkg_width:    objHold.pkg_width,
+						     					pkg_height:   objHold.pkg_height,
+						     					pkg_length:   objHold.pkg_length,
+						     					pkg_remarks:  objHold.pkg_remarks,
 
-						    			isDelivered:false,
-						    			index: index});
-			     index++;
+								    			isDelivered:false,
+								    			index: index});
+					     index++;
+					 if(myViewModel.search_pkg == objHold.pkg_tracking){
+					 	customer_status = objHold.pkg_status;
+						customer_track_num = objHold.pkg_tracking;
+						customer_dest = objHold.mailstop;
+
+					 }
 				//console.log(response.params[key]);
 			 }
 		     },
 		     error: function(response){
 			 console.log("invalid inputs\n");
+			 customer_search = true;
 		     }
 	    });
 	},
