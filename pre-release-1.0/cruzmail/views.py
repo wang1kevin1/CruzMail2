@@ -10,7 +10,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, permission_required
 
 from django.core.mail import send_mail
-from background_task import background
+#from background_task import background
 
 
 # PACKAGE VIEWS-------------------------------------------------------------------------------------------------------------
