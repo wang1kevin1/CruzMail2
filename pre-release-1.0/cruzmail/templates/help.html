@@ -1,0 +1,146 @@
+{% load staticfiles %}
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>document.getElementsByTagName("html")[0].className += " js";</script>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <title>Help Center</title>
+</head>
+<body>
+
+<section class="cd-faq js-cd-faq container max-width-md margin-top-lg margin-bottom-lg">
+	<ul class="cd-faq__categories">
+		<li><a class="cd-faq__category cd-faq__category-selected truncate" href="#packages">Packages</a></li>
+		<li><a class="cd-faq__category truncate" href="#account">Accounts</a></li>
+	</ul> <!-- cd-faq__categories -->
+
+	<div class="cd-faq__items">
+		<ul id="packages" class="cd-faq__group">
+			<li class="cd-faq__title"><h2>Packages</h2></li>
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>How do I add a package?</span></a>
+				<div class="cd-faq__content">
+          <div class="text-component">
+            <p>
+							On the package management page, click on the 'New Package' button to bring up the blank receiving form.
+						</p>
+
+						<img src="../static/img/help/new_package.PNG">
+
+						<p>
+							First enter the tracking number of the package (barcode scanner compatible). 
+							Next, fill out the recipient name. The case-sensitive 'autofill' is available for quickly filling in the 'Mailstop' and 'Email' fields.
+							Finally, while not required, employees may include weight and dimension information as well as any miscellaneous remarks.
+							Click 'Add Package' to save the package into the database.
+						</p>
+					</div>
+				</div> <!-- cd-faq__content -->
+			</li>
+
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>How do I use advanced search for packages?</span></a>
+				<div class="cd-faq__content">
+          <div class="text-component">
+							<p>
+									On the package management page, click on the 'More' button under the search tool to bring up advanced search options.
+								</p>
+		
+								<img src="../static/img/help/search.PNG">
+		
+								<p>
+									Here, employees may search for packages by: delivery status, recipient name, email, as well as by their mailstop.
+								</p>
+          </div>
+				</div> <!-- cd-faq__content -->
+			</li>
+
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>How do I deliver packages?</span></a>
+				<div class="cd-faq__content">
+          <div class="text-component">
+            <p>
+							On the package management page, select the packages to be delivered and click 'Deliver Package' to deliver.
+						</p>
+						
+						<p>
+							When delivering packages to individual mailstops, the recommended way is to first perform an advanced search by 'Status' and 'Mailstop'.
+						</p>
+						<img src="../static/img/help/deliver.PNG">
+						<p>
+							For example, packages headed for the Baytree Book Store can be found by searching for the status 'Received' and the mailstop 'BAYTREE'.
+							Afterwards, simply click the top checkbox to select all listed packages and deliver.
+						</p>
+          </div>
+				</div> <!-- cd-faq__content -->
+			</li>
+
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>How do I update package information?</span></a>
+				<div class="cd-faq__content">
+          <div class="text-component">
+            <p>
+								On the package management page, click the package to be updated and a form will appear with the package information.
+								Simply make any changes and click 'Update' to save.
+						</p>
+          </div>
+				</div> <!-- cd-faq__content -->
+			</li>
+		</ul> <!-- cd-faq__group -->
+
+
+
+		<ul id="account" class="cd-faq__group">
+			<li class="cd-faq__title"><h2>Account</h2></li>
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>How do I add a new employee?</span></a>
+				<div class="cd-faq__content">
+          <div class="text-component">
+            <p>
+							First access the admin account tools, by clicking on the 'Admin' tab on the Home navigation bar. (Note: only admins are able to access)
+							Next, click 'Add+' next to Users. 
+						</p>
+						<img src="../static/img/help/admin1.PNG">
+						<p>
+							After adding the initial user information, click 'Save and continue editing' to assign the account to the 'Worker' group.
+							This will give the new employee all the 'Worker' privileges. To create a new admin account, simply assign it to the 'Admin' group.
+							(User permissions will be automatically set by group.)
+						</p>
+						<img src="../static/img/help/new_user.PNG">
+						<p>
+							Finally, click 'Save' to finalize changes.
+						</p>
+          </div>
+				</div> <!-- cd-faq__content -->
+			</li>
+
+			<li class="cd-faq__item">
+				<a class="cd-faq__trigger" href="#0"><span>How do I remove an employee?</span></a>
+				<div class="cd-faq__content">
+          <div class="text-component">
+            <p>
+							First access the admin account tools, by clicking on the 'Admin' tab on the Home navigation bar. (Note: only admins are able to access)
+							Next, click on 'Users' and select a user to change.
+						</p>
+						<img src="../static/img/help/deactivate.PNG">
+						<p>
+							Uncheck 'Active' in the permission section to remove access for the employee account.
+						</p>
+          </div>
+				</div> <!-- cd-faq__content -->
+			</li>
+
+	</div> <!-- cd-faq__items -->
+
+	<a href="#0" class="cd-faq__close-panel text-replace">Close</a>
+  
+  <div class="cd-faq__overlay" aria-hidden="true"></div>
+</section> <!-- cd-faq -->
+
+<script src="{% static 'js/util.js' %}"></script> 
+<script src="{% static 'js/main.js' %}"></script> 
+
+</body>
+</html>
