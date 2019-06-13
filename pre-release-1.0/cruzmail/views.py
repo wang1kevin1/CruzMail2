@@ -55,8 +55,7 @@ def package_delivered(request):
     if request.user is None:
       return
 
-    print(request.user)
-    print(request.POST)
+    print(request.POST.get('pkg_tracking'))
 
     #updates package as delievered and saves it
     #t = packages_master.objects.get(pkg_tracking=request.POST.get('pkg_tracking'))
@@ -67,7 +66,6 @@ def package_delivered(request):
     'cruzmail.ucsc@gmail.com',
     [request.POST.get('pkg_email')],
     )
-
 
     p = packages_master.objects.get(pkg_tracking=request.POST.get('pkg_tracking'))
     p.pkg_status = 'delivered'
