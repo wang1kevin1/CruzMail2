@@ -217,7 +217,7 @@ def query_person(request):
 
     params = []
     index = int(request.POST.get('index'))
-    for r in people_master.objects.filter(name__contains = request.POST.get('search')):
+    for r in people_master.objects.filter(name__icontains = request.POST.get('search')):
 
       t = dict(name       = r.name,
                ppl_email  = r.ppl_email,
