@@ -55,8 +55,6 @@ def package_delivered(request):
     if request.user is None:
       return
 
-    print(request.POST.get('pkg_tracking'))
-
     #updates package as delievered and saves it
     #t = packages_master.objects.get(pkg_tracking=request.POST.get('pkg_tracking'))
 
@@ -117,6 +115,11 @@ def add_package(request):
       width = None
     if length is '':
       length = None
+
+    tracking_num = request.POST.get('track')
+   # if tracking_num is '' or tracking_num is:
+   #   tracking_num = 
+
     #inputs package information based on the data from request parameter
     packages_master.objects.create(pkg_tracking = request.POST.get('track'),
                                   name =        request.POST.get('name'),
