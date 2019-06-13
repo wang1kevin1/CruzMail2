@@ -25,11 +25,11 @@ def query_package(request):
     index = request.POST.get('index')
 
     #gets proper queries and stores it into an array
-    for r in packages_master.objects.filter(pkg_tracking__contains = request.POST.get('search'),
-                                            mailstop__contains =     request.POST.get('mailstop'),
-                                            name__contains =         request.POST.get('name'),
-                                            pkg_email__contains =    request.POST.get('email'),
-                                            pkg_status__contains =   request.POST.get('status'),):
+    for r in packages_master.objects.filter(pkg_tracking__startswith =     request.POST.get('search'),
+                                            mailstop__startswith =     request.POST.get('mailstop'),
+                                            name__startswith =         request.POST.get('name'),
+                                            pkg_email__startswith =    request.POST.get('email'),
+                                            pkg_status__startswith =   request.POST.get('status'),):
 
       t = dict(pkg_tracking = r.pkg_tracking,
                pkg_status = r.pkg_status,
