@@ -10,7 +10,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, permission_required
 
 from django.core.mail import send_mail
-#from background_task import background
+from background_task import background
 
 
 # PACKAGE VIEWS-------------------------------------------------------------------------------------------------------------
@@ -151,8 +151,7 @@ def query_mailstop(request):
     params = []
     search = request.POST.get('search')
     index = int(request.POST.get('index'))
-    for r in mailstops_master.objects.all():
-      if search is None or (len(search) <= len(r.mailstop) and search == r.mailstop[0:len(search)]):
+    for r in mailstops_master.objects.filter(mailstop__icontains = search).union(mailstops_master.objects.filter(ms_name__icontains = search)):
         t = dict(mailstop       = r.mailstop,
                  ms_name        = r.ms_name,
                  ms_route       = r.ms_route,
